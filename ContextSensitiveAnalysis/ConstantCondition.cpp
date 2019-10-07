@@ -1,8 +1,3 @@
-//
-// Created by jetbrains on 04/10/2019.
-//
-
-#include <cstdint>
 #include <iostream>
 
 void test() {
@@ -19,7 +14,7 @@ void test() {
 #pragma clang diagnostic pop
 }
 
-
+// https://youtrack.jetbrains.com/issue/CPP-3583
 void test1() {
     int a = 0;
     int b = 0;
