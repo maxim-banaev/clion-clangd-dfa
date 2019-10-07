@@ -1,3 +1,5 @@
 #include <cstdio>
 
-void test(int argc, char* argv[]) { }
+namespace {
+    void test(int argc, char *argv[]) {}
+}
