@@ -57,6 +57,19 @@ namespace {
         if ( true || false )
             x ++;
         else
-            x --;
+            int i_am_unreachable;
+    }
+
+    void test7() {
+        for (int i = 0; i < 100; ++i) {
+            continue;
+            int i_am_unreachable;
+        }
+
+        for (int i = 0; i < 100; ++i) {
+            break;
+            int i_am_unreachable;
+        }
+
     }
 }

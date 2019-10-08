@@ -29,8 +29,4 @@ namespace {
     int EscapeFoo::test8() {}
 
     EscapeFoo::EscapeFoo() = default;
-
-
-
-
 }

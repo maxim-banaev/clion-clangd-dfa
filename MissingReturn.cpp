@@ -21,7 +21,13 @@ namespace {
         [[nodiscard]] int test7() const {}
 
         int test8();
+
+        virtual int test9() = 0;
     };
 
     int MissingFoo::test8() {}
+
+    class MissingBar : MissingFoo {
+        int test9() override {}
+    };
 }
