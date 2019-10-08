@@ -1,14 +1,15 @@
-#include <iostream>
+#include <memory>
 #include <string>
+
 
 namespace {
     struct foo {
         char data[42];
     };
 
-    void test1() {
+    size_t test1() {
         struct foo *t = nullptr;
-        std::cout << sizeof(t->data);
+        return sizeof(t->data);
     }
 
     void test2() {
@@ -25,5 +26,9 @@ namespace {
         if (*f && *c) {
 
         }
+    }
+
+    void test4() {
+
     }
 }

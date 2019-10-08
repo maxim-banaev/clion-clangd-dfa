@@ -14,7 +14,7 @@ namespace {
     }
 
 
-    class foo {
+    class InfiniteFoo {
     public:
         void bar() {
             this->bar();

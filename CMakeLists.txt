@@ -9,4 +9,4 @@ add_executable(main main.cpp
         ContextSensitiveAnalysis/UnreachableCode.cpp
         ContextSensitiveAnalysis/EndlessLoop.cpp
         ContextSensitiveAnalysis/InfiniteRecursion.cpp
-        ContextSensitiveAnalysis/EscapeAnalysis.cpp ContextSensitiveAnalysis/UnusedLocal.cpp LocalVariableEscapesScope.cpp NotInitializedVariable.cpp)
+        ContextSensitiveAnalysis/EscapeAnalysis.cpp ContextSensitiveAnalysis/UnusedLocal.cpp LocalVariableEscapesScope.cpp NotInitializedVariable.cpp MissingReturn.cpp)

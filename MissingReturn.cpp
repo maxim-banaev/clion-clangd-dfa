@@ -1,22 +1,19 @@
 #include <string>
+
 namespace {
     int test1() {}
 
+    auto test2() -> bool {}
+
     template<typename T>
-    int test2(T t){}
-
-#define INT int
-
-    INT test3() {}
+    int test3(T t) {}
 
 #define func int test4() {}
+
     func
 
-    class EscapeFoo {
+    class MissingFoo {
     public:
-
-        EscapeFoo();
-
         std::string test5() {}
 
         static int test6() {}
@@ -26,11 +23,5 @@ namespace {
         int test8();
     };
 
-    int EscapeFoo::test8() {}
-
-    EscapeFoo::EscapeFoo() = default;
-
-
-
-
+    int MissingFoo::test8() {}
 }
