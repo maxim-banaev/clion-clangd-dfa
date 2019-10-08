@@ -12,10 +12,18 @@ namespace {
     }
 
     void test2() {
-        std::string* a = nullptr;
+        std::string *a = nullptr;
         std::string b = "a";
-        while(a == nullptr || a->length()){
+        while (a == nullptr || a->length()) {
             a = &b;
+        }
+    }
+
+    void test3() {
+        bool *f = nullptr;
+        char *c = nullptr;
+        if (*f && *c) {
+
         }
     }
 }
