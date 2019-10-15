@@ -1,32 +1,25 @@
-#include <string>
 namespace {
-    int test1() {}
+    int *gPtr;
+    int g;
 
-    template<typename T>
-    int test2(T t){}
+    int *foo(int p) {
+        int ar[3];
+        int x = 0;
+        int *ptr = &x;
+        gPtr = ptr; //Address of local variable may escape the function
+        gPtr = &x; //Address of local variable may escape the function
 
-#define INT int
+        if (p == 1)
+            return ptr; //Address of local variable may escape the function
 
-    INT test3() {}
+        ptr = &g;
+        gPtr = ptr;
 
-#define func int test4() {}
-    func
+        if (p == 2)
+            return ptr;
 
-    class EscapeFoo {
-    public:
-
-        EscapeFoo();
-
-        std::string test5() {}
-
-        static int test6() {}
-
-        [[nodiscard]] int test7() const {}
-
-        int test8();
-    };
-
-    int EscapeFoo::test8() {}
-
-    EscapeFoo::EscapeFoo() = default;
+        ptr = ar;
+        gPtr = ptr; //Address of local variable may escape the function
+        return ptr; //Address of local variable may escape the function
+    }
 }

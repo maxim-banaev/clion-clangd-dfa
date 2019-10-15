@@ -18,9 +18,7 @@ namespace {
 
     void test1() {
         int a = 1;
-        if(A(a)){
-
-        }
+        if(A(a)){}
     }
 
 
@@ -32,9 +30,7 @@ namespace {
         int *a_ptr = &a;
         *a_ptr = 1; // Modifies a, now a=1, b=0.
 
-        if (a != b) {
-            std::cout << "a != b\n";
-        }
+        if (a != b) {}
     }
 
 // https://youtrack.jetbrains.com/issue/CPP-13000

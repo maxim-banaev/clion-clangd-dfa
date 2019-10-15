@@ -8,6 +8,4 @@ namespace {
         char val[100];
         something = val;
     }
-
-
 }

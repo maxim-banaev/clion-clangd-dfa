@@ -1,2 +1,2 @@
-#include "exclude/excluded.cpp"
+#include <iostream>
 int main() {}
