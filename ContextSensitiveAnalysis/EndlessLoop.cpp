@@ -25,4 +25,11 @@ foo:
   int barbla;
   goto foo;
 }
+
+template <typename T> void test6() {
+    while(true) {
+
+    }
+}
+
 } // namespace

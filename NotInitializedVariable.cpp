@@ -1,3 +1,4 @@
+#include <string>
 namespace {
 void test() {
   int a;
@@ -37,8 +38,19 @@ void test4() {
 }
 
 void test5() {
-  int a;
-  int b;
+  int a, b;
   a = b;
 }
+
+void test6() {
+  std::string s1, s2;
+  s2 = s1;
+}
+
+template <typename T> T test7() {
+  T t1, t2;
+  t1 = t2;
+  return t1;
+}
+
 } // namespace

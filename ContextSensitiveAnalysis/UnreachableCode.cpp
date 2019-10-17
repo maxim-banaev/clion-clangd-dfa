@@ -67,4 +67,10 @@ void test7() {
     int i_am_unreachable;
   }
 }
+
+template <typename T>
+T test8() {
+  T t;
+  return t; T t1;
+}
 } // namespace
