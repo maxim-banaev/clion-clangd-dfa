@@ -4,8 +4,21 @@ void test1() {
   }
 }
 
+void test1_1() {
+  for (;;)
+    int a;
+}
+
+void test1_2() {
+  for (;;) {
+    int a;
+    int b;
+  }
+}
+
 [[noreturn]] void test2() {
   for (;;) {
+    int a;
   } // should'n be there
 }
 
@@ -14,22 +27,59 @@ void test3() {
   }
 }
 
+void test3_1() {
+  while (true)
+    int a;
+}
+
+void test3_2() {
+  while (true) {
+    int a;
+    int b;
+  }
+}
+
 void test4() {
   do {
   } while (true);
 }
 
+void test4_1() {
+  do {
+    int a;
+  } while (true);
+}
+
+void test4_2() {
+  do
+    int a;
+  while (true);
+}
+
 void test5() {
 foo:
-  int foobla;
-  int barbla;
+  int a;
+  goto foo;
+}
+
+void test5_1() {
+foo:
+  goto foo;
+}
+
+void test5_2() {
+foo:
+  int a;
+  goto bar;
+  int i_am_unused;
+bar:
+  int b;
   goto foo;
 }
 
 template <typename T> void test6() {
-    while(true) {
-
-    }
+  while (true) {
+  }
 }
 
 } // namespace
