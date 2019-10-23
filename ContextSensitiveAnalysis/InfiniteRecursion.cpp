@@ -35,12 +35,19 @@ public:
 
   void test8();
 
-  void operator+() {
-    this->operator+();
-  }
+  void operator+() { this->operator+(); }
 };
 
 void InfiniteFoo::test8() { InfiniteFoo::test8(); }
 
+void test9();
+void test9_1();
+void test9_2();
+
+void test9() { test9_1(); }
+
+void test9_1() { test9_2(); }
+
+void test9_2() { test9(); }
 
 } // namespace
