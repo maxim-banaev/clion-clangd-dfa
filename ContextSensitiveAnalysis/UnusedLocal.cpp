@@ -21,7 +21,7 @@ public:
   static void test4(int x) { int y; }
 };
 
-void test5(foo f) { foo f1; }
+void test5(foo f) { foo f1{}; }
 
 void test6() { std::string s = "123"; }
 
@@ -32,4 +32,21 @@ void test7(std::string s, std::vector<int> v) {
 
 template <typename T> void test8(T t) {}
 
+void test9() {
+  auto l = []() {
+    int a;
+  };
+}
+
+void test9_1() {
+  auto l = []() {};
+}
+
+void test9_2() {
+  auto l = [=]() {};
+}
+
+void test9_3() {
+  auto l = [&]() {};
+}
 } // namespace

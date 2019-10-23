@@ -1,3 +1,4 @@
+#include <vector>
 #include <iostream>
 
 namespace {
@@ -66,11 +67,32 @@ void test7() {
     break;
     int i_am_unreachable;
   }
+
+  for (int i = 0; i < 100; ++i) {
+    return;
+    int i_am_unreachable;
+  }
+
+  std::vector<int> range = {1,2,3};
+  for (const auto &item : range) {
+    continue;
+    int i_am_unreachable;
+  }
+
+  for (const auto &item : range) {
+    break;
+    int i_am_unreachable;
+  }
+
+  for (const auto &item : range) {
+    return;
+    int i_am_unreachable;
+  }
 }
 
-template <typename T>
-T test8() {
+template <typename T> T test8() {
   T t;
-  return t; T t1;
+  return t;
+  T t1;
 }
 } // namespace
