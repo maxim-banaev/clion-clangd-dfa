@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 namespace {
 void test() {
   int a = 1;
@@ -53,4 +53,35 @@ template <> void test4<int>() {
   if (t1 == t2) {
   }
 }
+
+void test5() {
+  int* i = nullptr;
+  if(i == nullptr) {}
+
+  std::string* s = nullptr;
+  if (s == nullptr) {}
+}
+
+typedef int X;
+void test6() {
+  X i = 1;
+  if (i == 1) {}
+}
+
+#define X 1
+#define Y y
+void test7() {
+  int x = 1;
+  int y = 1;
+
+  if (x == X) {}
+  if (X == x) {}
+  if (Y == 1) {}
+  if (1 == Y) {}
+  if (x == Y) {}
+  if (Y == x) {}
+  if (Y == X) {}
+  if (X == Y) {}
+}
+
 } // namespace

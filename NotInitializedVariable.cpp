@@ -10,10 +10,13 @@ struct X {
   int myFoo;
 };
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
 int test1() {
   X x;
   return x.myFoo; // no 'not unitialized warning'
 }
+#pragma clang diagnostic pop
 
 struct bla {
   double foo = 0;

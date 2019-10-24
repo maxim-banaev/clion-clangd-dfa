@@ -38,16 +38,17 @@ public:
   void operator+() { this->operator+(); }
 };
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "MemberFunctionCanBeStatic"
 void InfiniteFoo::test8() { InfiniteFoo::test8(); }
+#pragma clang diagnostic pop
 
 void test9();
 void test9_1();
 void test9_2();
 
 void test9() { test9_1(); }
-
 void test9_1() { test9_2(); }
-
 void test9_2() { test9(); }
 
 } // namespace

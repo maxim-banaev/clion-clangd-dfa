@@ -30,6 +30,9 @@ void test7(std::string s, std::vector<int> v) {
   std::vector<int> v1;
 }
 
+void test7_1(std::string s = "123") {
+}
+
 template <typename T> void test8(T t) {}
 
 void test9() {
