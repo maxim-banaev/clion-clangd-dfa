@@ -22,6 +22,12 @@ void test1_2() {
   } // should'n be there
 }
 
+_Noreturn void test2_1() {
+  for (;;) {
+    int a;
+  } // should'n be there
+}
+
 void test3() {
   while (true) {
   }
@@ -82,4 +88,14 @@ template <typename T> void test6() {
   }
 }
 
+// check the suppressing
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "EndlessLoop"
+
+void test7() {
+  for (;;) {
+  }
+}
+
+#pragma clang diagnostic pop
 } // namespace

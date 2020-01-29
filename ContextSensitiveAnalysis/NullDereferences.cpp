@@ -8,21 +8,21 @@ struct foo {
 
 size_t test1() {
   struct foo *t = nullptr;
-  return sizeof(t->data);
+  return sizeof(t->data); // Should be warn here
 }
 
 void test2() {
   std::string *a = nullptr;
-  std::string b = "a";
-  while (a == nullptr || a->length()) {
-    a = &b;
+  //std::string b = "a";
+  while (a == nullptr || a->length()) { // Shouldn't be warn here
+    //a = &b;
   }
 }
 
 void test3() {
   bool *f = nullptr;
   char *c = nullptr;
-  if (*f && *c) {
+  if (*f && *c) { // Should be warn here
   }
 }
 

@@ -1,7 +1,7 @@
 #include <iostream>
 
 namespace {
-void test1() { test1(); }
+void test1() { test1(); } // Should be warn here
 
 void test2();
 
@@ -29,18 +29,18 @@ void test5() {
 
 class InfiniteFoo {
 public:
-  void test6() { this->test6(); }
+  void test6() { this->test6(); } // Should be warn here
 
-  static void test7() { test7(); }
+  static void test7() { test7(); } // Should be warn here
 
   void test8();
 
-  void operator+() { this->operator+(); }
+  void operator+() { this->operator+(); } // Should be warn here
 };
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "MemberFunctionCanBeStatic"
-void InfiniteFoo::test8() { InfiniteFoo::test8(); }
+void InfiniteFoo::test8() { InfiniteFoo::test8(); } // Should be warn here
 #pragma clang diagnostic pop
 
 void test9();
