@@ -8,7 +8,7 @@ struct foo {
 
 size_t test1() {
   struct foo *t = nullptr;
-  return sizeof(t->data); // Should be warn here
+  return sizeof(t->data); // Shouldn't be warn here
 }
 
 void test2() {
