@@ -1,7 +1,8 @@
 #include <iostream>
 
-namespace {
-void test1() { test1(); }
+// Local DFA
+namespace infinite_recursion {
+    [[noreturn]] void test1() { test1(); }
 
 void test2();
 
