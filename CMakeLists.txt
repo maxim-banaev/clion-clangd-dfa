@@ -13,4 +13,6 @@ add_executable(main main.cpp
         ContextSensitiveAnalysis/UnusedLocal.cpp
         LocalVariableEscapesScope.cpp
         NotInitializedVariable.cpp
-        MissingReturn.cpp)
+        MissingReturn.cpp ContextSensitiveAnalysis/ConstantFunctionResult.cpp ContextSensitiveAnalysis/ConstantParameter.cpp)
+
+add_executable(check main.cpp)
