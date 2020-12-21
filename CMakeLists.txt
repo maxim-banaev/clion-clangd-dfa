@@ -5,14 +5,17 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(main main.cpp
         ContextSensitiveAnalysis/ConstantCondition.cpp
-        ContextSensitiveAnalysis/NullDereferences.cpp
-        ContextSensitiveAnalysis/UnreachableCode.cpp
+        ContextSensitiveAnalysis/ConstantFunctionResult.cpp
+        ContextSensitiveAnalysis/ConstantParameter.cpp
         ContextSensitiveAnalysis/EndlessLoop.cpp
-        ContextSensitiveAnalysis/InfiniteRecursion.cpp
         ContextSensitiveAnalysis/EscapeAnalysis.cpp
+        ContextSensitiveAnalysis/InfiniteRecursion.cpp
+        ContextSensitiveAnalysis/NullDereferences.cpp
+        ContextSensitiveAnalysis/UnreachableCall.cpp
+        ContextSensitiveAnalysis/UnreachableCode.cpp
         ContextSensitiveAnalysis/UnusedLocal.cpp
         LocalVariableEscapesScope.cpp
         NotInitializedVariable.cpp
-        MissingReturn.cpp ContextSensitiveAnalysis/ConstantFunctionResult.cpp ContextSensitiveAnalysis/ConstantParameter.cpp)
+        MissingReturn.cpp )
 
 add_executable(check main.cpp)

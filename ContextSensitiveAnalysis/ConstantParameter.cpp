@@ -36,7 +36,10 @@ enum class Letter {
 
 void static test7(Color c, Letter l) {}
 
+void static test8(float a) {}
 
+typedef int MyInt;
+void static test9(MyInt a) {}
 
 namespace {
     void test11(int a) {}
@@ -74,8 +77,6 @@ public:
     void chechDFA() {
         XTest1(1);
         auto ret = flag ? XTest2(1) : 0;
-
-
     }
 };
 
@@ -92,6 +93,8 @@ void checkGlobalDFA() {
     test5(true);
     test6(1);
     test7(Blue, Letter::A);
+    test8(0.5);
+    test9(9);
 
     test11(INT_MAX);
     test11_1(0);
