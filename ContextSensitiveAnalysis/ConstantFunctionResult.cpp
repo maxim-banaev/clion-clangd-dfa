@@ -49,7 +49,7 @@ namespace {
         return N;
     }
 
-    // https://youtrack.jetbrains.com/issue/CPP-23367
+    // https://youtrack.jetbrains.com/issue/CPP-23449
     template<typename T>
     T test6(T x, T b = 0) {
         if (x > 0)

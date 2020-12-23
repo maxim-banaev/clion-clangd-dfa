@@ -10,6 +10,7 @@ add_executable(main main.cpp
         ContextSensitiveAnalysis/EndlessLoop.cpp
         ContextSensitiveAnalysis/EscapeAnalysis.cpp
         ContextSensitiveAnalysis/InfiniteRecursion.cpp
+        ContextSensitiveAnalysis/LoopCondition.cpp
         ContextSensitiveAnalysis/NullDereferences.cpp
         ContextSensitiveAnalysis/UnreachableCall.cpp
         ContextSensitiveAnalysis/UnreachableCode.cpp
