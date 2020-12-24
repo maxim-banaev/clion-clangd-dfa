@@ -41,6 +41,10 @@ void static test8(float a) {}
 typedef int MyInt;
 void static test9(MyInt a) {}
 
+void static test10(float f) {}
+void static test10_1(float f) {}
+void static test10_2(double d) {}
+
 namespace {
     void test11(int a) {}
 
@@ -95,6 +99,10 @@ void checkGlobalDFA() {
     test7(Blue, Letter::A);
     test8(0.5);
     test9(9);
+    test10(10.5);
+    //test10_1(4e2);
+    test10_1(0x10.1p0);
+    test10_2(123.456e-67);
 
     test11(INT_MAX);
     test11_1(0);

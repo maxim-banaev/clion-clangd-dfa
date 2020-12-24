@@ -15,6 +15,7 @@ add_executable(main main.cpp
         ContextSensitiveAnalysis/UnreachableCall.cpp
         ContextSensitiveAnalysis/UnreachableCode.cpp
         ContextSensitiveAnalysis/UnusedLocal.cpp
+        ContextSensitiveAnalysis/UnusedParameter.cpp
         LocalVariableEscapesScope.cpp
         NotInitializedVariable.cpp
         MissingReturn.cpp )

@@ -87,8 +87,6 @@ namespace {
             return b;
         return 0;
     }
-
-
 }
 
 // https://youtrack.jetbrains.com/issue/CPP-23365
@@ -112,6 +110,16 @@ public:
 
 int X::number = 0;
 
+
+float test17(int x, float b = 0.17) {
+    if (x > 0)
+        return b;
+    return 0.17;
+}
+
+
+
+
 void checkGlobalDFA() {
     test1();
     test1_1(1);
@@ -129,4 +137,5 @@ void checkGlobalDFA() {
     f_test10(10, 0);
 
     test15();
+    test17(17);
 }

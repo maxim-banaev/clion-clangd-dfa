@@ -125,4 +125,5 @@ void checkGlobalDFA() {
     ::test9_1();
     ::test9_2();
     ::test9_3();
+    ::test1();
 }

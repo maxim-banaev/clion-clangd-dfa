@@ -179,6 +179,8 @@ void test20(int a) {
     }
 }
 
+
+
 void chekGlobalDFA() {
     ::test6();
     ::test7();
