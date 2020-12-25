@@ -110,6 +110,12 @@ namespace {
     void test9_3() {
         auto l = [&]() {};
     }
+
+    void test10() {
+        float f = 0.3;
+        auto f1 = 0.4;
+        double d = 0.5;
+    }
 } // namespace
 
 void checkGlobalDFA() {
@@ -125,5 +131,6 @@ void checkGlobalDFA() {
     ::test9_1();
     ::test9_2();
     ::test9_3();
+    ::test10();
     ::test1();
 }

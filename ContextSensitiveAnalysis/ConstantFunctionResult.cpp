@@ -1,6 +1,49 @@
 #include <string>
 #include <unistd.h>
 
+// Local DFA
+namespace constant_function_result {
+    bool test1() {
+        return true;
+    }
+
+    bool test1_2() {
+        return (true);
+    }
+
+    int test2() {
+        int a = 0;
+        return a;
+    }
+
+    char test3() {
+        auto a = 'c';
+        return a;
+    }
+
+    float test4() {
+        float a = 1.1;
+        return a;
+    }
+
+    enum class Letter {
+        A
+    };
+
+    Letter test5() {
+        Letter l = Letter::A;
+        return l;
+    }
+
+
+    // https://youtrack.jetbrains.com/issue/CPP-23490
+    bool test11() {
+        auto a = true;
+        auto b = false;
+        return a && b;
+    }
+}
+
 // Global DFA
 namespace {
     // https://youtrack.jetbrains.com/issue/CPP-23365
@@ -87,6 +130,13 @@ namespace {
             return b;
         return 0;
     }
+
+    // https://youtrack.jetbrains.com/issue/CPP-23490
+    bool test11() {
+        auto a = true;
+        auto b = false;
+        return a && b;
+    }
 }
 
 // https://youtrack.jetbrains.com/issue/CPP-23365
@@ -110,7 +160,7 @@ public:
 
 int X::number = 0;
 
-
+// https://youtrack.jetbrains.com/issue/CPP-23481
 float test17(int x, float b = 0.17) {
     if (x > 0)
         return b;
@@ -121,21 +171,22 @@ float test17(int x, float b = 0.17) {
 
 
 void checkGlobalDFA() {
-    test1();
-    test1_1(1);
-    test1_2(1);
-    test2(2);
-    test3(3);
-    test4(4);
-    test5<0>(5);
-    test6<int>(6);
-    test7(7);
-    test8(8);
-    test9(9);
+    ::test1();
+    ::test1_1(1);
+    ::test1_2(1);
+    ::test2(2);
+    ::test3(3);
+    ::test4(4);
+    ::test5<0>(5);
+    ::test6<int>(6);
+    ::test7(7);
+    ::test8(8);
+    ::test9(9);
 
-    std::function<int(int, int)> f_test10 = test10;
+    std::function<int(int, int)> f_test10 = ::test10;
     f_test10(10, 0);
+    ::test11();
 
-    test15();
-    test17(17);
+    ::test15();
+    ::test17(17);
 }
