@@ -1,7 +1,16 @@
+// summary: should be 43 warnings
+
 #include <vector>
 #include <iostream>
 
 // Local DFA
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantParameter"
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+#pragma ide diagnostic ignored "UnusedLocalVariable"
+#pragma ide diagnostic ignored "UnusedValue"
+#pragma ide diagnostic ignored "ConstantConditionsOC"
+#pragma ide diagnostic ignored "EndlessLoop"
 namespace null_dereferences {
     void test() {
         return;
@@ -22,7 +31,7 @@ namespace null_dereferences {
         if (a == 1)
             goto foo;
 
-        int i_am_unreachable;
+        [[maybe_unused]] int i_am_unreachable;
     }
 
     void test3(int a = 1) {
@@ -279,6 +288,6 @@ void checkGlobalDFA() {
     ::test9();
     ::test10();
     ::test11();
-    ::test12();
     ::test1();
 }
+#pragma clang diagnostic pop

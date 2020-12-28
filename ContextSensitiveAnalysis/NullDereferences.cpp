@@ -1,7 +1,12 @@
+// summary: should be 9 warnings
+
 #include <memory>
 #include <string>
 
 // local DFA
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-value"
+#pragma clang diagnostic ignored "-Winvalid-noreturn"
 namespace null_dereference {
     struct foo {
         char data[42];
@@ -79,3 +84,4 @@ void checkGlobalDFA() {
     ::test4();
     ::test1();
 }
+#pragma clang diagnostic pop

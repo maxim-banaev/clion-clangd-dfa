@@ -1,5 +1,8 @@
 #include <string>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+#pragma ide diagnostic ignored "UnusedLocalVariable"
 namespace {
     [[noreturn]] int test1() {}
 
@@ -29,7 +32,8 @@ namespace {
 
     int MissingFoo::test8() {}
 
-    class MissingBar : MissingFoo {
+    class [[maybe_unused]] MissingBar : MissingFoo {
         int test9() override {}
     };
 } // namespace
+#pragma clang diagnostic pop

@@ -1,3 +1,4 @@
+// summary: 17 warnings
 #include <iostream>
 #include <string>
 

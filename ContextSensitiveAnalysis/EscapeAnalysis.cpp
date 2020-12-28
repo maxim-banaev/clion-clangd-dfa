@@ -1,4 +1,8 @@
+// summary: should be 9 warnings
 // Local DFA
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 namespace escape_analysis {
 int *gPtr;
 int g;
@@ -58,3 +62,4 @@ void checkGlobalDFA() {
     ::foo(1);
     ::foo(2);
 }
+#pragma clang diagnostic pop

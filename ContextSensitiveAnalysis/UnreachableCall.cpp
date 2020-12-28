@@ -1,5 +1,16 @@
+// summary: should be 20 warnings
 #include <string>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "EndlessLoop"
+#pragma ide diagnostic ignored "bugprone-reserved-identifier"
+#pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
+#pragma clang diagnostic ignored "-Wtautological-undefined-compare"
+#pragma ide diagnostic ignored "OCUnusedStructInspection"
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+#pragma ide diagnostic ignored "ConstantConditionsOC"
+#pragma ide diagnostic ignored "ConstantParameter"
+#pragma ide diagnostic ignored "UnreachableCode"
 static void test1_function() {}
 
 void test1() { if (false) test1_function(); }
@@ -173,7 +184,7 @@ void test19() {
 
 static bool test20_function() { return true; }
 
-void test20(int a) {
+void test20([[maybe_unused]] int a) {
     for (int i = 0; true || test20_function(); i++) {
 
     }
@@ -186,3 +197,4 @@ void chekGlobalDFA() {
     ::test7();
     ::test8<int>();
 }
+#pragma clang diagnostic pop

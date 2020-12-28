@@ -1,5 +1,10 @@
 #include <string>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
+#pragma ide diagnostic ignored "UnusedLocalVariable"
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+#pragma clang diagnostic ignored "-Winvalid-noreturn"
 namespace not_initialized_variable {
     void test() {
         int a;
@@ -61,3 +66,4 @@ namespace not_initialized_variable {
     }
 
 } // namespace
+#pragma clang diagnostic pop

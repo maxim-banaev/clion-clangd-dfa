@@ -8,6 +8,9 @@
 #include <string>
 #include <vector>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+#pragma ide diagnostic ignored "UnusedLocalVariable"
 void static test1(int a) {
 
 }
@@ -68,12 +71,12 @@ namespace {
 
 
 class X {
-    static int zero;
+    [[maybe_unused]] static int zero;
     bool flag;
 
-    void XTest1(int p) {}
+    void XTest1(unsigned p) {}
 
-    static int XTest2(unsigned p) {
+    static unsigned XTest2(unsigned p) {
         return p;
     }
 
@@ -84,7 +87,7 @@ public:
     }
 };
 
-struct point {
+struct [[maybe_unused]] point {
     int x;
     int y;
 };
@@ -117,3 +120,5 @@ void checkGlobalDFA() {
 
 
 
+
+#pragma clang diagnostic pop

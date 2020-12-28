@@ -1,7 +1,11 @@
-// Local DFA
+// summary: should be 17 warnings
+
 #include <string>
 #include <vector>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantConditionsOC"
+// Local DFA
 namespace unused_value {
     int test1() {
         int a = 0; // warn
@@ -39,6 +43,13 @@ namespace unused_value {
     std::vector<int> test5() {
         std::vector<int> v = {1, 2, 3};
         return {1, 2, 3};
+    }
+
+    template<typename T>
+    T test6() {
+        T t = 0;
+        t = 1;
+        return t;
     }
 }
 
@@ -81,6 +92,13 @@ namespace {
         std::vector<int> v = {1, 2, 3};
         return {1, 2, 3};
     }
+
+    template<typename T>
+    T test6() {
+        T t = 0;
+        t = 1;
+        return t;
+    }
 }
 
 void checkGlobalDFA() {
@@ -89,4 +107,7 @@ void checkGlobalDFA() {
     ::test3();
     ::test4();
     ::test5();
+    ::test6<int>();
 }
+
+#pragma clang diagnostic pop

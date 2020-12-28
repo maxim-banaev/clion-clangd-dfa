@@ -1,7 +1,14 @@
+// summary: should be 32 warnings
 #include <string>
 #include <vector>
 
 // Local DFA
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
+#pragma ide diagnostic ignored "ConstantParameter"
+#pragma ide diagnostic ignored "performance-unnecessary-value-param"
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+#pragma clang diagnostic ignored "-Winvalid-noreturn"
 namespace unused_local {
     [[noreturn]] void test1() {
         int x = 0;
@@ -134,3 +141,4 @@ void checkGlobalDFA() {
     ::test10();
     ::test1();
 }
+#pragma clang diagnostic pop

@@ -1,4 +1,8 @@
+// summary: should be 7 warnings
 #include <iostream>
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "misc-no-recursion"
 
 // Local DFA
 namespace infinite_recursion {
@@ -28,7 +32,7 @@ void test5() {
   l();
 }
 
-class InfiniteFoo {
+class [[maybe_unused]] InfiniteFoo {
 public:
   void test6() { this->test6(); }
 
@@ -53,3 +57,4 @@ void test9_1() { test9_2(); }
 void test9_2() { test9(); }
 
 } // namespace
+#pragma clang diagnostic pop

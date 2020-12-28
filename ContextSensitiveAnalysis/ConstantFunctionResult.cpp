@@ -1,7 +1,15 @@
+// summary: 12 warnings
 #include <string>
 #include <unistd.h>
 
 // Local DFA
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
+#pragma ide diagnostic ignored "OCUnusedStructInspection"
+#pragma ide diagnostic ignored "UnusedLocalVariable"
+#pragma ide diagnostic ignored "misc-no-recursion"
+#pragma ide diagnostic ignored "ConstantConditionsOC"
+#pragma ide diagnostic ignored "ConstantParameter"
 namespace constant_function_result {
     bool test1() {
         return true;
@@ -102,7 +110,7 @@ namespace {
 
     enum class Letter {
         A,
-        B
+        B [[maybe_unused]]
     };
 
     Letter test7(int x, Letter l = Letter::A) {
@@ -153,7 +161,7 @@ class X {
     }
 
 public:
-    void test16() {
+    [[maybe_unused]] void test16() { // NOLINT(readability-convert-member-functions-to-static)
         int tmp = getNUmber(0);
     }
 };
@@ -190,3 +198,5 @@ void checkGlobalDFA() {
     ::test15();
     ::test17(17);
 }
+
+#pragma clang diagnostic pop

@@ -1,4 +1,6 @@
 // Local DFA
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantParameter"
 namespace unused_parameter {
     void test1(int p) {}
 }
@@ -16,3 +18,4 @@ void checkGlobalDFA() {
     ::test1(1);
     ::test2(2.0);
 }
+#pragma clang diagnostic pop

@@ -1,5 +1,8 @@
 #include <string>
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+#pragma clang diagnostic ignored "-Winvalid-noreturn"
 namespace {
     std::string something;
 
@@ -8,3 +11,4 @@ namespace {
         something = val;
     }
 } // namespace
+#pragma clang diagnostic pop

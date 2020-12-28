@@ -1,4 +1,7 @@
+// summary: should be 9 warnings
 // Local DFA
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantParameter"
 namespace loop_condition {
     // https://youtrack.jetbrains.com/issue/CPP-23459
     void test1() {
@@ -25,8 +28,8 @@ namespace loop_condition {
         }
     }
 
-    void test5() {
-        for (int i = 0; i < 10; ) {
+    void test5(int i = 0) {
+        for (; i < 10; ) {
 
         }
     }
@@ -59,6 +62,12 @@ namespace {
 
         }
     }
+
+    void test5(int i = 0) {
+        for (; i < 10; ) {
+
+        }
+    }
 }
 
 void checkGlobalDFA() {
@@ -66,4 +75,7 @@ void checkGlobalDFA() {
     ::test2(2);
     ::test3(3);
     ::test4();
+    ::test5();
 }
+
+#pragma clang diagnostic pop
