@@ -1,11 +1,13 @@
 // summary: 26 warnings
+
 #include <iostream>
 #include <string>
 
-// Local DFA
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "ConstantFunctionResult"
+// Local DFA
 namespace constant_condition {
     void test() {
         int a = 1;
@@ -46,7 +48,7 @@ namespace constant_condition {
         std::cin >> first >> last;
 
         if (first == last) { // shouldn't be there
-        };
+        }
     }
 
     template<typename T>
@@ -141,7 +143,7 @@ namespace {
         std::cin >> first >> last;
 
         if (first == last) { // shouldn't be there
-        };
+        }
     }
 
     template<typename T>

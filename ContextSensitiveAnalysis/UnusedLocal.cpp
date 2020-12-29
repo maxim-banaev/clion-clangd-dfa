@@ -2,13 +2,13 @@
 #include <string>
 #include <vector>
 
-// Local DFA
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "performance-unnecessary-value-param"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
+// Local DFA
 namespace unused_local {
     [[noreturn]] void test1() {
         int x = 0;

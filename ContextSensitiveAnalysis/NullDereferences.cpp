@@ -3,10 +3,10 @@
 #include <memory>
 #include <string>
 
-// local DFA
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-value"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
+// local DFA
 namespace null_dereference {
     struct foo {
         char data[42];

@@ -1,8 +1,8 @@
-// summary: should be 9 warnings
-// Local DFA
+// summary: should be 11 warnings
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+// Local DFA
 namespace escape_analysis {
 int *gPtr;
 int g;

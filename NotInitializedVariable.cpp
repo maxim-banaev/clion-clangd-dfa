@@ -65,5 +65,6 @@ namespace not_initialized_variable {
         return t1;
     }
 
+
 } // namespace
 #pragma clang diagnostic pop

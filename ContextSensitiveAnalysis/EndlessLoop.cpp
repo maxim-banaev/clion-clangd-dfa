@@ -1,8 +1,9 @@
 // summary: 29 warnings
-// Local DFA
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+// Local DFA
 namespace endless_loop {
     void test1() {
         for (;;) {

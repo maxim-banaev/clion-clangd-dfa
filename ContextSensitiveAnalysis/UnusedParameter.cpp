@@ -1,12 +1,12 @@
 // summary: 9 warnings
-// Local DFA
-
 #include <string>
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "performance-unnecessary-value-param"
+// Local DFA
 namespace unused_parameter {
     void test1(int p) {}
 
