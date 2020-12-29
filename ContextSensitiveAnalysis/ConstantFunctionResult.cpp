@@ -186,7 +186,7 @@ public:
 int X::number = 0;
 
 // https://youtrack.jetbrains.com/issue/CPP-23481
-float test18(int x, float b = 0.17) {
+static float test18(int x, float b = 0.17) {
     if (x > 0)
         return b;
     return 0.17;
@@ -216,7 +216,7 @@ void checkGlobalDFA() {
     x.check_test16();
     x.check_test17();
 
-    ::test18(17);
+    ::test18(18);
 }
 
 #pragma clang diagnostic pop

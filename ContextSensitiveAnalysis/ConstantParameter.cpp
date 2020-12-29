@@ -1,4 +1,4 @@
-
+// summary: 24 warnings
 // Constant parameter is working only with int-convertible types
 // It's not working with other types even int() operator is defined
 // https://youtrack.jetbrains.com/issue/CPP-23268
@@ -6,9 +6,10 @@
 
 #include <climits>
 #include <string>
-#include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
+#pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 void static test1(int a) {
@@ -107,7 +108,7 @@ void checkGlobalDFA() {
     test10_1(0x10.1p0);
     test10_2(123.456e-67);
 
-    //test11(INT_MAX);
+    test11(INT_MAX);
     test11_1(0);
     test11_2(0, 1);
     test11_3('_', 1);
