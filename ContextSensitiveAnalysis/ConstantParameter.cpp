@@ -107,7 +107,7 @@ void checkGlobalDFA() {
     test10_1(0x10.1p0);
     test10_2(123.456e-67);
 
-    test11(INT_MAX);
+    //test11(INT_MAX);
     test11_1(0);
     test11_2(0, 1);
     test11_3('_', 1);
@@ -116,9 +116,4 @@ void checkGlobalDFA() {
     test16<int, char>(1 );
     test17(1, 2);
 }
-
-
-
-
-
 #pragma clang diagnostic pop

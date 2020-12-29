@@ -4,6 +4,8 @@
 
 // Local DFA
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCode"
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
@@ -11,10 +13,12 @@
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "ConstantParameter"
 namespace constant_function_result {
+    // https://youtrack.jetbrains.com/issue/CPP-23365
     bool test1() {
         return true;
     }
 
+    // https://youtrack.jetbrains.com/issue/CPP-23365
     bool test1_2() {
         return (true);
     }
@@ -156,26 +160,37 @@ static bool test15() {
 class X {
     static int number;
 
-    static int getNUmber(int offset) {
-        return number - offset;
+    static int test16(int offset) {
+        return offset;
+    }
+
+    // https://youtrack.jetbrains.com/issue/CPP-23519
+    static int test17(int offset) {
+        if (offset == 0) {
+            return number;
+        } else {
+            return 1;
+        }
     }
 
 public:
-    [[maybe_unused]] void test16() { // NOLINT(readability-convert-member-functions-to-static)
-        int tmp = getNUmber(0);
+    void check_test16() { // NOLINT(readability-convert-member-functions-to-static)
+        int tmp = test16(0);
+    }
+
+    void check_test17() { // NOLINT(readability-convert-member-functions-to-static)
+        int tmp = test17(0);
     }
 };
 
 int X::number = 0;
 
 // https://youtrack.jetbrains.com/issue/CPP-23481
-float test17(int x, float b = 0.17) {
+float test18(int x, float b = 0.17) {
     if (x > 0)
         return b;
     return 0.17;
 }
-
-
 
 
 void checkGlobalDFA() {
@@ -196,7 +211,12 @@ void checkGlobalDFA() {
     ::test11();
 
     ::test15();
-    ::test17(17);
+
+    X x;
+    x.check_test16();
+    x.check_test17();
+
+    ::test18(17);
 }
 
 #pragma clang diagnostic pop

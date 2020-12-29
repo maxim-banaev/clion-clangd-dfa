@@ -1,9 +1,10 @@
-// summary: should be 17 warnings
+// summary: should be 28 warnings
 
 #include <string>
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedLocalVariable"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 // Local DFA
 namespace unused_value {
@@ -50,6 +51,24 @@ namespace unused_value {
         T t = 0;
         t = 1;
         return t;
+    }
+
+    void test7() {
+        auto a = 1.3F; // warn
+        auto b = 1.3e19; // warn
+    }
+
+    void test8() {
+        int* a = nullptr; // warn
+        void *b = nullptr; // warn
+    }
+
+    void test9() {
+        int a[] = {1,233};
+    }
+
+    void test10() {
+        char p = '\0';
     }
 }
 
@@ -99,6 +118,20 @@ namespace {
         t = 1;
         return t;
     }
+
+    void test7() {
+        auto a = 1.3F; // warn
+        auto b = 1.3e19; // warn
+    }
+
+    void test8() {
+        int* a = nullptr; // warn
+        void *b = nullptr; // warn
+    }
+
+    void test9() {
+        int a[] = {1,233}; // warn
+    }
 }
 
 void checkGlobalDFA() {
@@ -108,6 +141,9 @@ void checkGlobalDFA() {
     ::test4();
     ::test5();
     ::test6<int>();
+    ::test7();
+    ::test8();
+    ::test9();
 }
 
 #pragma clang diagnostic pop

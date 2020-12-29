@@ -1,8 +1,11 @@
-// summary: 17 warnings
+// summary: 26 warnings
 #include <iostream>
 #include <string>
 
 // Local DFA
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCode"
+#pragma ide diagnostic ignored "ConstantFunctionResult"
 namespace constant_condition {
     void test() {
         int a = 1;
@@ -184,6 +187,45 @@ namespace {
         if (X == Y) {}
     }
 
+
+    int getZero() {
+        int a = 0;
+        return a;
+    }
+
+    int getOne() {
+        int a = 1;
+        return a;
+    }
+
+    void test8() {
+        if (getZero() == 0) {}
+        if (getZero()) {}
+        if (!getZero()) {}
+        if (getZero(
+                // foo
+                )) {}
+
+        if (false) {
+            asm("nop");
+        } else if (getZero()) {}
+    }
+
+    void test9() {
+        while (getZero()) {}
+    }
+
+    int test10() {
+        return 0;
+        if (getZero() == 0) {} // shouldn't warn here
+    }
+
+    void test11() {
+        if (getZero() == 0) {}
+        if (1 == getOne()) {}
+        if (getZero() == getOne()) { }
+    }
+
 } // namespace
 
 
@@ -196,4 +238,9 @@ void checkGlobalDFA() {
     ::test5();
     ::test6();
     ::test7();
+    ::test8();
+    ::test9();
+    ::test10();
+    ::test11();
 }
+#pragma clang diagnostic pop
