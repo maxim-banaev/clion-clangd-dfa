@@ -38,6 +38,7 @@ namespace {
         int ar[3];
         int x = 0;
         int *ptr = &x;
+        // https://youtrack.jetbrains.com/issue/CPP-23550
         gPtr = ptr; // Address of local variable may escape the function
         gPtr = &x;  // Address of local variable may escape the function
 
@@ -51,6 +52,7 @@ namespace {
             return ptr;
 
         ptr = ar;
+        // https://youtrack.jetbrains.com/issue/CPP-23550
         gPtr = ptr; // Address of local variable may escape the function
         return ptr; // Address of local variable may escape the function
     }

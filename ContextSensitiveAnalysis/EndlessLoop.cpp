@@ -1,6 +1,9 @@
-// summary: 29 warnings
+// summary: 30 warnings
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantConditionsOC"
+#pragma ide diagnostic ignored "ConstantParameter"
+#pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 // Local DFA
@@ -176,6 +179,14 @@ namespace {
         while (true) {
         }
     }
+
+    bool getTrue(bool a = true) {
+        return a;
+    }
+    void test7() {
+        while (getTrue()) {
+        }
+    }
 } // namespace
 
 void checkGlobalDFA() {
@@ -192,6 +203,7 @@ void checkGlobalDFA() {
     ::test5_1();
     ::test5_2();
     ::test6<int>();
+    ::test7();
     ::test2();
 }
 #pragma clang diagnostic pop
