@@ -8,6 +8,7 @@ add_executable(main main.cpp
         ContextSensitiveAnalysis/ConstantCondition.cpp
         ContextSensitiveAnalysis/ConstantFunctionResult.cpp
         ContextSensitiveAnalysis/ConstantParameter.cpp
+        ContextSensitiveAnalysis/DanglingPointer.cpp
         ContextSensitiveAnalysis/EndlessLoop.cpp
         ContextSensitiveAnalysis/EscapeAnalysis.cpp
         ContextSensitiveAnalysis/InfiniteRecursion.cpp
