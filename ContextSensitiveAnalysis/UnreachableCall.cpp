@@ -11,11 +11,11 @@
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "UnreachableCode"
-static void test1_function() {}
+static void test1_function() {} // warn here
 
 void test1() { if (false) test1_function(); }
 
-static void test2_function() {}
+static void test2_function() {} // warn here
 
 void static test2(bool d = false) { if (d) test2_function(); }
 
@@ -25,7 +25,7 @@ enum Switcher {
     ON, OFF
 };
 
-static void test3_function() {}
+static void test3_function() {} // warn here
 
 void static test3(Switcher s = OFF) {
     switch (s) {
@@ -64,13 +64,13 @@ public:
 namespace {
     bool flag = false;
 
-    void test6_function() {}
+    void test6_function() {} // warn here
 
     void test6() {
         if (flag) test6_function();
     }
 
-    std::string test7_function() { return ""; }
+    std::string test7_function() { return ""; } // warn here
 
     void test7() {
         if (flag) test7_function();
@@ -89,13 +89,13 @@ namespace {
 
 
 class Test9 {
-    static void test9_function() {}
+  static void test9_function() {} // warn here
 
 public:
     void test9() { if (flag) test9_function(); }
 };
 
-static void test10_function() {}
+static void test10_function() {} // warn here
 
 #define _FUNC_NAME test10_function
 
@@ -103,11 +103,11 @@ void test10() { if (flag) _FUNC_NAME(); }
 
 static void test11_function();
 
-static void test11_function() {}
+static void test11_function() {} // warn here
 
 void test11() { if (flag) test11_function(); }
 
-static void test12_function() {}
+static void test12_function() {} // warn here
 
 void do_nothing() {}
 
@@ -121,14 +121,14 @@ void test13() {
     }
 }
 
-static void test14_function() {}
+static void test14_function() {} // warn here
 
 void test14() {
     return;
     test14_function();
 }
 
-static void test14_1_function() {}
+static void test14_1_function() {} // warn here
 
 void test14_1() {
     while (true) {
@@ -137,7 +137,7 @@ void test14_1() {
     }
 }
 
-static void test14_2_function() {}
+static void test14_2_function() {} // warn here
 
 void test14_2() {
     for (int a = 1; a < 5; a++) {
@@ -146,14 +146,14 @@ void test14_2() {
     }
 }
 
-static void test15_function() {}
+static void test15_function() {} // warn here
 
 void test15() {
     while (true) {}
     test15_function();
 }
 
-static void test16_function() {}
+static void test16_function() {} // warn here
 
 void test16() {
     goto test16_label;
@@ -162,13 +162,13 @@ void test16() {
     return;
 }
 
-static bool test17_function() { return true; }
+static bool test17_function() { return true; } // warn here
 
 void test17() {
     if (!flag || test17_function()) { do_nothing(); }
 }
 
-static bool test18_function() { return true; }
+static bool test18_function() { return true; } // warn here
 
 void test18() {
     if (!flag) {
@@ -176,13 +176,13 @@ void test18() {
     } else if (test18_function()) {}
 }
 
-static bool test19_function() { return true; }
+static bool test19_function() { return true; } // warn here
 
 void test19() {
     if (flag && test19_function()) { do_nothing(); }
 }
 
-static bool test20_function() { return true; }
+static bool test20_function() { return true; } // warn here
 
 void test20([[maybe_unused]] int a) {
     for (int i = 0; true || test20_function(); i++) {

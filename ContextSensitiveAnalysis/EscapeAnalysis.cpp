@@ -11,11 +11,11 @@ int *foo(int p) {
   int ar[3];
   int x = 0;
   int *ptr = &x;
-  gPtr = ptr; // Address of local variable may escape the function
-  gPtr = &x;  // Address of local variable may escape the function
+  gPtr = ptr; // warn here
+  gPtr = &x;  // warn here
 
   if (p == 1)
-    return ptr; // Address of local variable may escape the function
+      return ptr; // warn here
 
   ptr = &g;
   gPtr = ptr;
@@ -24,8 +24,8 @@ int *foo(int p) {
     return ptr;
 
   ptr = ar;
-  gPtr = ptr; // Address of local variable may escape the function
-  return ptr; // Address of local variable may escape the function
+  gPtr = ptr; // warn here
+  return ptr; // warn here
 }
 } // namespace
 
@@ -39,11 +39,11 @@ namespace {
         int x = 0;
         int *ptr = &x;
         // https://youtrack.jetbrains.com/issue/CPP-23550
-        gPtr = ptr; // Address of local variable may escape the function
-        gPtr = &x;  // Address of local variable may escape the function
+        gPtr = ptr; // should warn here
+        gPtr = &x;  // warn here
 
         if (p == 1)
-            return ptr; // Address of local variable may escape the function
+            return ptr; // warn here
 
         ptr = &g;
         gPtr = ptr;
@@ -53,8 +53,8 @@ namespace {
 
         ptr = ar;
         // https://youtrack.jetbrains.com/issue/CPP-23550
-        gPtr = ptr; // Address of local variable may escape the function
-        return ptr; // Address of local variable may escape the function
+        gPtr = ptr; // should warn here
+        return ptr; // warn here
     }
 } // namespace
 

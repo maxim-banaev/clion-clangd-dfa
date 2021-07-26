@@ -1,4 +1,4 @@
-// summary: 12 warnings
+// summary: 14 warnings
 #include <string>
 #include <unistd.h>
 
@@ -23,17 +23,17 @@ namespace constant_function_result {
         return (true);
     }
 
-    int test2() {
+    int test2() { // warn here
         int a = 0;
         return a;
     }
 
-    char test3() {
+    char test3() { // warn here
         auto a = 'c';
         return a;
     }
 
-    float test4() {
+    float test4() { // warn here
         float a = 1.1;
         return a;
     }
@@ -42,7 +42,7 @@ namespace constant_function_result {
         A
     };
 
-    Letter test5() {
+    Letter test5() { // warn here
         Letter l = Letter::A;
         return l;
     }
@@ -63,13 +63,13 @@ namespace {
         return true;
     }
 
-    bool test1_1(int x, bool b = true) {
+    bool test1_1(int x, bool b = true) { // warn here
         if (x > 0)
             return b;
         return true;
     }
 
-    auto test1_2(int x, bool b = true) -> bool{
+    auto test1_2(int x, bool b = true) -> bool { // warn here
         if (x > 0)
             return b;
         return true;
@@ -83,14 +83,14 @@ namespace {
         return "";
     }
 
-    char test3(int x, char c = '3') {
+    char test3(int x, char c = '3') { // warn here
         if (x % 2 == 0)
             return c;
         sleep(x);
         return '3';
     }
 
-    auto test4(int x, int b = 0) -> decltype(1){
+    auto test4(int x, int b = 0) -> decltype(1) { // warn here
         if (x > 0)
             return b;
         return 0;
@@ -117,7 +117,7 @@ namespace {
         B [[maybe_unused]]
     };
 
-    Letter test7(int x, Letter l = Letter::A) {
+    Letter test7(int x, Letter l = Letter::A) { // warn here
         if (x > 0)
             return l;
         return Letter::A;
@@ -130,7 +130,7 @@ namespace {
         return x;
     }
 
-    void* test9(int x, void* p = nullptr) {
+    void* test9(int x, void* p = nullptr) { // warn here
         if (x > 0)
             return p;
         return nullptr;
@@ -160,12 +160,11 @@ static bool test15() {
 class X {
     static int number;
 
-    static int test16(int offset) {
+    static int test16(int offset) { // warn here
         return offset;
     }
 
-    // https://youtrack.jetbrains.com/issue/CPP-23519
-    static int test17(int offset) {
+    static int test17(int offset) { // warn here
         if (offset == 0) {
             return number;
         } else {
@@ -186,7 +185,7 @@ public:
 int X::number = 0;
 
 // https://youtrack.jetbrains.com/issue/CPP-23481
-static float test18(int x, float b = 0.17) {
+static float test18(int x, float b = 0.17) { // warn here
     if (x > 0)
         return b;
     return 0.17;

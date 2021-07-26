@@ -11,7 +11,7 @@
 namespace constant_condition {
     void test() {
         int a = 1;
-        if (a == 1) {
+        if (a == 1) { // warn here
         }
 
         // check the suppressing
@@ -58,23 +58,23 @@ namespace constant_condition {
     void test4<int>() {
         int t1 = 0;
         int t2 = 0;
-        if (t1 == t2) {
+        if (t1 == t2) { // warn here
         }
     }
 
     void test5() {
         int *i = nullptr;
-        if (i == nullptr) {}
+        if (i == nullptr) {} // warn here
 
         std::string *s = nullptr;
-        if (s == nullptr) {}
+        if (s == nullptr) {} // warn here
     }
 
     typedef int X;
 
     void test6() {
         X i = 1;
-        if (i == 1) {}
+        if (i == 1) {} // warn here
     }
 
 #define X 1
@@ -84,11 +84,11 @@ namespace constant_condition {
         int x = 1;
         int y = 1;
 
-        if (x == X) {}
+        if (x == X) {} // warn here
         if (X == x) {}
         if (Y == 1) {}
-        if (1 == Y) {}
-        if (x == Y) {}
+        if (1 == Y) {} // warn here
+        if (x == Y) {} // warn here
         if (Y == x) {}
         if (Y == X) {}
         if (X == Y) {}
@@ -96,7 +96,7 @@ namespace constant_condition {
 
     void test8() {
         float f = 0.5;
-        if (f == 0.5) {}
+        if (f == 0.5) {} // warn here
     }
 
 } // namespace
@@ -106,7 +106,7 @@ namespace constant_condition {
 namespace {
     void test() {
         int a = 1;
-        if (a == 1) {
+        if (a == 1) { // warn here
         }
 
         // check the suppressing
@@ -153,23 +153,23 @@ namespace {
     void test4<int>() {
         int t1 = 0;
         int t2 = 0;
-        if (t1 == t2) {
+        if (t1 == t2) { // warn here
         }
     }
 
     void test5() {
         int *i = nullptr;
-        if (i == nullptr) {}
+        if (i == nullptr) {} // warn here
 
         std::string *s = nullptr;
-        if (s == nullptr) {}
+        if (s == nullptr) {} // warn here
     }
 
     typedef int X1;
 
     void test6() {
         X1 i = 1;
-        if (i == 1) {}
+        if (i == 1) {} // warn here
     }
 
 #define X 1
@@ -179,11 +179,11 @@ namespace {
         int x = 1;
         int y = 1;
 
-        if (x == X) {}
+        if (x == X) {} // warn here
         if (X == x) {}
         if (Y == 1) {}
-        if (1 == Y) {}
-        if (x == Y) {}
+        if (1 == Y) {} // warn here
+        if (x == Y) {} // warn here
         if (Y == x) {}
         if (Y == X) {}
         if (X == Y) {}
@@ -201,20 +201,20 @@ namespace {
     }
 
     void test8() {
-        if (getZero() == 0) {}
-        if (getZero()) {}
-        if (!getZero()) {}
+        if (getZero() == 0) {} // warn here
+        if (getZero()) {} // warn here
+        if (!getZero()) {} // warn here
         if (getZero(
                 // foo
-                )) {}
+                )) {} // warn here
 
         if (false) {
             asm("nop");
-        } else if (getZero()) {}
+        } else if (getZero()) {} // warn here
     }
 
     void test9() {
-        while (getZero()) {}
+        while (getZero()) {} // warn here
     }
 
     int test10() {
@@ -223,8 +223,8 @@ namespace {
     }
 
     void test11() {
-        if (getZero() == 0) {}
-        if (1 == getOne()) {}
+        if (getZero() == 0) {} // warn here
+        if (1 == getOne()) {} // warn here
         if (getZero() == getOne()) { }
     }
 

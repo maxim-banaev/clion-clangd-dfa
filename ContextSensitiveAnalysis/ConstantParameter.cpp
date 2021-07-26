@@ -8,28 +8,25 @@
 #include <string>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedParameter"
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
-void static test1(int a) {
+void static test1(int a) { }// warn here
 
-}
-
-void static test2(const int &a) { // look like is not working also
-
-}
+void static test2(const int &a) { }// look like is not working also
 
 void static test3(const std::string &s) {
 
 }
 
-void static test4(const int p) {}
+void static test4(const int p) {} // warn here
 
-void static test5(bool flag) {}
+void static test5(bool flag) {} // warn here
 
 template<typename T>
-void static test6(T t) {}
+void static test6(T t) {} // warn here
 
 enum Color {
     Blue = 0
@@ -38,36 +35,36 @@ enum class Letter {
     A = 0
 };
 
-void static test7(Color c, Letter l) {}
+void static test7(Color c, Letter l) {} // warn here
 
-void static test8(float a) {}
+void static test8(float a) {} // warn here
 
 typedef int MyInt;
-void static test9(MyInt a) {}
+void static test9(MyInt a) {} // warn here
 
-void static test10(float f) {}
-void static test10_1(float f) {}
-void static test10_2(double d) {}
+void static test10(float f) {} // warn here
+void static test10_1(float f) {} // warn here
+void static test10_2(double d) {} // warn here
 
 namespace {
-    void test11(int a) {}
+    void test11(int a) {} // warn here
 
-    void test11_1(int a = 0) {}
+    void test11_1(int a = 0) {} // warn here
 
-    void test11_2(int a, int b) {}
+    void test11_2(int a, int b) {} // warn here
 
-    void test11_3(char c, int a) {}
+    void test11_3(char c, int a) {} // warn here
 
 
     void test12() {}
 
     template<typename T>
-    void test15(T t) {}
+    void test15(T t) {} // warn here
 
     template<typename T, typename U>
-    void test16(T t, U u = '.'){}
+    void test16(T t, U u = '.'){} // warn here
 
-    void test17(const int numbers...) {}
+    void test17(const int numbers...) {} // warn here
 }
 
 
@@ -75,9 +72,9 @@ class X {
     [[maybe_unused]] static int zero;
     bool flag;
 
-    void XTest1(unsigned p) {}
+    void XTest1(unsigned p) {} // warn here
 
-    static unsigned XTest2(unsigned p) {
+    static unsigned XTest2(unsigned p) { // warn here
         return p;
     }
 

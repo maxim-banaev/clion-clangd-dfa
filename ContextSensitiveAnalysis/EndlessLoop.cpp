@@ -9,17 +9,17 @@
 // Local DFA
 namespace endless_loop {
     void test1() {
-        for (;;) {
+        for (;;) { // warn here
         }
     }
 
     void test1_1() {
-        for (;;)
+        for (;;) // warn here
             int a;
     }
 
     void test1_2() {
-        for (;;) {
+        for (;;) { // warn here
             int a;
             int b;
         }
@@ -32,63 +32,63 @@ namespace endless_loop {
     }
 
     void test3() {
-        while (true) {
+        while (true) { // warn here
         }
     }
 
     void test3_1() {
-        while (true)
+        while (true) // warn here
             int a;
     }
 
     void test3_2() {
-        while (true) {
+        while (true) { // warn here
             int a;
             int b;
         }
     }
 
     void test4() {
-        do {
+        do { // warn here
         } while (true);
     }
 
     void test4_1() {
-        do {
+        do { // warn here
             int a;
         } while (true);
     }
 
     void test4_2() {
-        do
+        do // warn here
             int a;
         while (true);
     }
 
     void test5() {
         foo:
-        int a;
+        int a; // warn here
         goto foo;
     }
 
     void test5_1() {
         foo:
-        goto foo;
+        goto foo; // warn here
     }
 
     void test5_2() {
         foo:
-        int a;
+        int a; // warn here
         goto bar;
         int i_am_unused;
         bar:
-        int b;
+        int b; // warn here
         goto foo;
     }
 
     template<typename T>
     void test6() {
-        while (true) {
+        while (true) { // warn here
         }
     }
 } // namespace
@@ -97,17 +97,17 @@ namespace endless_loop {
 // Global DFA
 namespace {
     void test1() {
-        for (;;) {
+        for (;;) { // warn here
         }
     }
 
     void test1_1() {
-        for (;;)
+        for (;;) // warn here
             int a;
     }
 
     void test1_2() {
-        for (;;) {
+        for (;;) { // warn here
             int a;
             int b;
         }
@@ -120,53 +120,53 @@ namespace {
     }
 
     void test3() {
-        while (true) {
+        while (true) { // warn here
         }
     }
 
     void test3_1() {
-        while (true)
+        while (true) // warn here
             int a;
     }
 
     void test3_2() {
-        while (true) {
+        while (true) { // warn here
             int a;
             int b;
         }
     }
 
     void test4() {
-        do {
+        do { // warn here
         } while (true);
     }
 
     void test4_1() {
-        do {
+        do { // warn here
             int a;
         } while (true);
     }
 
     void test4_2() {
-        do
+        do // warn here
             int a;
         while (true);
     }
 
     void test5() {
         foo:
-        int a;
+        int a; // warn here
         goto foo;
     }
 
     void test5_1() {
         foo:
-        goto foo;
+        goto foo; // warn here
     }
 
     void test5_2() {
         foo:
-        int a;
+        int a; // warn here
         goto bar;
         int i_am_unused;
         bar:
@@ -176,7 +176,7 @@ namespace {
 
     template<typename T>
     void test6() {
-        while (true) {
+        while (true) { // warn here
         }
     }
 
@@ -184,7 +184,7 @@ namespace {
         return a;
     }
     void test7() {
-        while (getTrue()) {
+        while (getTrue()) { // warn here
         }
     }
 } // namespace

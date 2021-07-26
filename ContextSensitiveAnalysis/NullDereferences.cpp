@@ -1,4 +1,4 @@
-// summary: should be 9 warnings
+// summary: should be 8 warnings + 1 pop
 
 #include <memory>
 #include <string>
@@ -14,15 +14,13 @@ namespace null_dereference {
 
     [[noreturn]] size_t test1() {
         struct foo *t = nullptr;
-        t->data;
+        t->data; // warn here
         sizeof(t->data); // shouldn't warn here
     }
 
-    void test2() {
-        std::string *a = nullptr;
-        std::string b = "a";
+    void test2(std::string *a, std::string b) {
 
-        while (a != nullptr || a->length()) {
+        while (a != nullptr || a->length()) { // warn here
             a = &b;
         }
 
@@ -35,7 +33,7 @@ namespace null_dereference {
     void test3() {
         bool *f = nullptr;
         char *c = nullptr;
-        if (*f && *c) {
+        if (*f && *c) { // warn here
         }
     }
 
@@ -50,7 +48,7 @@ namespace {
 
     [[noreturn]] size_t test1() {
         struct foo *t = nullptr;
-        t->data;
+        t->data; // warn here
         sizeof(t->data); // shouldn't warn here
     }
 
@@ -58,7 +56,7 @@ namespace {
         std::string *a = nullptr;
         std::string b = "a";
 
-        while (a != nullptr || a->length()) {
+        while (a != nullptr || a->length()) { // warn here
             a = &b;
         }
 
@@ -71,7 +69,7 @@ namespace {
     void test3() {
         bool *f = nullptr;
         char *c = nullptr;
-        if (*f && *c) {
+        if (*f && *c) { // warn here
         }
     }
 

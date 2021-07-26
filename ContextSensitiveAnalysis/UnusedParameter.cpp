@@ -8,28 +8,28 @@
 #pragma ide diagnostic ignored "performance-unnecessary-value-param"
 // Local DFA
 namespace unused_parameter {
-    void test1(int p) {}
+void test1(int p) {} // warn here
 
-    void test2(float p) {}
+void test2(float p) {} // warn here
 
-    void test3(const std::string p) {}
+void test3(const std::string p) {} // warn here
 
     // https://youtrack.jetbrains.com/issue/CPP-9788
     void test4(int& p) {}
 
-    void test5(int* p) {}
+    void test5(int* p) {} // warn here
 
-    void test6(std::function<int(void)> f) {}
+    void test6(std::function<int(void)> f) {} // warn here
 
     template<typename T>
-    void test7(T t) {}
+    void test7(T t) {} // warn here
 
-    void test8(const int numbers...) {}
+    void test8(const int numbers...) {} // warn here
 
     enum class Letter {
         A
     };
-    void test9(Letter l) {}
+void test9(Letter l) {} // warn here
 
     // https://youtrack.jetbrains.com/issue/CPP-23537
     void test10() {
@@ -40,22 +40,22 @@ namespace unused_parameter {
 
     class X {
     public:
-        void test15(int p) {}
+  void test15(int p) {} // warn here
 
-        void test11(int p) const {}
+  void test11(int p) const {} // warn here
 
-        static void test12(int p) {}
+  static void test12(int p) {} // warn here
     };
 }
 
 // Global DFA
 namespace {
     // https://youtrack.jetbrains.com/issue/CPP-23482
-    void test1(int p) {}
+    void test1(int p) {} // warn here
 
-    void test2(float p) {}
+    void test2(float p) {} // warn here
 
-    void test3(const std::string p) {}
+    void test3(const std::string p) {} // warn here
 
     // https://youtrack.jetbrains.com/issue/CPP-9788
     void test4(int& p) {}

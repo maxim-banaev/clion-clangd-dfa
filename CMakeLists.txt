@@ -3,6 +3,7 @@ project(clangd-dfa-inspection-checker)
 
 set(CMAKE_CXX_STANDARD 17)
 
+#set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 add_executable(main main.cpp
         ContextSensitiveAnalysis/ConstantCondition.cpp
         ContextSensitiveAnalysis/ConstantFunctionResult.cpp

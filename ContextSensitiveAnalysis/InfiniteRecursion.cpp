@@ -6,7 +6,7 @@
 
 // Local DFA
 namespace infinite_recursion {
-    [[noreturn]] void test1() { test1(); }
+[[noreturn]] void test1() { test1(); } // warn here
 
 void test2();
 
@@ -24,7 +24,7 @@ template <typename T> void test3(T t) { test3(t); }
 // as designed. Functions may throw an exception and end a caller function.
 void test4() {
   std::cout << "a";
-  test4();
+  test4(); // warn here
 }
 
 void test5() {
@@ -34,18 +34,18 @@ void test5() {
 
 class [[maybe_unused]] InfiniteFoo {
 public:
-  void test6() { this->test6(); }
+  void test6() { this->test6(); } // warn here
 
-  static void test7() { test7(); }
+  static void test7() { test7(); } // warn here
 
   void test8();
 
-  void operator+() { this->operator+(); }
+  void operator+() { this->operator+(); } // warn here
 };
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "MemberFunctionCanBeStatic"
-void InfiniteFoo::test8() { InfiniteFoo::test8(); }
+void InfiniteFoo::test8() { InfiniteFoo::test8(); } // warn here
 #pragma clang diagnostic pop
 
 void test9();
