@@ -1,4 +1,4 @@
-// summary: 15 warnings
+// summary: 14 warnings
 #include <string>
 
 #pragma clang diagnostic push

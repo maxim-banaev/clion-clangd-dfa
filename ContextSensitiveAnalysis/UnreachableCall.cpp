@@ -1,4 +1,4 @@
-// summary: should be 20 warnings
+// summary: should be 18 warnings
 #include <string>
 
 #pragma clang diagnostic push
@@ -6,11 +6,13 @@
 #pragma ide diagnostic ignored "bugprone-reserved-identifier"
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #pragma clang diagnostic ignored "-Wtautological-undefined-compare"
+#pragma ide diagnostic ignored "Simplify"
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "UnreachableCode"
+
 static void test1_function() {} // warn here
 
 void test1() { if (false) test1_function(); }
@@ -53,7 +55,7 @@ class Base {
 };
 
 class Test5 : public Base {
-    void test5_function() override {} //shouldn't warn here
+    void test5_function() override {} // shouldn't warn here
 public:
     void test5() {
         bool a = false;
@@ -190,9 +192,7 @@ void test20([[maybe_unused]] int a) {
     }
 }
 
-
-
-void chekGlobalDFA() {
+void checkGlobalDFA() {
     ::test6();
     ::test7();
     ::test8<int>();

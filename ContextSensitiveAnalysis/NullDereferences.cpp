@@ -1,4 +1,4 @@
-// summary: should be 8 warnings + 1 pop
+// summary: should be 8 warnings
 
 #include <memory>
 #include <string>

@@ -1,4 +1,4 @@
-// summary: 14 warnings
+// summary: 15 warnings
 #include <string>
 #include <unistd.h>
 
@@ -39,8 +39,19 @@ char test3() { // warn here
   return a;
 }
 
-float test4() { // warn here
+// https://youtrack.jetbrains.com/issue/CPP-7454
+float test4() { // shouldn't warn here
   float a = 1.1;
+  return a;
+}
+
+double test4_1() { // warn here
+  float a = 1.1f;
+  return a;
+}
+
+double test4_2() { // warn here
+  double a = 1.1;
   return a;
 }
 
@@ -179,8 +190,20 @@ public:
 
 int X::number = 0;
 
-// https://youtrack.jetbrains.com/issue/CPP-23481
-static float test18(int x, float b = 0.17) { // warn here
+// https://youtrack.jetbrains.com/issue/CPP-7454
+static float test18(int x, float b = 0.17) { // shouldn't warn here.
+  if (x > 0)
+    return b;
+  return 0.17;
+}
+
+static float test18_1(int x, float b = 0.17f) { // warn here.
+  if (x > 0)
+    return b;
+  return 0.17f;
+}
+
+static double test18_2(int x, double b = 0.17) { // warn here.
   if (x > 0)
     return b;
   return 0.17;
@@ -210,6 +233,8 @@ void checkGlobalDFA() {
   x.check_test17();
 
   ::test18(18);
+  ::test18_1(18);
+  ::test18_2(18);
 }
 
 #pragma clang diagnostic pop

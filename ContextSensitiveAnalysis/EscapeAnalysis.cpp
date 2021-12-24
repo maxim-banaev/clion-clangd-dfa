@@ -1,4 +1,4 @@
-// summary: should be 11 warnings
+// summary: should be 8 warnings
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
@@ -39,7 +39,7 @@ namespace {
         int x = 0;
         int *ptr = &x;
         // https://youtrack.jetbrains.com/issue/CPP-23550
-        gPtr = ptr; // should warn here
+        gPtr = ptr; // shouldn't warn here
         gPtr = &x;  // warn here
 
         if (p == 1)
@@ -53,7 +53,7 @@ namespace {
 
         ptr = ar;
         // https://youtrack.jetbrains.com/issue/CPP-23550
-        gPtr = ptr; // should warn here
+        gPtr = ptr; // shouldn't warn here
         return ptr; // warn here
     }
 } // namespace

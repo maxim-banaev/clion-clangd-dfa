@@ -1,4 +1,4 @@
-// summary: should be 38 warnings
+// summary: should be 37 warnings
 
 #include <iostream>
 #include <vector>

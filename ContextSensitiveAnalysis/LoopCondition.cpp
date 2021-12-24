@@ -1,15 +1,16 @@
-// summary: should be 9 warnings + 1 pop
+// summary: should be 10
+
+#include <vector>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "bugprone-suspicious-semicolon"
 #pragma ide diagnostic ignored "ConstantParameter"
 // Local DFA
 namespace loop_condition {
-    // https://youtrack.jetbrains.com/issue/CPP-23459
     void test1() {
-        for (int i = 0; i < 10;) {
+      for (int i = 0; i < 10;) { // warn here
             if (i > 5)
-                break;
+                ;
         }
     }
 
@@ -25,7 +26,7 @@ namespace loop_condition {
     }
 
     void test4() {
-        for (int i = 0; i < 10; ) { // warn here
+        for (auto i = 0; i < 10; ) { // warn here
 
         }
     }
@@ -35,12 +36,18 @@ namespace loop_condition {
 
         }
     }
+
+    // https://youtrack.jetbrains.com/issue/CPP-25978
+    void test6(const std::vector<int> & v) {
+      for (auto wrapIter = v.begin(); wrapIter != v.end();) {
+
+      }
+    }
 }
 
 
 // Global DFA
 namespace {
-    // https://youtrack.jetbrains.com/issue/CPP-23459
     void test1() {
         for (int i = 0; i < 10;) { // warn here
             if (i > 5)
@@ -70,6 +77,13 @@ namespace {
 
         }
     }
+
+    // https://youtrack.jetbrains.com/issue/CPP-25978
+    void test6(const std::vector<int> & v) {
+      for (auto wrapIter = v.begin(); wrapIter != v.end();) {
+
+      }
+    }
 }
 
 void checkGlobalDFA() {
@@ -78,6 +92,7 @@ void checkGlobalDFA() {
     ::test3(3);
     ::test4();
     ::test5();
+    ::test6({6});
 }
 
 #pragma clang diagnostic pop

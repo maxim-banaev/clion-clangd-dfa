@@ -94,9 +94,15 @@ namespace constant_condition {
         if (X == Y) {}
     }
 
+    // https://youtrack.jetbrains.com/issue/CPP-7454
     void test8() {
         float f = 0.5;
-        if (f == 0.5) {} // warn here
+        if (f == 0.5) {} // shouldn't warn here
+    }
+
+    void test8_1() {
+      float f = 0.5f;
+      if (f == 0.5f) {} // warn here
     }
 
 } // namespace

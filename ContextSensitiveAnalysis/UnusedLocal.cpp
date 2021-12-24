@@ -1,4 +1,4 @@
-// summary: should be 17 warnings + 1 pop
+// summary: should be 17 warnings
 #include <string>
 #include <vector>
 
@@ -33,11 +33,11 @@ namespace unused_local {
 
     void test5(foo f) { foo f1{}; } // warn here
 
-    void test6() { std::string s = "123"; } // should warn here
+    void test6() { std::string s = "123"; } // shouldn't warn here
 
     void test7(std::string s, std::vector<int> v) {
-      std::string s1; // should warn here
-      std::vector<int> v1; // should warn here
+      std::string s1; // shouldn't warn here
+      std::vector<int> v1; // shouldn't warn here
     }
 
     void test7_1(std::string s = "123") {
@@ -89,11 +89,11 @@ namespace {
 
     void test5(foo f) { foo f1{}; } // warn here
 
-    void test6() { std::string s = "123"; } // should warn here
+    void test6() { std::string s = "123"; } // shouldn't warn here
 
     void test7(std::string s, std::vector<int> v) {
-      std::string s1; // should warn here
-      std::vector<int> v1; // should warn here
+      std::string s1; // shouldn't warn here
+      std::vector<int> v1; // shouldn't warn here
     }
 
     void test7_1(std::string s = "123") {

@@ -8,7 +8,7 @@
 namespace not_initialized_variable {
     void test() {
         int a;
-        if (a > 1) {
+        if (a > 1) { // warn here
         }
     }
 
@@ -45,12 +45,12 @@ namespace not_initialized_variable {
 
     void test4() {
         int a;
-        a++;
+        a++; // warn here
     }
 
     void test5() {
         int a, b;
-        a = b;
+        a = b; // warn here
     }
 
     void test6() {

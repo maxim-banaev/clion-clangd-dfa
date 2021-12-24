@@ -1,4 +1,4 @@
-// summary: 24 warnings
+// summary: 22 warnings
 // Constant parameter is working only with int-convertible types
 // It's not working with other types even int() operator is defined
 // https://youtrack.jetbrains.com/issue/CPP-23268
@@ -36,22 +36,22 @@ enum class Letter { A = 0 };
 
 void static test7(Color c, Letter l) {} // warn here
 
-void static test8(float a) {} // warn here
+// https://youtrack.jetbrains.com/issue/CPP-7454
+void static test8(float a) {} // shouldn't warn here.
+void static test8_1(float a) {} // warn here.
 
 typedef int MyInt;
 void static test9(MyInt a) {} // warn here
 
-void static test10(float f) {}    // warn here
-void static test10_1(float f) {}  // warn here
+// https://youtrack.jetbrains.com/issue/CPP-7454
+void static test10(float f) {}    // shouldn't warn here.
+void static test10_1(float f) {}  // warn here.
 void static test10_2(double d) {} // warn here
 
 namespace {
 void test11(int a) {} // warn here
-
 void test11_1(int a = 0) {} // warn here
-
 void test11_2(int a, int b) {} // warn here
-
 void test11_3(char c, int a) {} // warn here
 
 void test12() {}
@@ -74,7 +74,7 @@ class X {
   }
 
 public:
-  void chechDFA() {
+  void checkDFA() {
     XTest1(1);
     auto ret = flag ? XTest2(1) : 0;
   }
@@ -95,10 +95,10 @@ void checkGlobalDFA() {
   test6(1);
   test7(Blue, Letter::A);
   test8(0.5);
+  test8_1(0.5f);
   test9(9);
   test10(10.5);
-  // test10_1(4e2);
-  test10_1(0x10.1p0);
+  test10_1(10.5f);
   test10_2(123.456e-67);
 
   test11(INT_MAX);
