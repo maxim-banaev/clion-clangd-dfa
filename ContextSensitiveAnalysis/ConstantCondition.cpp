@@ -1,4 +1,4 @@
-// summary: 26 warnings
+// summary: 39 warnings
 
 #include <iostream>
 #include <string>
@@ -26,7 +26,7 @@ namespace constant_condition {
 
     void test1() {
         int a = 1;
-        if (A(a)) {
+        if (A(a)) { // warn here
         }
     }
 
@@ -85,13 +85,13 @@ namespace constant_condition {
         int y = 1;
 
         if (x == X) {} // warn here
-        if (X == x) {}
-        if (Y == 1) {}
+        if (X == x) {} // warn here
+        if (Y == 1) {} // warn here
         if (1 == Y) {} // warn here
         if (x == Y) {} // warn here
-        if (Y == x) {}
-        if (Y == X) {}
-        if (X == Y) {}
+        if (Y == x) {} // warn here
+        if (Y == X) {} // warn here
+        if (X == Y) {} // warn here
     }
 
     // https://youtrack.jetbrains.com/issue/CPP-7454
@@ -127,7 +127,7 @@ namespace {
 
     void test1() {
         int a = 1;
-        if (A(a)) {
+        if (A(a)) { // warn here
         }
     }
 
@@ -186,13 +186,13 @@ namespace {
         int y = 1;
 
         if (x == X) {} // warn here
-        if (X == x) {}
-        if (Y == 1) {}
+        if (X == x) {} // warn here
+        if (Y == 1) {} // warn here
         if (1 == Y) {} // warn here
         if (x == Y) {} // warn here
-        if (Y == x) {}
-        if (Y == X) {}
-        if (X == Y) {}
+        if (Y == x) {} // warn here
+        if (Y == X) {} // warn here
+        if (X == Y) {} // warn here
     }
 
 

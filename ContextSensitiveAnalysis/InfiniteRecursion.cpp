@@ -1,4 +1,4 @@
-// summary: should be 7 warnings
+// summary: should be 16 warnings
 #include <iostream>
 
 #pragma clang diagnostic push
@@ -12,16 +12,13 @@ void test2();
 
 #define CALL_TEST() test2()
 
-// https://youtrack.jetbrains.com/issue/CPP-17805
 void test2() {
-  CALL_TEST(); // a is incremented twice
+  CALL_TEST(); // warn here
 }
 
 // https://youtrack.jetbrains.com/issue/CPP-17716
 template <typename T> void test3(T t) { test3(t); }
 
-// https://youtrack.jetbrains.com/issue/CPP-17578#focus=streamItem-27-3733783.0-0
-// as designed. Functions may throw an exception and end a caller function.
 void test4() {
   std::cout << "a";
   test4(); // warn here
@@ -57,4 +54,47 @@ void test9_1() { test9_2(); }
 void test9_2() { test9(); }
 
 } // namespace
+
+
+// Global DFA
+namespace {
+    [[noreturn]] void test1() { test1(); } // warn here
+
+    void test2();
+
+#define CALL_TEST() test2()
+
+    void test2() {
+        CALL_TEST(); // warn here
+    }
+
+    // https://youtrack.jetbrains.com/issue/CPP-17716
+    template <typename T> void test3(T t) { test3(t); }
+
+    void test4() {
+        std::cout << "a";
+        test4(); // warn here
+    }
+
+    void test5() {
+        auto l = []() { test5(); };
+        l();
+    }
+}
+
+void checkGlobalDFA1() {
+    ::test1();
+}
+void checkGlobalDFA2() {
+    ::test2();
+}
+void checkGlobalDFA3() {
+    ::test3<int>(1);
+}
+void checkGlobalDFA4() {
+    ::test4();
+}
+void checkGlobalDFA5() {
+    ::test5();
+}
 #pragma clang diagnostic pop
