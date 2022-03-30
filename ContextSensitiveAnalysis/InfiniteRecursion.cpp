@@ -1,7 +1,8 @@
-// summary: should be 16 warnings
+// summary: should be 8 warnings
 #include <iostream>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "misc-no-recursion"
 
 // Local DFA
@@ -13,7 +14,7 @@ void test2();
 #define CALL_TEST() test2()
 
 void test2() {
-  CALL_TEST(); // warn here
+  CALL_TEST(); // https://youtrack.jetbrains.com/issue/CPP-17805
 }
 
 // https://youtrack.jetbrains.com/issue/CPP-17716
@@ -65,7 +66,7 @@ namespace {
 #define CALL_TEST() test2()
 
     void test2() {
-        CALL_TEST(); // warn here
+        CALL_TEST(); // https://youtrack.jetbrains.com/issue/CPP-17805
     }
 
     // https://youtrack.jetbrains.com/issue/CPP-17716
@@ -82,19 +83,23 @@ namespace {
     }
 }
 
-void checkGlobalDFA1() {
+[[maybe_unused]] void checkGlobalDFA1() {
     ::test1();
 }
-void checkGlobalDFA2() {
+
+[[maybe_unused]] void checkGlobalDFA2() {
     ::test2();
 }
-void checkGlobalDFA3() {
+
+[[maybe_unused]] void checkGlobalDFA3() {
     ::test3<int>(1);
 }
-void checkGlobalDFA4() {
+
+[[maybe_unused]] void checkGlobalDFA4() {
     ::test4();
 }
-void checkGlobalDFA5() {
+
+[[maybe_unused]] void checkGlobalDFA5() {
     ::test5();
 }
 #pragma clang diagnostic pop

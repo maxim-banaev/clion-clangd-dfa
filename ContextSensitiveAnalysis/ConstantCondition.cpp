@@ -1,4 +1,4 @@
-// summary: 55 warnings
+// summary: 43 warnings
 
 #include <iostream>
 
@@ -25,7 +25,7 @@ namespace constant_condition {
 
     void test1() {
         int a = 1;
-        if (A(a)) { // warn here
+        if (A(a)) { // https://youtrack.jetbrains.com/issue/CPP-17805
         }
     }
 
@@ -84,13 +84,13 @@ namespace constant_condition {
         int y = 1;
 
         if (x == X) {} // warn here
-        if (X == x) {} // warn here
-        if (Y == 1) {} // warn here
+        if (X == x) {} // https://youtrack.jetbrains.com/issue/CPP-17805
+        if (Y == 1) {} // https://youtrack.jetbrains.com/issue/CPP-17805
         if (1 == Y) {} // warn here
         if (x == Y) {} // warn here
-        if (Y == x) {} // warn here
-        if (Y == X) {} // warn here
-        if (X == Y) {} // warn here
+        if (Y == x) {} // https://youtrack.jetbrains.com/issue/CPP-17805
+        if (Y == X) {} // https://youtrack.jetbrains.com/issue/CPP-17805
+        if (X == Y) {} // https://youtrack.jetbrains.com/issue/CPP-17805
     }
 
     // https://youtrack.jetbrains.com/issue/CPP-7454
@@ -155,7 +155,7 @@ namespace constant_condition {
 
     [[maybe_unused]] void test16(bool flag) {
         int x = 1;
-        [[maybe_unused]] bool a = flag ? x == 1 : x == 2; // warn here
+        [[maybe_unused]] bool a = flag ? x == 1 : x == 2; // warn here twice
     }
 } // namespace
 
@@ -179,7 +179,7 @@ namespace {
 
     void test1() {
         int a = 1;
-        if (A(a)) { // warn here
+        if (A(a)) { // https://youtrack.jetbrains.com/issue/CPP-17805
         }
     }
 
@@ -238,13 +238,13 @@ namespace {
         int y = 1;
 
         if (x == X) {} // warn here
-        if (X == x) {} // warn here
-        if (Y == 1) {} // warn here
+        if (X == x) {} // https://youtrack.jetbrains.com/issue/CPP-17805
+        if (Y == 1) {} // https://youtrack.jetbrains.com/issue/CPP-17805
         if (1 == Y) {} // warn here
         if (x == Y) {} // warn here
-        if (Y == x) {} // warn here
-        if (Y == X) {} // warn here
-        if (X == Y) {} // warn here
+        if (Y == x) {} // https://youtrack.jetbrains.com/issue/CPP-17805
+        if (Y == X) {} // https://youtrack.jetbrains.com/issue/CPP-17805
+        if (X == Y) {} // https://youtrack.jetbrains.com/issue/CPP-17805
     }
 
 

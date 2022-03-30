@@ -1,3 +1,4 @@
+//  summary: should be 3 warnings
 #include <string>
 
 #pragma clang diagnostic push
