@@ -1,7 +1,6 @@
-// summary: 39 warnings
+// summary: 55 warnings
 
 #include <iostream>
-#include <string>
 
 
 #pragma clang diagnostic push
@@ -100,11 +99,64 @@ namespace constant_condition {
         if (f == 0.5) {} // shouldn't warn here
     }
 
-    void test8_1() {
+    [[maybe_unused]] void test8_1() {
       float f = 0.5f;
       if (f == 0.5f) {} // warn here
     }
 
+    bool test9(int p1, [[maybe_unused]] int p2) {
+        if (p1 == 1 || p1 == 2)
+            return p1 == 1 || p1 == 2; // warn here
+        return false;
+    }
+
+    void fn(bool cond);
+    void test10() {
+        int x = 1;
+        fn(x == 1); // warn here
+    }
+
+    void test11() {
+        int x = 1;
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
+        [[maybe_unused]] bool a = x == 1; // warn here
+#pragma clang diagnostic pop
+    }
+
+    class [[maybe_unused]] test12 {
+        int x;
+    public:
+        [[maybe_unused]] void func() {
+            this->x = 1;
+            if (this->x == 1) {} // warn here
+        }
+    };
+
+    void test13() {
+        int a = 1;
+        [[maybe_unused]] auto cond = a == 1; // warn here
+    }
+
+    void fn14([[maybe_unused]] bool flag = false) {}
+    void test14() {
+        int a = 1;
+        fn14( a == 1); // warn here
+    }
+
+    int fn15() {
+        return 0;
+    }
+
+    void test15() {
+        int a = 1;
+        if(a == fn15()) {} // warn here
+    }
+
+    [[maybe_unused]] void test16(bool flag) {
+        int x = 1;
+        [[maybe_unused]] bool a = flag ? x == 1 : x == 2; // warn here
+    }
 } // namespace
 
 
@@ -234,6 +286,54 @@ namespace {
         if (getZero() == getOne()) { }
     }
 
+    bool test12(int p1, [[maybe_unused]] int p2) {
+        if (p1 == 1 || p1 == 2)
+            return p1 == 1 || p1 == 2; // warn here
+        return false;
+    }
+
+    void fn([[maybe_unused]] bool cond) {}
+    void test13() {
+        int x = 1;
+        fn(false);
+        fn(x == 1); // warn here
+    }
+
+    void test14() {
+        int x = 1;
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
+        [[maybe_unused]] auto b = x == 1; // warn here
+#pragma clang diagnostic pop
+    }
+
+    void test15() {
+        int a = 1;
+        [[maybe_unused]] auto cond = a == 1; // warn here
+    }
+
+    void fn16([[maybe_unused]] bool flag = false) {}
+    void test16() {
+        int a = 1;
+        fn16();
+        fn16( a == 1); // warn here
+    }
+
+    int fn17() {
+        return 0;
+    }
+
+    void test17() {
+        int a = 1;
+        if(a == fn17()) {} // warn here
+    }
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantParameter"
+    void test18(float f = 0.f) {
+        [[maybe_unused]] auto cond = f == 0.f; // warn here
+    }
+#pragma clang diagnostic pop
 } // namespace
 
 
@@ -250,5 +350,13 @@ void checkGlobalDFA() {
     ::test9();
     ::test10();
     ::test11();
+    ::test12(1,2);
+    ::test12(2,1);
+    ::test13();
+    ::test14();
+    ::test15();
+    ::test16();
+    ::test17();
+    ::test18();
 }
 #pragma clang diagnostic pop
