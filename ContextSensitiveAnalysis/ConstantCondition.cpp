@@ -1,6 +1,7 @@
 // summary: 43 warnings
 
 #include <iostream>
+#include <type_traits>
 
 
 #pragma clang diagnostic push
@@ -156,6 +157,34 @@ namespace constant_condition {
     [[maybe_unused]] void test16(bool flag) {
         int x = 1;
         [[maybe_unused]] bool a = flag ? x == 1 : x == 2; // warn here twice
+    }
+
+    void test17() {
+        if(std::is_constant_evaluated()) {} // warn here
+    }
+
+    [[maybe_unused]] void test18() {
+        [[maybe_unused]] const int n = std::is_constant_evaluated() ? 13 : 17; // warn here
+    }
+
+    template <int x>
+    struct C {};
+
+    template<>
+    struct C<true> {
+        static const int x = 1;
+    };
+
+    template<>
+    struct C<false> {
+        static const int x = 0;
+    };
+
+    [[maybe_unused]] constexpr void test19(const int x) {
+        // Type checker correctly evaluates std::is_constant_evaluated() == true here
+        if (C<std::is_constant_evaluated()>::x) {
+
+        }
     }
 } // namespace
 
@@ -334,6 +363,18 @@ namespace {
         [[maybe_unused]] auto cond = f == 0.f; // warn here
     }
 #pragma clang diagnostic pop
+
+    void test19() {
+        if(std::is_constant_evaluated()) {} // warn here
+    }
+
+    constexpr int test20(bool flag) {
+        if(std::is_constant_evaluated()) { // shouldn't warn here
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 } // namespace
 
 
@@ -358,5 +399,7 @@ void checkGlobalDFA() {
     ::test16();
     ::test17();
     ::test18();
+    ::test19();
+    constexpr int f = ::test20(true);
 }
 #pragma clang diagnostic pop

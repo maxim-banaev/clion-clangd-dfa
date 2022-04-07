@@ -122,9 +122,9 @@ void test10() {
   try {
     int a;
   } catch (std::bad_alloc &e) {
-    int i_am_not_unreachable; // shouldn't war here.
+    int i_am_not_unreachable; // shouldn't warn here.
   } catch (...) {
-    int i_am_not_unreachable; // shouldn't war here.
+    int i_am_not_unreachable; // shouldn't warn here.
   }
 }
 
@@ -132,7 +132,7 @@ void test11() {
   try {
     int a = 1;
   } catch (...) {
-    int i_am_not_unreachable; // shouldn't war here.
+    int i_am_not_unreachable; // shouldn't warn here.
   }
 }
 
@@ -140,7 +140,7 @@ void test12() {
   try {
     int a = 1;
   } catch (...) {
-    int i_am_not_unreachable; // shouldn't war here.
+    int i_am_not_unreachable; // shouldn't warn here.
   }
 }
 } // namespace null_dereferences
@@ -175,9 +175,9 @@ void test3(int a = 1) {
     std::cout << "1";
     break;
   case 2:
-    std::cout << "2"; // warn here
+    std::cout << "2";
     break;
-    int i_am_unreachable;
+    int i_am_unreachable; // warn here
   default: // warn here
     std::cout << "hz";
     break;

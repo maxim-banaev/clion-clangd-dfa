@@ -22,6 +22,6 @@ add_executable(main main.cpp
         LocalVariableEscapesScope.cpp
         NotInitializedVariable.cpp
         MissingReturn.cpp
-        ContextSensitiveAnalysis/UnusedField.cpp)
+        ContextSensitiveAnalysis/UnusedField.cpp ContextSensitiveAnalysis/ArrayIndexOutOfBounds.cpp)
 
 add_executable(check main.cpp)

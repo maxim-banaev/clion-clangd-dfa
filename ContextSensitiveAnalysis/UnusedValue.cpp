@@ -64,6 +64,7 @@ namespace unused_value {
     }
 
     void test9() {
+        // https://youtrack.jetbrains.com/issue/CPP-28842
         int a[] = {1,233}; // warn here
     }
 
@@ -130,6 +131,7 @@ namespace {
     }
 
     void test9() {
+        // https://youtrack.jetbrains.com/issue/CPP-28842
         int a[] = {1,233}; // warn here
     }
 }

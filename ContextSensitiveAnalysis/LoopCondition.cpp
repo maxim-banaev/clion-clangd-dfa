@@ -3,6 +3,8 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantConditionsOC"
+#pragma ide diagnostic ignored "EndlessLoop"
 #pragma ide diagnostic ignored "bugprone-suspicious-semicolon"
 #pragma ide diagnostic ignored "ConstantParameter"
 // Local DFA

@@ -108,8 +108,7 @@ auto test4(int x, int b = 0) -> decltype(1) { // warn here
   return 0;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-23367
-template <int N> int test5(int x, int b = N) {
+template <int N> int test5(int x, int b = N) { // warn here
   if (x > 0)
     return b;
   return N;
