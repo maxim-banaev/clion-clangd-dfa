@@ -1,57 +1,49 @@
-// summary: 25 warnings
-
 #include <array>
 #include <vector>
 #include <iostream>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "NullDereference"
+#pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "ConstantParameter"
-#pragma clang diagnostic ignored "-Warray-bounds"
-#pragma clang diagnostic ignored "-Wunused-value"
+#pragma ide diagnostic ignored "ConstantConditionsOC"
 
 // local DFA
 namespace array_index_out_of_bounds {
     void test1() {
-        int *a = new int[10];
-        a[11] = 11; // warn here
+        int *a = new int[0];
+        a[1] = 11; // warn here
     }
 
-#define N 11
+#define N 1
 
     void test1_1() {
-        int *a = new int[10];
+        int *a = new int[0];
         a[N] = 11; // warn here
     }
 
-    void test1_2() {
-        int buf[100];
-        int *p = buf;
-        p[101] = 1; // warn here
-    }
-
     void test2() {
-        int *a = new int[1];
-        for (int i = 0; i < 2; ++i) a[i] = i; // warn here
-    }
-
-    void test3() {
-        auto *a = new int[2];
+        int *a = new int[2];
         for (int i = 0; i < 3; ++i) a[i] = i; // warn here
     }
 
+    void test3() {
+        auto *a = new int[3];
+        for (int i = 0; i < 4; ++i) a[i] = i; // warn here
+    }
+
+    // https://youtrack.jetbrains.com/issue/CPP-29036
     void test4() {
         int *a = new int[10];
         for (int i = 11; i >= 0; --i) a[i] = i; // warn here?
     }
 
-    // https://youtrack.jetbrains.com/issue/CPP-28848
     void test5() {
-        int a[2][2] = {1, 2, 3, 4};
-        [[maybe_unused]] int c = a[0][3];
+        int a[2][4] = {1, 2, 3, 4};
+        [[maybe_unused]] int c = a[0][5]; // warn here
 
     }
 
-    // https://youtrack.jetbrains.com/issue/CPP-28848
     void test5_1() {
         int **a = new int *[10];
         for (int i = 0; i < 10; ++i)
@@ -73,8 +65,8 @@ namespace array_index_out_of_bounds {
             [[maybe_unused]] foo(int a) : a(a) {} // NOLINT(google-explicit-constructor)
         };
 
-        foo *f = new foo[3];
-        f[6] = 1; // warn here
+        [[maybe_unused]] foo *f = new foo[3];
+        f[6] = 1;
     }
 
     void test7() {
@@ -82,116 +74,116 @@ namespace array_index_out_of_bounds {
         printf("arr[7] is %d\n", arr[7]); // warn here
     }
 
-    void test8() {
-        int buf[100];
-        buf[-1] = 1; // warn here
-    }
+    void test8(int x) {
+        int buf[7];
 
-    // https://youtrack.jetbrains.com/issue/CPP-28847
-    void test9() {
-        const char *mystr = "mary had a little lamb";
-        mystr[-1]; // warn here
-        mystr[1000]; // warn here
-    }
-
-    void test10(int x) {
-        int buf[100];
-        if (x < 0)
+        if (x > 7)
             buf[x] = 1; // warn here
-        else
-            buf[x] = 0; // shouldn't warn here
-
-        if (x > 99)
-            buf[x] = 1; // warn here?
     }
 
-    [[maybe_unused]] void test11(int x[10]) {
-        x[11] = 1; // warn here?
+    void test9() {
+        std::array<int, 9> array = {1, 2, 3, 4, 5};
+        for (int i = 10; i < 11; ++i) array[i] = i; // warn here
     }
 
-    // test12 for global mode
-
-    void test13() {
-        int x[12];
-        auto l =[&]() {
-            x[13] = 1; // warn here ?
-        };
-        l();
-
-        auto l1 = [=]() {
-            [[maybe_unused]] int c = x[13];// warn here ?
-        };
-        l1();
-    }
-
-    void test14_call([[maybe_unused]] int x){}
-    void test14() {
-        int x[13];
-        test14_call(x[14]); //warn here
-    }
-
-    // https://youtrack.jetbrains.com/issue/CPP-28845
-    void test15() {
-        std::array<int, 5> array = {1, 2, 3, 4, 5};
-        for (int i = 0; i < 10; ++i) array[i] = i; // warn here
-    }
-
-    // https://youtrack.jetbrains.com/issue/CPP-28845
-    void test16() {
+    // will not be fixed
+    void test10() {
         std::vector<int> vec = {3, 1, 4, 1, 5};
         try {
-            vec.at(5) = 9; // warn here
+            vec.at(5) = 9; // warn here?
         }
         catch (...) {
             std::cout << "Out-of-bounds exception captured!\n";
         }
     }
 
-    constexpr int get17(){
-        return 17;
+    [[maybe_unused]] void test11(int x[10]) {
+        x[11] = 1; // shouldn't warn here. Strange
     }
+
+    [[maybe_unused]] void test12() {
+        int *ip = new int;
+        ip[1] = 2; //warn here?
+    }
+
+    //https://youtrack.jetbrains.com/issue/CPP-29038/
+    void test13() {
+        int x[12], i = 13;
+        x[i++] = 1; // should warn here
+    }
+
+    enum {
+        SIZE = 13,
+        VALUE
+    };
+    void test14() {
+        bool flags[SIZE];
+        flags[VALUE] = true; // warn here
+    }
+
+    class [[maybe_unused]] test15 {
+        [[maybe_unused]] int x[14]{};
+    public:
+        [[maybe_unused]] explicit test15() {
+            this->x[15] = 1; // warn here
+        }
+    };
+
+    void test16() {
+        int x[15];
+        if (x[16] == 1) {} // warn here
+    }
+
     void test17() {
-        int x[16];
-        x[get17()]; // warn here
+        std::string s[16];
+        s[17] = "test17"; // warn here?
+    }
+
+    [[maybe_unused]] void test18() {
+        int x[17];
+        [[maybe_unused]] int c = (x[18]); // warn here
+    }
+
+    namespace {
+        int test19[18];
+        [[maybe_unused]] int c = test19[19]; // should warn here
     }
 }
 
 // global DFA
 namespace {
     void test1() {
-        int *a = new int[10];
-        a[11] = 11; // warn here
+        int *a = new int[1];
+        a[1] = 11; // warn here
     }
 
-#define N 11
-
     void test1_1() {
-        int *a = new int[10];
+        int *a = new int[1];
         a[N] = 11; // warn here
     }
 
     void test2() {
-        int *a = new int[1];
-        for (int i = 0; i < 2; ++i) a[i] = i; // warn here
-    }
-
-    void test3() {
-        auto *a = new int[2];
+        int *a = new int[2];
         for (int i = 0; i < 3; ++i) a[i] = i; // warn here
     }
 
+    void test3() {
+        auto *a = new int[3];
+        for (int i = 0; i < 4; ++i) a[i] = i; // warn here
+    }
+
+    // https://youtrack.jetbrains.com/issue/CPP-29036
     void test4() {
         int *a = new int[10];
         for (int i = 11; i >= 0; --i) a[i] = i; // warn here?
     }
 
-    // https://youtrack.jetbrains.com/issue/CPP-28848
     void test5() {
         int a[2][2] = {1, 2, 3, 4};
-        [[maybe_unused]] int c = a[0][3];
+        [[maybe_unused]] int c = a[0][5]; // warn here
 
     }
-    // https://youtrack.jetbrains.com/issue/CPP-28848
+
     void test5_1() {
         int **a = new int *[10];
         for (int i = 0; i < 10; ++i)
@@ -210,16 +202,11 @@ namespace {
 
             foo() = default;
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "ConstantParameter"
-#pragma ide diagnostic ignored "UnusedValue"
-
             [[maybe_unused]] foo(int a) : a(a) {} // NOLINT(google-explicit-constructor)
-#pragma clang diagnostic pop
         };
 
-        foo *f = new foo[3];
-        f[6] = 1; // warn here
+        [[maybe_unused]] foo *f = new foo[3];
+        f[6] = 1;
     }
 
     void test7() {
@@ -227,92 +214,25 @@ namespace {
         printf("arr[7] is %d\n", arr[7]); // warn here
     }
 
-    void test8() {
-        int buf[100];
-        buf[-1] = 1; // warn here
-    }
+    void test8(int x = 8) {
+        int buf[7];
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-value"
-    // https://youtrack.jetbrains.com/issue/CPP-28847
-    void test9() {
-        const char *mystr = "mary had a little lamb";
-        mystr[-1]; // warn here?
-        mystr[1000]; // warn here?
-    }
-#pragma clang diagnostic pop
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "ConstantConditionsOC"
-#pragma ide diagnostic ignored "UnreachableCode"
-    void test10(int x) {
-        int buf[100];
-        if (x < 0)
+        if (x > 7)
             buf[x] = 1;
-        else
-            buf[x] = 0; // warn here
-
-        if (x > 99)
-            buf[x] = 1; // warn here
-    }
-#pragma clang diagnostic pop
-
-    void test11(int x[10]) {
-        x[11] = 1; // warn here
     }
 
-    void test12(const int x) {
-        int n[10];
-        n[x] = 1; // warn here
-    }
-
-    void test12_1(const int x = 12) {
-        int n[10];
-        n[x] = 1; // warn here
-    }
-
-    void test13() {
-        int x[12];
-        auto l =[&]() {
-            x[13] = 1; // warn here ?
-        };
-        l();
-
-        auto l1 = [=]() {
-            [[maybe_unused]] int c = x[13];// warn here ?
-        };
-        l1();
-    }
-
-    void test14_call([[maybe_unused]] int x){}
-    void test14() {
-        int x[13];
-        test14_call(x[14]); //warn here
-    }
-
-    // https://youtrack.jetbrains.com/issue/CPP-28845
-    void test15() {
-        std::array<int, 5> array = {1, 2, 3, 4, 5};
+    void test9() {
+        std::array<int, 9> array = {1, 2, 3, 4, 5};
         for (int i = 0; i < 10; ++i) array[i] = i; // warn here
     }
 
-    // https://youtrack.jetbrains.com/issue/CPP-28845
-    void test16() {
-        std::vector<int> vec = {3, 1, 4, 1, 5};
-        try {
-            vec.at(5) = 9; // warn here
-        }
-        catch (...) {
-            std::cout << "Out-of-bounds exception captured!\n";
-        }
+    void test10(int x[10] = nullptr) {
+        x[11] = 1; // shouldn't warn here. Strange
     }
 
-    constexpr int get17(){
-        return 17;
-    }
-    void test17() {
-        int x[16];
-        x[get17()]; // warn here
+    void test11() {
+        int *ip = new int;
+        ip[1] = 2; //warn here?
     }
 }
 
@@ -328,16 +248,9 @@ void checkGlobalDFA() {
     ::test7();
     ::test8();
     ::test9();
-    ::test10(100);
-    int x11[10] = {1,2,3,4,5,6,7,8,9,0};
-    ::test11(x11);
-    ::test12(12);
-    ::test12_1();
-    ::test13();
-    ::test14();
-    ::test15();
-    ::test16();
-    ::test17();
+    ::test10();
+    ::test11();
+
 }
 
 #pragma clang diagnostic pop
