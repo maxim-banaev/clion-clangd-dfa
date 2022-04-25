@@ -1,3 +1,4 @@
+// summary: should be 24 warnings
 #include <array>
 #include <vector>
 #include <iostream>
@@ -234,6 +235,45 @@ namespace {
         int *ip = new int;
         ip[1] = 2; //warn here?
     }
+
+    //https://youtrack.jetbrains.com/issue/CPP-29038/
+    void test13() {
+        int x[12], i = 13;
+        x[i++] = 1; // should warn here
+    }
+
+    enum {
+        SIZE = 13,
+        VALUE
+    };
+    void test14() {
+        bool flags[SIZE];
+        flags[VALUE] = true; // warn here
+    }
+
+    class [[maybe_unused]] test15 {
+        [[maybe_unused]] int x[14]{};
+    public:
+        [[maybe_unused]] explicit test15() {
+            this->x[15] = 1; // warn here
+        }
+    };
+
+    void test16() {
+        int x[15];
+        if (x[16] == 1) {} // warn here
+    }
+
+    void test17() {
+        std::string s[16];
+        s[17] = "test17"; // warn here?
+    }
+
+    [[maybe_unused]] void test18() {
+        int x[17];
+        [[maybe_unused]] int c = (x[18]); // warn here
+    }
+
 }
 
 void checkGlobalDFA() {
@@ -250,6 +290,13 @@ void checkGlobalDFA() {
     ::test9();
     ::test10();
     ::test11();
+
+    ::test13();
+    ::test14();
+    ::test15();
+    ::test16();
+    ::test17();
+    ::test18();
 
 }
 
