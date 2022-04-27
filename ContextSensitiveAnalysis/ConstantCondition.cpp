@@ -5,6 +5,8 @@
 
 
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wconstant-evaluated"
+#pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 // Local DFA
@@ -368,7 +370,7 @@ namespace {
         if(std::is_constant_evaluated()) {} // warn here
     }
 
-    constexpr int test20(bool flag) {
+    constexpr int test20([[maybe_unused]] bool flag) {
         if(std::is_constant_evaluated()) { // shouldn't warn here
             return 1;
         } else {
@@ -400,6 +402,6 @@ void checkGlobalDFA() {
     ::test17();
     ::test18();
     ::test19();
-    constexpr int f = ::test20(true);
+    [[maybe_unused]] constexpr int f = ::test20(true);
 }
 #pragma clang diagnostic pop

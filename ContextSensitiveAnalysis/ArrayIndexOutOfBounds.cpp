@@ -149,6 +149,41 @@ namespace array_index_out_of_bounds {
         int test19[18];
         [[maybe_unused]] int c = test19[19]; // should warn here
     }
+
+    template<typename T>
+    [[maybe_unused]] void test20() {
+        std::array<T, 5> t{};
+        t[20] = 1; // warn here
+    }
+
+    template<int SIZE>
+    [[maybe_unused]] void test21() {
+        int x[0];
+        x[SIZE] = 1;
+    }
+
+    //https://youtrack.jetbrains.com/issue/CPP-29044
+    [[maybe_unused]] void test22(int a = 5) {
+        if (a == 5) {
+            [[maybe_unused]] char x[a];
+            int y[sizeof(x)];
+            y[5] = 5;
+        }
+    }
+
+    [[maybe_unused]] void test23() {
+        int *x = new int[10]; //10*sizeof(int) Bytes allocated
+        int *y = x;
+        y[sizeof(int) * 9] = 1;  // warn here
+    }
+
+    int test24(int a) {
+            int x[2] = {1, 2};
+            if (a < 0 ) {
+                return x[a]; // warn here
+            }
+        return 0;
+    }
 }
 
 // global DFA
@@ -233,7 +268,13 @@ namespace {
 
     void test11() {
         int *ip = new int;
-        ip[1] = 2; //warn here?
+        ip[1] = 2; // warn here?
+    }
+
+    void test12(int x) {
+        int arr[11];
+        arr[x] = 1; // warn here
+
     }
 
     //https://youtrack.jetbrains.com/issue/CPP-29038/
@@ -246,6 +287,7 @@ namespace {
         SIZE = 13,
         VALUE
     };
+
     void test14() {
         bool flags[SIZE];
         flags[VALUE] = true; // warn here
@@ -290,7 +332,7 @@ void checkGlobalDFA() {
     ::test9();
     ::test10();
     ::test11();
-
+    ::test12(12);
     ::test13();
     ::test14();
     ::test15();

@@ -5,6 +5,7 @@
 
 // Local DFA
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
 #pragma ide diagnostic ignored "Simplify"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
@@ -84,7 +85,8 @@ void test7() {
     return;
     int i_am_unreachable; // warn here
   }
-
+}
+void test7_1() {
   std::vector<int> range = {1, 2, 3};
   for (const auto &item : range) {
     continue;
@@ -178,14 +180,15 @@ void test3(int a = 1) {
     std::cout << "2";
     break;
     int i_am_unreachable; // warn here
-  default: // warn here
+  default:                // warn here
     std::cout << "hz";
     break;
   }
 }
 
 void test4(bool flag) {
-  std::string str = (flag || true) ? "reachable" : "i_am_unreachable"; // warn here
+  std::string str =
+      (flag || true) ? "reachable" : "i_am_unreachable"; // warn here
 }
 
 void test5() {
@@ -217,7 +220,8 @@ void test7() {
     return;
     int i_am_unreachable; // warn here
   }
-
+}
+void test7_1() {
   std::vector<int> range = {1, 2, 3};
   for (const auto &item : range) {
     continue;
@@ -257,7 +261,7 @@ void test10() {
   } catch (std::bad_alloc &e) {
     int i_am_not_unreachable; // shouldn't war here.
   } catch (...) {
-    int i_am_not_unreachable;// shouldn't war here.
+    int i_am_not_unreachable; // shouldn't war here.
   }
 }
 
@@ -279,6 +283,7 @@ void checkGlobalDFA() {
   ::test5();
   ::test6();
   ::test7();
+  ::test7_1();
   ::test8<int>();
   ::test9();
   ::test10();
