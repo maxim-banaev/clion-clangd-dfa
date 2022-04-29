@@ -1,4 +1,4 @@
-// summary: should be 24 warnings
+// summary: should be 35 warnings
 #include <array>
 #include <vector>
 #include <iostream>
@@ -12,14 +12,14 @@
 // local DFA
 namespace array_index_out_of_bounds {
     void test1() {
-        int *a = new int[0];
+        int *a = new int[1];
         a[1] = 11; // warn here
     }
 
 #define N 1
 
     void test1_1() {
-        int *a = new int[0];
+        int *a = new int[1];
         a[N] = 11; // warn here
     }
 
@@ -36,7 +36,7 @@ namespace array_index_out_of_bounds {
     // https://youtrack.jetbrains.com/issue/CPP-29036
     void test4() {
         int *a = new int[10];
-        for (int i = 11; i >= 0; --i) a[i] = i; // warn here?
+        for (int i = 11; i >= 0; --i) a[i] = i; // should warn here
     }
 
     void test5() {
@@ -67,7 +67,7 @@ namespace array_index_out_of_bounds {
         };
 
         [[maybe_unused]] foo *f = new foo[3];
-        f[6] = 1;
+        f[6] = 1; // warn here
     }
 
     void test7() {
@@ -87,6 +87,26 @@ namespace array_index_out_of_bounds {
         for (int i = 10; i < 11; ++i) array[i] = i; // warn here
     }
 
+    void test9_1() {
+      [[maybe_unused]] int local_variable = 1;
+      std::array<int, 5> array{0, 1, 2, 3, 4};
+      array[9] = 1; // warn here
+    }
+
+    void test9_2(int param) {
+      std::array<int, 5> array{0, 1, 2, 3, param};
+      array[9] = 1; // warn here
+    }
+
+    class [[maybe_unused]] test9_3 {
+      [[maybe_unused]] int x[14]{};
+      std::array<int, 7> buf{};
+    public:
+      [[maybe_unused]] explicit test9_3() {
+        this->buf[8] = 1; // warn here
+      }
+    };
+
     // will not be fixed
     void test10() {
         std::vector<int> vec = {3, 1, 4, 1, 5};
@@ -98,8 +118,9 @@ namespace array_index_out_of_bounds {
         }
     }
 
+    // negative case
     [[maybe_unused]] void test11(int x[10]) {
-        x[11] = 1; // shouldn't warn here. Strange
+        x[11] = 1; // shouldn't warn here
     }
 
     [[maybe_unused]] void test12() {
@@ -150,16 +171,18 @@ namespace array_index_out_of_bounds {
         [[maybe_unused]] int c = test19[19]; // should warn here
     }
 
+    // won't fix
     template<typename T>
     [[maybe_unused]] void test20() {
         std::array<T, 5> t{};
-        t[20] = 1; // warn here
+        t[20] = 1; // warn here?
     }
 
+    // negative case
     template<int SIZE>
     [[maybe_unused]] void test21() {
         int x[0];
-        x[SIZE] = 1;
+        x[SIZE] = 1; // shouldn't warn here
     }
 
     //https://youtrack.jetbrains.com/issue/CPP-29044
@@ -177,7 +200,7 @@ namespace array_index_out_of_bounds {
         y[sizeof(int) * 9] = 1;  // warn here
     }
 
-    int test24(int a) {
+    [[maybe_unused]] int test24(int a) {
             int x[2] = {1, 2};
             if (a < 0 ) {
                 return x[a]; // warn here
@@ -242,7 +265,7 @@ namespace {
         };
 
         [[maybe_unused]] foo *f = new foo[3];
-        f[6] = 1;
+        f[6] = 1; // warn here
     }
 
     void test7() {
@@ -254,7 +277,7 @@ namespace {
         int buf[7];
 
         if (x > 7)
-            buf[x] = 1;
+            buf[x] = 1; // warn here
     }
 
     void test9() {
@@ -262,8 +285,20 @@ namespace {
         for (int i = 0; i < 10; ++i) array[i] = i; // warn here
     }
 
+    void test9_1() {
+      [[maybe_unused]] int local_variable = 1;
+      std::array<int, 5> array{0, 1, 2, 3, 4};
+      array[9] = 1; // warn here
+    }
+
+    void test9_2(int param) {
+      std::array<int, 5> array{0, 1, 2, 3, param};
+      array[9] = 1; // warn here
+    }
+
+    // negative case
     void test10(int x[10] = nullptr) {
-        x[11] = 1; // shouldn't warn here. Strange
+        x[11] = 1; // shouldn't warn here
     }
 
     void test11() {
@@ -330,6 +365,8 @@ void checkGlobalDFA() {
     ::test7();
     ::test8();
     ::test9();
+    ::test9_1();
+    ::test9_2(3);
     ::test10();
     ::test11();
     ::test12(12);
