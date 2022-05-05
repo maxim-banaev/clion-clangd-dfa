@@ -188,6 +188,18 @@ namespace constant_condition {
 
         }
     }
+
+    [[maybe_unused]] void CPP_28958() {
+      bool state = false;
+      for (int i = 0; i < 10; ++i) {
+        if (state) { // shouldn't warn here
+          std::cout << "true\n";
+        }
+        state = !state;
+      }
+    }
+
+
 } // namespace
 
 
@@ -377,6 +389,16 @@ namespace {
             return 0;
         }
     }
+
+    void CPP_28958() {
+      bool state = false;
+      for (int i = 0; i < 10; ++i) {
+        if (state) { // shouldn't warn here
+          std::cout << "true\n";
+        }
+        state = !state;
+      }
+    }
 } // namespace
 
 
@@ -403,5 +425,7 @@ void checkGlobalDFA() {
     ::test18();
     ::test19();
     [[maybe_unused]] constexpr int f = ::test20(true);
+
+    ::CPP_28958();
 }
 #pragma clang diagnostic pop
