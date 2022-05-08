@@ -1,8 +1,9 @@
-// summary: should be 10
+// summary: should be 11
 
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "EndlessLoop"
 #pragma ide diagnostic ignored "bugprone-suspicious-semicolon"
@@ -86,6 +87,15 @@ namespace {
 
       }
     }
+
+    void test7(int c) {
+      int a = 10;
+      while(a > 0) { // should warn here
+        if (c > 0) {
+          a--;
+        }
+      }
+    }
 }
 
 void checkGlobalDFA() {
@@ -95,6 +105,7 @@ void checkGlobalDFA() {
     ::test4();
     ::test5();
     ::test6({6});
+    ::test7(-1);
 }
 
 #pragma clang diagnostic pop

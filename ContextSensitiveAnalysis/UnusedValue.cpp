@@ -4,6 +4,7 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 // Local DFA
@@ -71,6 +72,14 @@ namespace unused_value {
     void test10() {
         char p = '\0'; // warn here
     }
+
+    [[maybe_unused]] int test11() {
+      int a = 1; // should warn here
+      if (a > 0) {
+        a = 2;
+      }
+      return a;
+    }
 }
 
 // Global DFA
@@ -134,6 +143,14 @@ namespace {
         // https://youtrack.jetbrains.com/issue/CPP-28842
         int a[] = {1,233}; // warn here
     }
+
+    int test10() {
+      int a = 1; // should warn here
+      if (a > 0) {
+        a = 2;
+      }
+      return a;
+    }
 }
 
 void checkGlobalDFA() {
@@ -146,6 +163,7 @@ void checkGlobalDFA() {
     ::test7();
     ::test8();
     ::test9();
+    ::test10();
 }
 
 #pragma clang diagnostic pop

@@ -1,4 +1,4 @@
-// summary: 43 warnings
+// summary: 46 warnings
 
 #include <iostream>
 #include <type_traits>
@@ -196,6 +196,12 @@ namespace constant_condition {
           std::cout << "true\n";
         }
         state = !state;
+      }
+    }
+
+    [[maybe_unused]] void test20() {
+      int a = 1;
+      if (a < 2) { // warn here
       }
     }
 
@@ -399,6 +405,12 @@ namespace {
         state = !state;
       }
     }
+
+    [[maybe_unused]] void test21() {
+      int a = 1;
+      if (a < 2) { // warn here
+      }
+    }
 } // namespace
 
 
@@ -427,5 +439,7 @@ void checkGlobalDFA() {
     [[maybe_unused]] constexpr int f = ::test20(true);
 
     ::CPP_28958();
+
+    ::test21();
 }
 #pragma clang diagnostic pop

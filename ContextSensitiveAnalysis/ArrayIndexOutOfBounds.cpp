@@ -255,6 +255,9 @@ template <int SIZE> [[maybe_unused]] void test21() {
   mystr[100]; // warn here?
 }
 
+void test27() {
+
+}
 
 } // namespace array_index_out_of_bounds
 

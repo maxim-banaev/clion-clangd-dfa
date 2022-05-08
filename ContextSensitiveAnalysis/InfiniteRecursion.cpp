@@ -2,6 +2,7 @@
 #include <iostream>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "misc-no-recursion"
 
@@ -54,52 +55,57 @@ void test9() { test9_1(); }
 void test9_1() { test9_2(); }
 void test9_2() { test9(); }
 
-} // namespace
+void test10() {
+  int a = 1;
+  if (a > 0) {
+    test10(); // should warn here
+  }
+}
 
+} // namespace infinite_recursion
 
 // Global DFA
 namespace {
-    [[noreturn]] void test1() { test1(); } // warn here
+[[noreturn]] void test1() { test1(); } // warn here
 
-    void test2();
+void test2();
 
 #define CALL_TEST() test2()
 
-    void test2() {
-        CALL_TEST(); // https://youtrack.jetbrains.com/issue/CPP-17805
-    }
-
-    // https://youtrack.jetbrains.com/issue/CPP-17716
-    template <typename T> void test3(T t) { test3(t); }
-
-    void test4() {
-        std::cout << "a";
-        test4(); // warn here
-    }
-
-    void test5() {
-        auto l = []() { test5(); };
-        l();
-    }
+void test2() {
+  CALL_TEST(); // https://youtrack.jetbrains.com/issue/CPP-17805
 }
 
-[[maybe_unused]] void checkGlobalDFA1() {
-    ::test1();
+// https://youtrack.jetbrains.com/issue/CPP-17716
+template <typename T> void test3(T t) { test3(t); }
+
+void test4() {
+  std::cout << "a";
+  test4(); // warn here
 }
 
-[[maybe_unused]] void checkGlobalDFA2() {
-    ::test2();
+void test5() {
+  auto l = []() { test5(); };
+  l();
 }
 
-[[maybe_unused]] void checkGlobalDFA3() {
-    ::test3<int>(1);
+void test6() {
+  int a = 1;
+  if (a > 0) {
+    test6(); // should warn here
+  }
 }
+} // namespace
 
-[[maybe_unused]] void checkGlobalDFA4() {
-    ::test4();
-}
+[[maybe_unused]] void checkGlobalDFA1() { ::test1(); }
 
-[[maybe_unused]] void checkGlobalDFA5() {
-    ::test5();
-}
+[[maybe_unused]] void checkGlobalDFA2() { ::test2(); }
+
+[[maybe_unused]] void checkGlobalDFA3() { ::test3<int>(1); }
+
+[[maybe_unused]] void checkGlobalDFA4() { ::test4(); }
+
+[[maybe_unused]] void checkGlobalDFA5() { ::test5(); }
+
+[[maybe_unused]] void checkGlobalDFA6() { ::test6(); }
 #pragma clang diagnostic pop

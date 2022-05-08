@@ -1,7 +1,9 @@
-// summary: 29 warnings
+// summary: 18 warnings
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCallsOfFunction"
+#pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
+#pragma ide diagnostic ignored "Simplify"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "ConstantFunctionResult"
@@ -95,6 +97,12 @@ template <typename T> void test6() {
 // negative case
 void test7() {
   for (int i = 0; i < 3; i++) { // shouldn't warn here
+  }
+}
+
+void test8() {
+  int a = 1;
+  while (a > 0) { // warn here
   }
 }
 } // namespace endless_loop
@@ -200,6 +208,12 @@ void test9() {
   while (true) { // shouldn't warn here. No call of function
   }
 }
+
+void test10() {
+  int a = 1;
+  while (a > 0) { // warn here
+  }
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -219,5 +233,6 @@ void checkGlobalDFA() {
   ::test6<int>();
   ::test7();
   ::test8();
+  ::test10();
 }
 #pragma clang diagnostic pop
