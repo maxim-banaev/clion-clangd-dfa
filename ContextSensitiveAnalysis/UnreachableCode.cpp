@@ -152,7 +152,7 @@ void test13() {
     if (c > 0) {
       int i_am_unreachable; // warn here
     }
-};
+}
 } // namespace null_dereferences
 
 // Global DFA

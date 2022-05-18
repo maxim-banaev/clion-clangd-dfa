@@ -1,7 +1,9 @@
+// summary: 11 warnings
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "Simplify"
-// summary: 12 warnings
+
 #include <iostream>
 #include <mutex>
 #include <string>

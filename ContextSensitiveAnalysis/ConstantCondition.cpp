@@ -1,4 +1,4 @@
-// summary: 46 warnings
+// summary: 50 warnings
 
 #include <iostream>
 #include <type_traits>
@@ -96,10 +96,9 @@ namespace constant_condition {
         if (X == Y) {} // https://youtrack.jetbrains.com/issue/CPP-17805
     }
 
-    // https://youtrack.jetbrains.com/issue/CPP-7454
     void test8() {
         float f = 0.5;
-        if (f == 0.5) {} // shouldn't warn here
+        if (f == 0.5) {} // warn here
     }
 
     [[maybe_unused]] void test8_1() {
@@ -184,9 +183,7 @@ namespace constant_condition {
 
     [[maybe_unused]] constexpr void test19(const int x) {
         // Type checker correctly evaluates std::is_constant_evaluated() == true here
-        if (C<std::is_constant_evaluated()>::x) {
-
-        }
+        if (C<std::is_constant_evaluated()>::x) {} // warn here
     }
 
     [[maybe_unused]] void CPP_28958() {
@@ -315,7 +312,7 @@ namespace {
                 // foo
                 )) {} // warn here
 
-        if (false) {
+        if (false) { // warn here
             asm("nop");
         } else if (getZero()) {} // warn here
     }
@@ -336,7 +333,7 @@ namespace {
     }
 
     bool test12(int p1, [[maybe_unused]] int p2) {
-        if (p1 == 1 || p1 == 2)
+        if (p1 == 1 || p1 == 2) // warn here
             return p1 == 1 || p1 == 2; // warn here
         return false;
     }
