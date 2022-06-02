@@ -5,6 +5,7 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-value"
 #pragma ide diagnostic ignored "NullDereference"
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "ConstantParameter"
@@ -94,7 +95,6 @@ void test8(int x) {
     buf[x] = 1; // shouldn't warn here
 }
 
-
 void test9() {
   std::array<int, 9> array = {1, 2, 3, 4, 5};
   for (int i = 10; i < 11; ++i)
@@ -114,7 +114,7 @@ void test9_2(int param) {
 
 class [[maybe_unused]] test9_3 {
   [[maybe_unused]] int x[14]{};
-  std::array<int, 7> buf{};
+  [[maybe_unused]] std::array<int, 7> buf{};
 
 public:
   [[maybe_unused]] explicit test9_3() {
@@ -169,6 +169,7 @@ class [[maybe_unused]] test15_1 : private test15 {
   void test() {
     this->x[15] = 1; // warn here
   }
+
 public:
   test15_1() {
     test();
@@ -221,7 +222,6 @@ template <int SIZE> [[maybe_unused]] void test21() {
     int y[sizeof(x)];
     y[5] = 5; // won't fix
   }
-
 }
 
 [[maybe_unused]] void test23() {
@@ -255,9 +255,7 @@ template <int SIZE> [[maybe_unused]] void test21() {
   mystr[100]; // warn here?
 }
 
-void test27() {
-
-}
+void test27() {}
 
 } // namespace array_index_out_of_bounds
 

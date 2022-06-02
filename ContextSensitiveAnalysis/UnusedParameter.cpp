@@ -1,5 +1,6 @@
 // summary: 14 warnings
 #include <string>
+#include <functional>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
