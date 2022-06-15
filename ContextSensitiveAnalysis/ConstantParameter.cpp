@@ -1,17 +1,20 @@
-// summary: 24 warnings
+// summary: 25 warnings
 // Constant parameter is working only with int-convertible types
 // It's not working with other types even int() operator is defined
 // https://youtrack.jetbrains.com/issue/CPP-23268
-
 #include <climits>
-#include <string>
 
+#include <string>
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCode"
+
+#pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "UnusedParameter"
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+#pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 
 // check the suppressing
 #pragma clang diagnostic push
@@ -34,17 +37,15 @@ template <typename T> void static test6(T t) {} // warn here
 enum Color { Blue = 0 };
 enum class Letter { A = 0 };
 
-void static test7(Color c, Letter l) {} // warn here
+void static test7(Color c, Letter l) {} // warn here twice
 
-// https://youtrack.jetbrains.com/issue/CPP-7454
-void static test8(float a) {} // shouldn't warn here.
+void static test8(float a) {} // warn here.
 void static test8_1(float a) {} // warn here.
 
 typedef int MyInt;
 void static test9(MyInt a) {} // warn here
 
-// https://youtrack.jetbrains.com/issue/CPP-7454
-void static test10(float f) {}    // shouldn't warn here.
+void static test10(float f) {}    // warn here.
 void static test10_1(float f) {}  // warn here.
 void static test10_2(double d) {} // warn here
 
@@ -58,10 +59,16 @@ void test12() {}
 
 template <typename T> void test15(T t) {} // warn here
 
-template <typename T, typename U> void test16(T t, U u = '.') {} // warn here
+template <typename T, typename U> void test16(T t, U u = '.') {} // warn here twice
 
 void test17(const int numbers...) {} // warn here
 } // namespace
+
+static int CPP_23668(bool t) { // warn here
+  if (t)
+    return 1;
+  return 0;
+}
 
 class X {
   [[maybe_unused]] static int zero;
@@ -109,5 +116,8 @@ void checkGlobalDFA() {
   test15<int>(0);
   test16<int, char>(1);
   test17(1, 2);
+
+
+  CPP_23668(0.0);
 }
 #pragma clang diagnostic pop

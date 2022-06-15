@@ -1,13 +1,14 @@
-// summary: 52 warnings
-
+// summary: 53 warnings
 #include <iostream>
-#include <type_traits>
 
+#include <type_traits>
 #pragma clang diagnostic push
+
 #pragma clang diagnostic ignored "-Wconstant-evaluated"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "ConstantFunctionResult"
+#pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 // Local DFA
 namespace constant_condition {
 void test() {
@@ -216,6 +217,12 @@ template <> struct C<false> {
 static int verbose = 1;
 static void *ptr = &verbose;
 void CPP_29088() {
+  if (verbose) // shouldn't warn here
+    std::cout << "unknown \n";
+}
+
+void* ptr1 = &verbose;
+void CPP_29088_1() {
   if (verbose) // shouldn't warn here
     std::cout << "unknown \n";
 }
@@ -442,6 +449,12 @@ void CPP_28958() {
     state = !state;
   }
 }
+
+int CPP_23668(bool t) {
+  if(t) // warn here
+    return 0;
+  return 1;
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -470,5 +483,6 @@ void checkGlobalDFA() {
   ::test21();
 
   ::CPP_28958();
+  ::CPP_23668(0.0);
 }
 #pragma clang diagnostic pop

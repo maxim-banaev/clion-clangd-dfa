@@ -13,6 +13,7 @@
 #pragma ide diagnostic ignored "misc-no-recursion"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "ConstantParameter"
+#pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 namespace constant_function_result {
 
 // check the suppressing
@@ -209,6 +210,10 @@ static double test18_2(int x, double b = 0.17) { // warn here.
   return 0.17;
 }
 
+static bool CPP_23668(double t) { // should warn here?
+  return t;
+}
+
 void checkGlobalDFA() {
   ::test1();
   ::test1_1(1);
@@ -235,6 +240,8 @@ void checkGlobalDFA() {
   ::test18(18);
   ::test18_1(18);
   ::test18_2(18);
+
+  CPP_23668(0.0);
 }
 
 #pragma clang diagnostic pop

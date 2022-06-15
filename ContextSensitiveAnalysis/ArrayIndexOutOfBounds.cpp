@@ -248,8 +248,13 @@ template <int SIZE> [[maybe_unused]] void test21() {
   mystr[100]; //  warn here
 }
 
-// negative case. DFA doesn't support reassignment
 [[maybe_unused]] void test26_1() {
+  const std::string Str2 = "aaa";
+  Str2[5]; //  warn here
+}
+
+// negative case. DFA doesn't support reassignment
+[[maybe_unused]] void test26_2() {
   std::string mystr = "mary had a little lamb";
   mystr = "bary had a little pony";
   mystr[100]; // warn here?
@@ -410,6 +415,11 @@ void test26() {
   std::string mystr = "mary had a little lamb";
   mystr[100]; //  warn here
 }
+
+void test26_1() {
+  const std::string mystr = "mary had a little lamb";
+  mystr[100]; //  warn here
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -438,6 +448,8 @@ void checkGlobalDFA() {
 
   ::test25();
   ::test26();
+  ::test26_1();
+
 }
 
 #pragma clang diagnostic pop
