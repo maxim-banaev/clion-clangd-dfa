@@ -1,4 +1,4 @@
-// summary: should be 47 warnings
+// summary: should be 48 warnings
 #include <array>
 #include <iostream>
 #include <string>
@@ -260,7 +260,10 @@ template <int SIZE> [[maybe_unused]] void test21() {
   mystr[100]; // warn here?
 }
 
-void test27() {}
+const std::string myConstFoo = "foo";
+[[maybe_unused]] void CPP_29592() {
+  myConstFoo[4]; // warn here
+}
 
 } // namespace array_index_out_of_bounds
 
