@@ -1,4 +1,4 @@
-// summary: should be 48 warnings
+// summary: should be 49 warnings
 #include <array>
 #include <iostream>
 #include <string>
@@ -91,6 +91,7 @@ void test8(int x) {
   if (x > 5 && x < 9)
     buf[x] = 1; // warn here
 
+  // negative case
   if (x > 5 && x < 7)
     buf[x] = 1; // shouldn't warn here
 }
@@ -257,7 +258,7 @@ template <int SIZE> [[maybe_unused]] void test21() {
 [[maybe_unused]] void test26_2() {
   std::string mystr = "mary had a little lamb";
   mystr = "bary had a little pony";
-  mystr[100]; // warn here?
+  mystr[100]; // won't fix
 }
 
 const std::string myConstFoo = "foo";
@@ -402,7 +403,7 @@ void test16() {
 
 void test17() {
   std::string s[16];
-  s[17] = "test17"; // warn here?
+  s[17] = "test17"; // warn here
 }
 
 void test18() {
