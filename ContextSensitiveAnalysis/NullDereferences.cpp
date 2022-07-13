@@ -35,7 +35,7 @@ void test2(std::string *a, std::string b) {
 void test3() {
   bool *f = nullptr;
   char *c = nullptr;
-  if (*f && *c) { // warn here
+  if (*f && *c) { // warn here twice
   }
 }
 
@@ -80,7 +80,7 @@ void test2() {
 void test3() {
   bool *f = nullptr;
   char *c = nullptr;
-  if (*f && *c) { // warn here
+  if (*f && *c) { // warn here twice
   }
 }
 

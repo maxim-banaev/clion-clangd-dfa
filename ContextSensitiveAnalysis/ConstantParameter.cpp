@@ -37,16 +37,17 @@ template <typename T> void static test6(T t) {} // warn here
 enum Color { Blue = 0 };
 enum class Letter { A = 0 };
 
-void static test7(Color c, Letter l) {} // warn here twice
+void static test7(Color c, // warn here
+                  Letter l) {} // warn here
 
-void static test8(float a) {} // warn here.
-void static test8_1(float a) {} // warn here.
+void static test8(float a) {} // warn here
+void static test8_1(float a) {} // warn here
 
 typedef int MyInt;
 void static test9(MyInt a) {} // warn here
 
-void static test10(float f) {}    // warn here.
-void static test10_1(float f) {}  // warn here.
+void static test10(float f) {}    // warn here
+void static test10_1(float f) {}  // warn here
 void static test10_2(double d) {} // warn here
 
 namespace {
@@ -59,7 +60,8 @@ void test12() {}
 
 template <typename T> void test15(T t) {} // warn here
 
-template <typename T, typename U> void test16(T t, U u = '.') {} // warn here twice
+template <typename T, typename U> void test16(T t, // warn here
+        U u = '.') {} // warn here
 
 void test17(const int numbers...) {} // warn here
 } // namespace

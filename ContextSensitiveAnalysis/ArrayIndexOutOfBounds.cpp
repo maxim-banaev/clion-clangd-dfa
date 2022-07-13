@@ -1,4 +1,4 @@
-// summary: should be 49 warnings
+// summary: should be 48 warnings
 #include <array>
 #include <iostream>
 #include <string>

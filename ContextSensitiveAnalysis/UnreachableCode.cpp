@@ -145,14 +145,6 @@ void test12() {
     int i_am_not_unreachable; // shouldn't warn here.
   }
 }
-
-void test13() {
-    int c = 1;
-    int d = 2;
-    if (c > 0) {
-      int i_am_unreachable; // warn here
-    }
-}
 } // namespace null_dereferences
 
 // Global DFA

@@ -1,4 +1,4 @@
-// summary: 18 warnings
+// summary: 32 warnings
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCallsOfFunction"
@@ -52,20 +52,20 @@ void test3_2() {
 }
 
 void test4() {
-  do { // warn here
-  } while (true);
+  do {
+  } while (true); // warn here
 }
 
 void test4_1() {
-  do { // warn here
+  do {
     int a;
-  } while (true);
+  } while (true); // warn here
 }
 
 void test4_2() {
-  do // warn here
+  do
     int a;
-  while (true);
+  while (true); // warn here
 }
 
 void test5() {
@@ -150,20 +150,20 @@ void test3_2() {
 }
 
 void test4() {
-  do { // warn here
-  } while (true);
+  do {
+  } while (true); // warn here
 }
 
 void test4_1() {
-  do { // warn here
+  do {
     int a;
-  } while (true);
+  } while (true); // warn here
 }
 
 void test4_2() {
-  do // warn here
+  do
     int a;
-  while (true);
+  while (true); // warn here
 }
 
 void test5() {
@@ -183,7 +183,7 @@ foo:
   goto bar;
   int i_am_unused;
 bar:
-  int b;
+  int b; // warn here
   goto foo;
 }
 
@@ -220,7 +220,6 @@ void checkGlobalDFA() {
   ::test1();
   ::test1_1();
   ::test1_2();
-  ::test2();
   ::test3();
   ::test3_1();
   ::test3_2();
@@ -234,5 +233,9 @@ void checkGlobalDFA() {
   ::test7();
   ::test8();
   ::test10();
+}
+
+void checkGlobalDFA1() {
+    ::test2();
 }
 #pragma clang diagnostic pop

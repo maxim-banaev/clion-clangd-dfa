@@ -90,7 +90,7 @@ namespace {
 
     void test7(int c) {
       int a = 10;
-      while(a > 0) { // should warn here
+      while(a > 0) { // warn here
         if (c > 0) {
           a--;
         }
