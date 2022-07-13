@@ -270,7 +270,7 @@ void test2() {
   int *a_ptr = &a;
   *a_ptr = 1; // Modifies a, now a=1, b=0.
 
-  if (a != b) { // shouldn't wanr here
+  if (a != b) { // shouldn't warn here
   }
 }
 

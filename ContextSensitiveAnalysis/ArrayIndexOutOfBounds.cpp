@@ -207,7 +207,7 @@ template <typename T> [[maybe_unused]] void test20() {
 // won't fix
 template <typename T> [[maybe_unused]] void test20_1() {
   std::array<T, 5> t{};
-  t[20] = 1; // warn here?
+  t[20] = 1;
 }
 
 // negative case
@@ -241,17 +241,17 @@ template <int SIZE> [[maybe_unused]] void test21() {
 
 [[maybe_unused]] void test25() {
   const char *mystr = "mary had a little lamb";
-  mystr[100]; //  warn here
+  mystr[100]; // warn here
 }
 
 [[maybe_unused]] void test26() {
   std::string mystr = "mary had a little lamb";
-  mystr[100]; //  warn here
+  mystr[100]; // warn here
 }
 
 [[maybe_unused]] void test26_1() {
   const std::string Str2 = "aaa";
-  Str2[5]; //  warn here
+  Str2[5]; // warn here
 }
 
 // negative case. DFA doesn't support reassignment
@@ -413,16 +413,16 @@ void test18() {
 
 void test25() {
   const char *mystr = "mary had a little lamb";
-  mystr[100]; //  warn here
+  mystr[100]; // warn here
 }
 void test26() {
   std::string mystr = "mary had a little lamb";
-  mystr[100]; //  warn here
+  mystr[100]; // warn here
 }
 
 void test26_1() {
   const std::string mystr = "mary had a little lamb";
-  mystr[100]; //  warn here
+  mystr[100]; // warn here
 }
 } // namespace
 

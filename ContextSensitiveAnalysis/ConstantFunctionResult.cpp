@@ -41,8 +41,7 @@ char test3() { // warn here
   return a;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-7454
-float test4() { // shouldn't warn here
+float test4() { // warn here
   float a = 1.1;
   return a;
 }
@@ -191,8 +190,7 @@ public:
 
 int X::number = 0;
 
-// https://youtrack.jetbrains.com/issue/CPP-7454
-static float test18(int x, float b = 0.17) { // shouldn't warn here.
+static float test18(int x, float b = 0.17) { // warn here.
   if (x > 0)
     return b;
   return 0.17;
