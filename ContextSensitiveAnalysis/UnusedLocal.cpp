@@ -1,5 +1,7 @@
-// summary: should be 20 warnings
+// summary: should be 22 warnings
+#include <iostream>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #pragma clang diagnostic push
@@ -11,6 +13,7 @@
 #pragma ide diagnostic ignored "performance-unnecessary-value-param"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
+#pragma ide diagnostic ignored "performance-for-range-copy"
 
 // Local DFA
 namespace unused_local {
@@ -37,9 +40,10 @@ void test5(foo f) { foo f1{}; } // warn here
 
 void test6() { std::string s = "123"; } // shouldn't warn here
 
-void test7(std::string s, std::vector<int> v) {
-  std::string s1;      // shouldn't warn here
-  std::vector<int> v1; // shouldn't warn here
+// https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
+void test7() {
+  std::string s1;      // should warn here
+  std::vector<int> v1; // should warn here
 }
 
 void test7_1(std::string s = "123") {}
@@ -76,6 +80,25 @@ void test11() {
   if (b < 0) {
     int d = a;
   }
+}
+template <typename T>
+void CPP_30074(const std::unordered_map<std::string, T> &v) {
+  for (auto item : v) { // shouldn't warn here
+    std::cout << "\t\t - " << item.first;
+  }
+  // https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
+  for (auto item : v) { // should warn here
+  }
+}
+
+void test12(const std::unordered_map<int, int> &v) {
+  for (const auto item : v) {
+  } // warn here
+}
+
+// https://youtrack.jetbrains.com/issue/CPP-7079/Reference-is-not-marked-as-unused
+void test13(int c) {
+  int &d = c; // should warn here
 }
 } // namespace unused_local
 
@@ -104,9 +127,10 @@ void test5(foo f) { foo f1{}; } // warn here
 
 void test6() { std::string s = "123"; } // shouldn't warn here
 
+// https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
 void test7(std::string s, std::vector<int> v) {
-  std::string s1;      // shouldn't warn here
-  std::vector<int> v1; // shouldn't warn here
+  std::string s1;      // should warn here
+  std::vector<int> v1; // should warn here
 }
 
 void test7_1(std::string s = "123") {}
@@ -144,6 +168,26 @@ void test11() {
     int d = a;
   }
 }
+
+template <typename T>
+void CPP_30074(const std::unordered_map<std::string, T> &v) {
+  for (auto item : v) { // shouldn't warn here
+    std::cout << "\t\t - " << item.first;
+  }
+  // https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
+  for (auto item : v) { // should warn here
+  }
+}
+
+void test12(const std::unordered_map<int, int> &v) {
+  for (const auto item : v) {
+  } // warn here
+}
+
+// https://youtrack.jetbrains.com/issue/CPP-7079/Reference-is-not-marked-as-unused
+void test13(int c) {
+  int &d = c; // should warn here
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -161,6 +205,10 @@ void checkGlobalDFA() {
   ::test9_3();
   ::test10();
   ::test11();
+  ::test12({{1, 2}});
+  ::test13(2);
+  ::CPP_30074<int>({{"foo", 1}});
+
   ::test1();
 }
 #pragma clang diagnostic pop

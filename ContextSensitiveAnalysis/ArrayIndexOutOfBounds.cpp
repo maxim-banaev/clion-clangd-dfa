@@ -453,7 +453,6 @@ void checkGlobalDFA() {
   ::test25();
   ::test26();
   ::test26_1();
-
 }
 
 #pragma clang diagnostic pop
