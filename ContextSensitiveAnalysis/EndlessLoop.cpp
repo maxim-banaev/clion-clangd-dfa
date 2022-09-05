@@ -1,4 +1,4 @@
-// summary: 32 warnings
+// summary: 31 warnings
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCallsOfFunction"
@@ -235,7 +235,5 @@ void checkGlobalDFA() {
   ::test10();
 }
 
-void checkGlobalDFA1() {
-    ::test2();
-}
+[[maybe_unused]] void checkGlobalDFA1() { ::test2(); }
 #pragma clang diagnostic pop

@@ -1,6 +1,5 @@
 // summary: should be 10 warnings
 
-#include <memory>
 #include <string>
 
 #pragma clang diagnostic push
@@ -94,12 +93,46 @@ void test4() {
   }
   t->data; // warn here
 }
-} // namespace
 
+struct Base {
+  virtual ~Base() = default;
+
+  [[maybe_unused]] virtual void f(){};
+};
+
+struct Derived1 : public virtual Base {};
+struct Derived2 : public virtual Base {};
+
+class Test5 {
+private:
+  static void dynCastDereference(Base *a) {
+    auto *b = dynamic_cast<Derived1 *>(a);
+    *b; // Pointer may be null
+  }
+
+public:
+  static void testDynamicCastBadConservativeCase() {
+    auto *b = new Derived1();
+    auto *b2 = dynamic_cast<Derived1 *>(b);
+    *b2; // Pointer may be null
+    dynCastDereference(b2);
+  }
+
+  static void testDynamicCastGoodCase() {
+    auto *b = new Derived1();
+    auto *b2 = dynamic_cast<Derived2 *>(b);
+    *b2; // Pointer may be null
+    dynCastDereference(b2);
+  }
+};
+
+} // namespace
 void checkGlobalDFA() {
   ::test2();
   ::test3();
   ::test4();
+  Test5::testDynamicCastBadConservativeCase();
+  Test5::testDynamicCastGoodCase();
   ::test1();
 }
 #pragma clang diagnostic pop

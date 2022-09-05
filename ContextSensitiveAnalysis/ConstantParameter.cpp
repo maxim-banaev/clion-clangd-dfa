@@ -1,4 +1,4 @@
-// summary: 25 warnings
+// summary: 24 warnings
 // Constant parameter is working only with int-convertible types
 // It's not working with other types even int() operator is defined
 // https://youtrack.jetbrains.com/issue/CPP-23268
@@ -66,7 +66,7 @@ template <typename T, typename U> void test16(T t, // warn here
 void test17(const int numbers...) {} // warn here
 } // namespace
 
-static int CPP_23668(bool t) { // warn here
+int static CPP_23668(bool t) { // shouldn't warn here
   if (t)
     return 1;
   return 0;

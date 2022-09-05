@@ -97,7 +97,7 @@ void test6() {
 }
 } // namespace
 
-[[maybe_unused]] void checkGlobalDFA1() { ::test1(); }
+[[maybe_unused]] [[maybe_unused]] void checkGlobalDFA1() { ::test1(); }
 
 [[maybe_unused]] void checkGlobalDFA2() { ::test2(); }
 
