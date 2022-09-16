@@ -1,14 +1,18 @@
-#include <vector>
+#include <string>
 
-using int128_t = __int128;
-using intpair = std::pair<int128_t,int128_t>;
+struct S {
+  S(const S &) {}
+
+  S() {}
+
+  virtual ~S() {}
+};
 
 int main() {
-
-  std::vector<intpair> pairs;
-  pairs.push_back({10, 20});
-  pairs.push_back({20, 30});
-  auto b = pairs[0].first;    // Subscripted value is not an array?!?!
-
-  return 0;
+  S s;
+  S &s1 = s;
+  S &&s2 = S();
+  const std::string &rs = "abc";
+  const double &rcd2 = 2;
+  double &&rrd3 = 2;
 }

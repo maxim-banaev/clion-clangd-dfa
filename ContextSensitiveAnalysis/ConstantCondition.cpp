@@ -199,7 +199,7 @@ template <> struct C<false> {
   static const int x = 0;
 };
 
-[[maybe_unused]] constexpr void test19(const int x) {
+[[maybe_unused]] constexpr void test19([[maybe_unused]] const int x) {
   // Type checker correctly evaluates std::is_constant_evaluated() == true here
   if (C<std::is_constant_evaluated()>::x) { // warn here
   }
@@ -231,10 +231,19 @@ static int verbose = 1;
 }
 
 // negative case
-[[maybe_unused]] void* ptr1 = &verbose;
+[[maybe_unused]] void *ptr1 = &verbose;
 [[maybe_unused]] void CPP_29088_1() {
   if (verbose) // shouldn't warn here
     std::cout << "unknown \n";
+}
+
+int tenOrFive() { return random() ? 5 : 10; }
+[[maybe_unused]] void CPP_30291(int y) {
+  int x = tenOrFive();
+  if (y < x) {
+    if (y == 5) {
+    } // shouldn't warn here
+  }
 }
 
 } // namespace constant_condition
@@ -466,9 +475,18 @@ void CPP_28958() {
 }
 
 int CPP_23668(bool t) {
-  if(t) // warn here
+  if (t) // warn here ???
     return 0;
   return 1;
+}
+
+int tenOrFive() { return random() ? 5 : 10; }
+[[maybe_unused]] void CPP_30291(int y) {
+  int x = tenOrFive();
+  if (y < x) {
+    if (y == 5) { // shouldn't warn here
+    }
+  }
 }
 } // namespace
 
@@ -499,5 +517,7 @@ void checkGlobalDFA() {
 
   ::CPP_28958();
   ::CPP_23668(0.0);
+  ::CPP_30291(5);
+  ::CPP_30291(6);
 }
 #pragma clang diagnostic pop

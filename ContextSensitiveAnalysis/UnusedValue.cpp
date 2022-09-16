@@ -74,13 +74,13 @@ namespace unused_value {
     }
 
     [[maybe_unused]] int test11() {
-      int a = 1; // should warn here
-      if (a > 0) {
-        a = 2;
-      }
-      return a;
+        int a = 1; // shouldn't warn here
+        if (a > 0) {
+          a = 2;
+        }
+        return a;
     }
-}
+    }
 
 // Global DFA
 namespace {
@@ -145,13 +145,13 @@ namespace {
     }
 
     int test10() {
-      int a = 1; // should warn here
-      if (a > 0) {
-        a = 2;
-      }
-      return a;
+        int a = 1; // shouldn't warn here
+        if (a > 0) {
+          a = 2;
+        }
+        return a;
     }
-}
+    }
 
 void checkGlobalDFA() {
     ::test1();
