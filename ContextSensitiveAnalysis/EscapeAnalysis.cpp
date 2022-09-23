@@ -1,5 +1,7 @@
 // summary: should be 8 warnings
 #include <cstdlib>
+#include <string>
+#include <vector>
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnusedValue"
@@ -41,6 +43,14 @@ void CPP_29550() {
     free(arr); // shouldn't warn here
   }
 }
+
+// negative case
+void CPP_29840(std::string &out) {
+  // false positive
+  std::vector<std::string> v;
+  out = v[0]; // shouldn't warn here
+}
+
 } // namespace escape_analysis
 
 // Global DFA
@@ -71,9 +81,7 @@ int *foo(int p) {
   return ptr; // warn here
 }
 
-int *create_array() {
-  return (int *) malloc(100 * sizeof(int));
-}
+int *create_array() { return (int *)malloc(100 * sizeof(int)); }
 
 // negative case
 void CPP_29550() {
@@ -82,6 +90,14 @@ void CPP_29550() {
     free(arr); // shouldn't warn here
   }
 }
+
+// negative case
+void CPP_29840(std::string &out) {
+  // false positive
+  std::vector<std::string> v;
+  out = v[0]; // shouldn't warn here
+}
+
 } // namespace
 
 void checkGlobalDFA() {
@@ -90,5 +106,7 @@ void checkGlobalDFA() {
   ::foo(2);
 
   ::CPP_29550();
+  std::string out;
+  ::CPP_29840(out);
 }
 #pragma clang diagnostic pop
