@@ -16,6 +16,7 @@
 
 // Local DFA
 namespace unused_local {
+// negative case
 [[noreturn]] void test1() {
   int x = 0; // shouldn't warn here
   x++;
@@ -23,6 +24,7 @@ namespace unused_local {
 
 void test2(int x) {}
 
+// negative case
 void test3() {
   int x = 2; // shouldn't warn here
   x = x + 1;
@@ -73,6 +75,7 @@ void test10() {
   double d = 0.5; // warn here
 }
 
+// negative case
 void test11() {
   int a = 1; // shouldn't warn here
   int b = 2;
@@ -99,10 +102,20 @@ void test12(const std::unordered_map<int, int> &v) {
 void test13(int c) {
   int &d = c; // should warn here
 }
+
+// negative case
+// https://youtrack.jetbrains.com/issue/CPP-30354/False-Positive-The-value-is-only-assigned-but-never-accessed
+void* CPP_30354() {
+  char* mem; // shouldn't warn here
+  size_t byteOffset = 8; // shouldn't warn here
+  void* elements = (void*) &(mem[byteOffset]);
+  return elements;
+}
 } // namespace unused_local
 
 // Global DFA
 namespace {
+// negative case
 [[noreturn]] void test1() {
   int x = 0; // shouldn't warn here
   x++;
@@ -110,6 +123,7 @@ namespace {
 
 void test2(int x) {}
 
+// negative case
 void test3() {
   int x = 2; // shouldn't warn here
   x = x + 1;
@@ -187,6 +201,15 @@ void test12(const std::unordered_map<int, int> &v) {
 void test13(int c) {
   int &d = c; // should warn here
 }
+
+// negative case
+// https://youtrack.jetbrains.com/issue/CPP-30354/False-Positive-The-value-is-only-assigned-but-never-accessed
+void* CPP_30354() {
+  char* mem; // shouldn't warn here
+  size_t byteOffset = 8; // shouldn't warn here
+  void* elements = (void*) &(mem[byteOffset]);
+  return elements;
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -207,7 +230,7 @@ void checkGlobalDFA() {
   ::test12({{1, 2}});
   ::test13(2);
   ::CPP_30074<int>({{"foo", 1}});
-
+  ::CPP_30354();
   ::test1();
 }
 #pragma clang diagnostic pop
