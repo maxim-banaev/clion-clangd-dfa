@@ -1,7 +1,7 @@
 // summary: 18 warnings
+#include <functional>
 #include <string>
 #include <unistd.h>
-#include <functional>
 
 // Local DFA
 #pragma clang diagnostic push

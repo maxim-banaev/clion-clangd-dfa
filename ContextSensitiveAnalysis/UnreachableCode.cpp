@@ -151,7 +151,7 @@ void test12() {
 }
 
 // negative case
-int CPP_30409(char c, int* mods) {
+int CPP_30409(char c, int *mods) {
   if (c >= 'a' && c <= 'z') {
     return c - 'a' + 1;
   }

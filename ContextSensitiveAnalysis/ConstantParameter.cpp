@@ -37,10 +37,10 @@ template <typename T> void static test6(T t) {} // warn here
 enum Color { Blue = 0 };
 enum class Letter { A = 0 };
 
-void static test7(Color c, // warn here
+void static test7(Color c,     // warn here
                   Letter l) {} // warn here
 
-void static test8(float a) {} // warn here
+void static test8(float a) {}   // warn here
 void static test8_1(float a) {} // warn here
 
 typedef int MyInt;
@@ -51,17 +51,18 @@ void static test10_1(float f) {}  // warn here
 void static test10_2(double d) {} // warn here
 
 namespace {
-void test11(int a) {} // warn here
-void test11_1(int a = 0) {} // warn here
-void test11_2(int a, int b) {} // warn here
+void test11(int a) {}           // warn here
+void test11_1(int a = 0) {}     // warn here
+void test11_2(int a, int b) {}  // warn here
 void test11_3(char c, int a) {} // warn here
 
 void test12() {}
 
 template <typename T> void test15(T t) {} // warn here
 
-template <typename T, typename U> void test16(T t, // warn here
-        U u = '.') {} // warn here
+template <typename T, typename U>
+void test16(T t,          // warn here
+            U u = '.') {} // warn here
 
 void test17(const int numbers...) {} // warn here
 } // namespace
@@ -118,7 +119,6 @@ void checkGlobalDFA() {
   test15<int>(0);
   test16<int, char>(1);
   test17(1, 2);
-
 
   CPP_23668(0.0);
 }

@@ -107,7 +107,6 @@ struct [[maybe_unused]] test13 {
   [[maybe_unused]] [[nodiscard]] int fn2() const { return this->_test13_2; };
 };
 
-
 } // namespace unused_field
 
 #pragma clang diagnostic pop

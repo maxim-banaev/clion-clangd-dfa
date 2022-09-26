@@ -105,10 +105,10 @@ void test13(int c) {
 
 // negative case
 // https://youtrack.jetbrains.com/issue/CPP-30354/False-Positive-The-value-is-only-assigned-but-never-accessed
-void* CPP_30354() {
-  char* mem; // shouldn't warn here
+void *CPP_30354() {
+  char *mem;             // shouldn't warn here
   size_t byteOffset = 8; // shouldn't warn here
-  void* elements = (void*) &(mem[byteOffset]);
+  void *elements = (void *)&(mem[byteOffset]);
   return elements;
 }
 } // namespace unused_local
@@ -204,10 +204,10 @@ void test13(int c) {
 
 // negative case
 // https://youtrack.jetbrains.com/issue/CPP-30354/False-Positive-The-value-is-only-assigned-but-never-accessed
-void* CPP_30354() {
-  char* mem; // shouldn't warn here
+void *CPP_30354() {
+  char *mem;             // shouldn't warn here
   size_t byteOffset = 8; // shouldn't warn here
-  void* elements = (void*) &(mem[byteOffset]);
+  void *elements = (void *)&(mem[byteOffset]);
   return elements;
 }
 } // namespace

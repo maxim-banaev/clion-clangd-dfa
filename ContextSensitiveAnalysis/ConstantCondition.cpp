@@ -94,7 +94,7 @@ void test7() {
   if (X == x) {
   } // https://youtrack.jetbrains.com/issue/CPP-17805
   if (Y == 1) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
+  }             // https://youtrack.jetbrains.com/issue/CPP-17805
   if (1 == Y) { // warn here
   }
   if (x == Y) { // warn here
@@ -333,7 +333,7 @@ void test7() {
   if (X == x) {
   } // https://youtrack.jetbrains.com/issue/CPP-17805
   if (Y == 1) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
+  }             // https://youtrack.jetbrains.com/issue/CPP-17805
   if (1 == Y) { // warn here
   }
   if (x == Y) { // warn here
@@ -364,7 +364,7 @@ void test8() {
   if (!getZero()) { // warn here
   }
   if (getZero( // warn here
-          // foo
+               // foo
           )) {
   }
 
