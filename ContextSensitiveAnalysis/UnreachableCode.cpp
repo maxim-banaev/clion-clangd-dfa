@@ -159,7 +159,7 @@ int CPP_30409(char c, int* mods) {
   switch (c) {
   case '0':
     return 0;
-  case ' ':
+  case ' ': // shouldn't warn here.
     return 2;
   }
 }
@@ -198,7 +198,7 @@ void test3(int a = 1) {
     std::cout << "2";
     break;
     int i_am_unreachable; // warn here
-  default:                // warn here
+  default:
     std::cout << "hz";
     break;
   }
@@ -299,6 +299,8 @@ void checkGlobalDFA() {
   ::test();
   ::test2();
   ::test3(1);
+  ::test3(2);
+  ::test3(3);
   ::test4(true);
   ::test5();
   ::test6();
