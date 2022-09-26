@@ -13,6 +13,7 @@
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "EndlessLoop"
+#pragma ide diagnostic ignored "hicpp-multiway-paths-covered"
 namespace null_dereferences {
 void test() {
   return;
@@ -120,6 +121,7 @@ void test9() {
   }
 }
 
+// negative case
 void test10() {
   try {
     int a;
@@ -130,6 +132,7 @@ void test10() {
   }
 }
 
+// negative case
 void test11() {
   try {
     int a = 1;
@@ -138,11 +141,26 @@ void test11() {
   }
 }
 
+// negative case
 void test12() {
   try {
     int a = 1;
   } catch (...) {
     int i_am_not_unreachable; // shouldn't warn here.
+  }
+}
+
+// negative case
+int CPP_30409(char c, int* mods) {
+  if (c >= 'a' && c <= 'z') {
+    return c - 'a' + 1;
+  }
+  *mods = 0;
+  switch (c) {
+  case '0':
+    return 0;
+  case ' ':
+    return 2;
   }
 }
 } // namespace null_dereferences
@@ -255,6 +273,7 @@ void test9() {
   }
 }
 
+// negative case
 void test10() {
   try {
     int a;
@@ -265,6 +284,7 @@ void test10() {
   }
 }
 
+// negative case
 void test11() {
   try {
     int a = 1;

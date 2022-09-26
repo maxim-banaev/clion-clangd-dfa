@@ -32,9 +32,7 @@ int *foo(int p) {
   return ptr; // warn here
 }
 
-int *create_array() {
-  return (int *) malloc(100 * sizeof(int));
-}
+int *create_array() { return (int *)malloc(100 * sizeof(int)); }
 
 // negative case
 void CPP_29550() {
