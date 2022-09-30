@@ -14,7 +14,8 @@ namespace {
 auto test2() -> bool {} // warn here
 
 // https://youtrack.jetbrains.com/issue/CPP-17716
-template <typename T> int test3(T t) {}
+template <typename T> int test3([[maybe_unused]] T t) {}
+template <> int test3([[maybe_unused]] int t) {} // warn here
 
 #define func                                                                   \
   int test4() {}
@@ -46,6 +47,24 @@ class [[maybe_unused]] MissingBar : MissingFoo {
 void test10() {
   auto l = []() -> int {}; // warn here
 }
+
+int test11(bool flag) {
+  if (flag)
+    return 0;
+} // warn here
+
+int test11_1(int number) {
+  switch (number) {
+  case 1:
+  case 2:
+    return 0;
+  default:
+    break;
+  }
+} // warn here
+
+// negative case
+int test12() { return 1; }
 
 } // namespace
 #pragma clang diagnostic pop
