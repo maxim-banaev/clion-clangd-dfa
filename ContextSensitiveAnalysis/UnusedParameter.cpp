@@ -1,4 +1,4 @@
-// summary: 14 warnings
+// summary: 16 warnings
 #include <functional>
 #include <string>
 
@@ -15,8 +15,7 @@ void test2(float p) {} // warn here
 
 void test3(const std::string p) {} // warn here
 
-// https://youtrack.jetbrains.com/issue/CPP-9788
-void test4(int &p) {}
+void test4(int &p) {} // warn here
 
 void test5(int *p) {} // warn here
 
@@ -48,15 +47,13 @@ public:
 
 // Global DFA
 namespace {
-// https://youtrack.jetbrains.com/issue/CPP-23482
 void test1(int p) {} // warn here
 
 void test2(float p) {} // warn here
 
 void test3(const std::string p) {} // warn here
 
-// https://youtrack.jetbrains.com/issue/CPP-9788
-void test4(int &p) {}
+void test4(int &p) {} // warn here
 
 // https://youtrack.jetbrains.com/issue/CPP-23537
 void test10() {
