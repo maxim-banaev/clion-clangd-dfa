@@ -1,9 +1,10 @@
-// summary: should be 22 warnings
+// summary: should be 24  warnings
 #include <iostream>
 #include <unordered_map>
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wuninitialized"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "UnusedParameter"
@@ -98,9 +99,8 @@ void test12(const std::unordered_map<int, int> &v) {
   } // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-7079/Reference-is-not-marked-as-unused
 void test13(int c) {
-  int &d = c; // should warn here
+  int &d = c; // warn here
 }
 
 // negative case
@@ -197,9 +197,8 @@ void test12(const std::unordered_map<int, int> &v) {
   } // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-7079/Reference-is-not-marked-as-unused
 void test13(int c) {
-  int &d = c; // should warn here
+  int &d = c; // warn here
 }
 
 // negative case

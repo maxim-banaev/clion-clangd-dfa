@@ -162,6 +162,7 @@ int CPP_30409(char c, int *mods) {
   case ' ': // shouldn't warn here.
     return 2;
   }
+  return 0;
 }
 } // namespace null_dereferences
 
