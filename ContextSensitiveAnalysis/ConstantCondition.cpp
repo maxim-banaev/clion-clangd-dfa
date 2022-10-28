@@ -246,6 +246,22 @@ int tenOrFive() { return random() ? 5 : 10; }
   }
 }
 
+static int x_cpp_26296;
+void foo_cpp_26296() {
+  x_cpp_26296 = 1;
+}
+void bar_cpp_26296(void (*f)()) {
+  f();
+}
+
+// negative case
+int CPP_26296() {
+  if (x_cpp_26296 != 0) return 1;
+  bar_cpp_26296(foo_cpp_26296);  // shouldn't warn here
+  if (x_cpp_26296 != 1) return 1;
+  return 0;
+}
+
 } // namespace constant_condition
 
 // Global DFA
@@ -488,6 +504,23 @@ int tenOrFive() { return random() ? 5 : 10; }
     }
   }
 }
+
+int x_cpp_26296;
+void foo_cpp_26296() {
+  x_cpp_26296 = 1;
+}
+void bar_cpp_26296(void (*f)()) {
+  f();
+}
+
+// negative case
+int CPP_26296() {
+  if (x_cpp_26296 != 0) return 1;
+  bar_cpp_26296(foo_cpp_26296);  // shouldn't warn here
+  if (x_cpp_26296 != 1) return 1;
+  return 0;
+}
+
 } // namespace
 
 void checkGlobalDFA() {
@@ -519,5 +552,6 @@ void checkGlobalDFA() {
   ::CPP_23668(0.0);
   ::CPP_30291(5);
   ::CPP_30291(6);
+  ::CPP_26296();
 }
 #pragma clang diagnostic pop

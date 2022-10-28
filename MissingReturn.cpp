@@ -1,4 +1,4 @@
-// summary: should be 13 warnings
+// summary: should be 15 warnings
 
 #include <map>
 #include <memory>
