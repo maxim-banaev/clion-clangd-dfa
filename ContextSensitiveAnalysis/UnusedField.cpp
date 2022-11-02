@@ -1,4 +1,4 @@
-// summary: 11 warnings
+// summary: should be 11 warnings
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"

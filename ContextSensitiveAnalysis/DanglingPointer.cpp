@@ -1,4 +1,4 @@
-// summary: 2 warnings
+// summary: should be 2 warnings
 
 // local DFA
 namespace dangling_pointer {

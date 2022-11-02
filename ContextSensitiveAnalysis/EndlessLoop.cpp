@@ -1,4 +1,4 @@
-// summary: 31 warnings
+// summary: should be 31 warnings
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCallsOfFunction"

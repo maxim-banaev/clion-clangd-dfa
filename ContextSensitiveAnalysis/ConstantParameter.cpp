@@ -1,4 +1,4 @@
-// summary: 24 warnings
+// summary: should be 24 warnings
 // Constant parameter is working only with int-convertible types
 // It's not working with other types even int() operator is defined
 // https://youtrack.jetbrains.com/issue/CPP-23268

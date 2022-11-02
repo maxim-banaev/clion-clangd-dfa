@@ -1,4 +1,4 @@
-// summary: 51 warnings
+// summary: should be 51 warnings
 #include <iostream>
 
 #include <type_traits>

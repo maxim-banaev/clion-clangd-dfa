@@ -1,4 +1,4 @@
-// summary: should be 24  warnings
+// summary: should be 24 warnings
 #include <iostream>
 #include <unordered_map>
 #include <vector>

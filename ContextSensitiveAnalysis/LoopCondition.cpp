@@ -1,4 +1,4 @@
-// summary: should be 11
+// summary: should be 11 warnings
 
 #include <vector>
 

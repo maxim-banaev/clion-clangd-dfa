@@ -1,4 +1,4 @@
-// summary: 16 warnings
+// summary: should be 16 warnings
 #include <functional>
 #include <string>
 

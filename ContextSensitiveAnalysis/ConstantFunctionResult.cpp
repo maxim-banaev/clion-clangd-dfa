@@ -1,4 +1,4 @@
-// summary: 18 warnings
+// summary: should be 18 warnings
 #include <functional>
 #include <string>
 #include <unistd.h>
