@@ -247,18 +247,24 @@ int tenOrFive() { return random() ? 5 : 10; }
 }
 
 static int x_cpp_26296;
-void foo_cpp_26296() {
-  x_cpp_26296 = 1;
-}
-void bar_cpp_26296(void (*f)()) {
-  f();
-}
+void foo_cpp_26296() { x_cpp_26296 = 1; }
+void bar_cpp_26296(void (*f)()) { f(); }
 
 // negative case
 int CPP_26296() {
-  if (x_cpp_26296 != 0) return 1;
-  bar_cpp_26296(foo_cpp_26296);  // shouldn't warn here
-  if (x_cpp_26296 != 1) return 1;
+  if (x_cpp_26296 != 0)
+    return 1;
+  bar_cpp_26296(foo_cpp_26296); // shouldn't warn here
+  if (x_cpp_26296 != 1)
+    return 1;
+  return 0;
+}
+
+// negative case
+[[maybe_unused]] int CPP_30449(int x, int y) {
+  int big = abs(x) > abs(y) ? x : y;
+  if (x == big) // shouldn't warn here
+    return 1;
   return 0;
 }
 
@@ -506,18 +512,16 @@ int tenOrFive() { return random() ? 5 : 10; }
 }
 
 int x_cpp_26296;
-void foo_cpp_26296() {
-  x_cpp_26296 = 1;
-}
-void bar_cpp_26296(void (*f)()) {
-  f();
-}
+void foo_cpp_26296() { x_cpp_26296 = 1; }
+void bar_cpp_26296(void (*f)()) { f(); }
 
 // negative case
 int CPP_26296() {
-  if (x_cpp_26296 != 0) return 1;
-  bar_cpp_26296(foo_cpp_26296);  // shouldn't warn here
-  if (x_cpp_26296 != 1) return 1;
+  if (x_cpp_26296 != 0)
+    return 1;
+  bar_cpp_26296(foo_cpp_26296); // shouldn't warn here
+  if (x_cpp_26296 != 1)
+    return 1;
   return 0;
 }
 
