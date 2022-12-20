@@ -10,6 +10,12 @@
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 // Local DFA
+
+#ifdef _MSC_VER
+#pragma ide diagnostic ignored "cert-msc50-cpp"
+#define random rand
+#endif
+
 namespace constant_condition {
 void test() {
   int a = 1;
