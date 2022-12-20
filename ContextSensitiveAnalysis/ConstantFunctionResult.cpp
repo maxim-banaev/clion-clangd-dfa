@@ -1,7 +1,10 @@
 // summary: should be 18 warnings
 #include <functional>
 #include <string>
+
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 // Local DFA
 #pragma clang diagnostic push
@@ -14,6 +17,15 @@
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "ConstantParameter"
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
+
+#ifdef _MSC_VER
+#pragma ide diagnostic ignored "cert-msc50-cpp"
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#define sleep _sleep
+#define random rand
+#endif
+
+
 namespace constant_function_result {
 
 // check the suppressing
