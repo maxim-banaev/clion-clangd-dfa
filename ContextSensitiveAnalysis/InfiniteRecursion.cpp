@@ -44,7 +44,7 @@ public:
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "MemberFunctionCanBeStatic"
-void InfiniteFoo::test8() { InfiniteFoo::test8(); } // warn here
+void InfiniteFoo::test8() { test8(); } // warn here
 #pragma clang diagnostic pop
 
 void test9();
@@ -97,15 +97,15 @@ void test6() {
 }
 } // namespace
 
-[[maybe_unused]] [[maybe_unused]] void checkGlobalDFA1() { ::test1(); }
+[[maybe_unused]] [[maybe_unused]] void checkGlobalDFA1() { test1(); }
 
-[[maybe_unused]] void checkGlobalDFA2() { ::test2(); }
+[[maybe_unused]] void checkGlobalDFA2() { test2(); }
 
 [[maybe_unused]] void checkGlobalDFA3() { ::test3<int>(1); }
 
-[[maybe_unused]] void checkGlobalDFA4() { ::test4(); }
+[[maybe_unused]] void checkGlobalDFA4() { test4(); }
 
-[[maybe_unused]] void checkGlobalDFA5() { ::test5(); }
+[[maybe_unused]] void checkGlobalDFA5() { test5(); }
 
-[[maybe_unused]] void checkGlobalDFA6() { ::test6(); }
+[[maybe_unused]] void checkGlobalDFA6() { test6(); }
 #pragma clang diagnostic pop

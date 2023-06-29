@@ -128,11 +128,11 @@ public:
 
 } // namespace
 void checkGlobalDFA() {
-  ::test2();
-  ::test3();
-  ::test4();
+  test2();
+  test3();
+  test4();
   Test5::testDynamicCastBadConservativeCase();
   Test5::testDynamicCastGoodCase();
-  ::test1();
+  test1();
 }
 #pragma clang diagnostic pop

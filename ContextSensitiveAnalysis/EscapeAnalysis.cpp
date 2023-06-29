@@ -99,12 +99,12 @@ void CPP_29840(std::string &out) {
 } // namespace
 
 void checkGlobalDFA() {
-  ::foo(0);
-  ::foo(1);
-  ::foo(2);
+  foo(0);
+  foo(1);
+  foo(2);
 
-  ::CPP_29550();
+  CPP_29550();
   std::string out;
-  ::CPP_29840(out);
+  CPP_29840(out);
 }
 #pragma clang diagnostic pop

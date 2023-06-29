@@ -534,34 +534,34 @@ int CPP_26296() {
 } // namespace
 
 void checkGlobalDFA() {
-  ::test();
-  ::test1();
-  ::test2();
-  ::test3();
+  test();
+  test1();
+  test2();
+  test3();
   ::test4<int>();
-  ::test5();
-  ::test6();
-  ::test7();
-  ::test8();
-  ::test9();
-  ::test10();
-  ::test11();
-  ::test12(1, 2);
-  ::test12(2, 1);
-  ::test13();
-  ::test14();
-  ::test15();
-  ::test16();
-  ::test17();
-  ::test18();
-  ::test19();
-  [[maybe_unused]] constexpr int f = ::test20(true);
-  ::test21();
+  test5();
+  test6();
+  test7();
+  test8();
+  test9();
+  test10();
+  test11();
+  test12(1, 2);
+  test12(2, 1);
+  test13();
+  test14();
+  test15();
+  test16();
+  test17();
+  test18();
+  test19();
+  [[maybe_unused]] constexpr int f = test20(true);
+  test21();
 
-  ::CPP_28958();
-  ::CPP_23668(0.0);
-  ::CPP_30291(5);
-  ::CPP_30291(6);
-  ::CPP_26296();
+  CPP_28958();
+  CPP_23668(0.0);
+  CPP_30291(5);
+  CPP_30291(6);
+  CPP_26296();
 }
 #pragma clang diagnostic pop

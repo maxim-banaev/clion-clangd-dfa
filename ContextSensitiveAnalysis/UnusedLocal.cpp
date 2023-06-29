@@ -212,24 +212,24 @@ void *CPP_30354() {
 } // namespace
 
 void checkGlobalDFA() {
-  ::test2(1);
-  ::test3();
+  test2(1);
+  test3();
   foo::test4(1);
-  ::test5({});
-  ::test6();
-  ::test7("_", {1});
-  ::test7_1();
-  ::test8(1);
-  ::test9();
-  ::test9_1();
-  ::test9_2();
-  ::test9_3();
-  ::test10();
-  ::test11();
-  ::test12({{1, 2}});
-  ::test13(2);
+  test5({});
+  test6();
+  test7("_", {1});
+  test7_1();
+  test8(1);
+  test9();
+  test9_1();
+  test9_2();
+  test9_3();
+  test10();
+  test11();
+  test12({{1, 2}});
+  test13(2);
   ::CPP_30074<int>({{"foo", 1}});
-  ::CPP_30354();
-  ::test1();
+  CPP_30354();
+  test1();
 }
 #pragma clang diagnostic pop

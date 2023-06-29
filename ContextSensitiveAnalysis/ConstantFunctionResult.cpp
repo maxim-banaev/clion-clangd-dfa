@@ -41,7 +41,7 @@ bool test0() {
 bool test1() { return true; }
 
 // https://youtrack.jetbrains.com/issue/CPP-23365
-bool test1_2() { return (true); }
+bool test1_2() { return true; }
 
 int test2() { // warn here
   int a = 0;
@@ -225,31 +225,31 @@ static bool CPP_23668(double t) { // should warn here?
 }
 
 void checkGlobalDFA() {
-  ::test1();
-  ::test1_1(1);
-  ::test1_2(1);
-  ::test2(2);
-  ::test3(3);
-  ::test4(4);
+  test1();
+  test1_1(1);
+  test1_2(1);
+  test2(2);
+  test3(3);
+  test4(4);
   ::test5<0>(5);
   ::test6<int>(6);
-  ::test7(7);
-  ::test8(8);
-  ::test9(9);
+  test7(7);
+  test8(8);
+  test9(9);
 
-  std::function<int(int, int)> f_test10 = ::test10;
+  std::function<int(int, int)> f_test10 = test10;
   f_test10(10, 0);
-  ::test11();
+  test11();
 
-  ::test15();
+  test15();
 
   X x;
   x.check_test16();
   x.check_test17();
 
-  ::test18(18);
-  ::test18_1(18);
-  ::test18_2(18);
+  test18(18);
+  test18_1(18);
+  test18_2(18);
 
   CPP_23668(0.0);
 }

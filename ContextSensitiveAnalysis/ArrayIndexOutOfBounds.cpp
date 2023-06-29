@@ -427,32 +427,32 @@ void test26_1() {
 } // namespace
 
 void checkGlobalDFA() {
-  ::test1();
-  ::test1_1();
-  ::test2();
-  ::test3();
-  ::test4();
-  ::test5();
-  ::test5_1();
-  ::test6();
-  ::test7();
-  ::test8();
-  ::test9();
-  ::test9_1();
-  ::test9_2(3);
-  ::test10();
-  ::test11();
-  ::test12(12);
-  ::test13();
-  ::test14();
-  ::test15();
-  ::test16();
-  ::test17();
-  ::test18();
+  test1();
+  test1_1();
+  test2();
+  test3();
+  test4();
+  test5();
+  test5_1();
+  test6();
+  test7();
+  test8();
+  test9();
+  test9_1();
+  test9_2(3);
+  test10();
+  test11();
+  test12(12);
+  test13();
+  test14();
+  test15();
+  test16();
+  test17();
+  test18();
 
-  ::test25();
-  ::test26();
-  ::test26_1();
+  test25();
+  test26();
+  test26_1();
 }
 
 #pragma clang diagnostic pop

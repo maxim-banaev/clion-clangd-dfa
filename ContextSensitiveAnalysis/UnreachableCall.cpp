@@ -216,8 +216,8 @@ void test20([[maybe_unused]] int a) {
 }
 
 void checkGlobalDFA() {
-  ::test6();
-  ::test7();
+  test6();
+  test7();
   ::test8<int>();
 }
 #pragma clang diagnostic pop

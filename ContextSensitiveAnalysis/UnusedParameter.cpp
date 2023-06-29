@@ -64,11 +64,11 @@ void test10() {
 } // namespace
 
 void checkGlobalDFA() {
-  ::test1(1);
-  ::test2(2.0);
-  ::test3("");
+  test1(1);
+  test2(2.0);
+  test3("");
   int a{0};
-  ::test4(a);
-  ::test10();
+  test4(a);
+  test10();
 }
 #pragma clang diagnostic pop
