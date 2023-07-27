@@ -1,4 +1,6 @@
 // summary: should be 2 warnings
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "NotInitializedField"
 
 // local DFA
 namespace dangling_pointer {
@@ -26,3 +28,4 @@ void test1(node *head) {
 } // namespace
 
 void checkGlobalDFA() { test1(new node()); }
+#pragma clang diagnostic pop

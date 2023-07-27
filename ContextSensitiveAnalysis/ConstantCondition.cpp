@@ -1,4 +1,4 @@
-// summary: should be 51 warnings
+// summary: should be 52 warnings
 #include <iostream>
 
 #include <type_traits>
@@ -151,8 +151,8 @@ class [[maybe_unused]] test12 {
 public:
   [[maybe_unused]] void func() {
     this->x = 1;
-    if (this->x == 1) {
-    } // warn here
+    if (this->x == 1) /*warn here*/ {
+    }
   }
 };
 
@@ -419,7 +419,7 @@ void test11() {
   }
   if (1 == getOne()) { // warn here
   }
-  if (getZero() == getOne()) {
+  if (getZero() == getOne()) { // warn here
   }
 }
 

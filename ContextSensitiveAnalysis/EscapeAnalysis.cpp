@@ -61,7 +61,7 @@ int *foo(int p) {
   int x = 0;
   int *ptr = &x;
   // https://youtrack.jetbrains.com/issue/CPP-23550
-  gPtr = ptr; // shouldn't warn here
+  gPtr = ptr; // warn here
   gPtr = &x;  // warn here
 
   if (p == 1)
@@ -75,7 +75,7 @@ int *foo(int p) {
 
   ptr = ar;
   // https://youtrack.jetbrains.com/issue/CPP-23550
-  gPtr = ptr; // shouldn't warn here
+  gPtr = ptr; // warn here
   return ptr; // warn here
 }
 

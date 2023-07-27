@@ -1,4 +1,4 @@
-// summary: should be 4 warnings
+// summary: should be 5 warnings
 #include <string>
 #include <vector>
 
@@ -75,7 +75,7 @@ namespace {
     char* char_pointer_char;
     void test2() {
         char val[10];
-        char_pointer_char = val; // shouldn't warn here
+        char_pointer_char = val; // warn here
     }
     std::vector<int> int_vector;
     void test3() {

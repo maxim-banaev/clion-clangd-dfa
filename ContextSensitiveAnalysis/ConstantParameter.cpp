@@ -19,7 +19,9 @@
 // check the suppressing
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppParameterNeverUsed
 void static test0(int a) {}
+// ReSharper restore CppParameterNeverUsed
 #pragma clang diagnostic pop
 
 void static test1(int a) {} // warn here

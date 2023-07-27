@@ -81,9 +81,10 @@ void test6(const std::vector<int> &v) {
   }
 }
 
+// https://youtrack.jetbrains.com/issue/CPP-34486
 void test7(int c) {
   int a = 10;
-  while (a > 0) { // warn here
+  while (a > 0) { // should warn here
     if (c > 0) {
       a--;
     }

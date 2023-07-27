@@ -1,4 +1,4 @@
-// summary: should be 18 warnings
+// summary: should be 19 warnings
 #include <string>
 
 #pragma clang diagnostic push
@@ -50,7 +50,6 @@ class Test4 {
   void test4_function() {}
 
 public:
-  // https://youtrack.jetbrains.com/issue/CPP-23431
   void test4() {
     if (this == nullptr)
       test4_function();
