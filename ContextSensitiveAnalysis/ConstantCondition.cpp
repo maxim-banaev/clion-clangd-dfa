@@ -30,7 +30,7 @@ void test() {
 #pragma clang diagnostic pop
 }
 
-#define A(index) x == 1
+#define A(index) a == 1
 
 void test1() {
   int a = 1;
@@ -291,7 +291,7 @@ void test() {
 #pragma clang diagnostic pop
 }
 
-#define A(index) x == 1
+#define A(index) a == 1
 
 void test1() {
   int a = 1;
