@@ -1,4 +1,4 @@
-// summary: should be 37 warnings
+// summary: should be 39 warnings
 
 #include <iostream>
 #include <vector>
@@ -164,6 +164,16 @@ int CPP_30409(char c, int *mods) {
   }
   return 0;
 }
+
+constexpr bool foo() { return !std::is_constant_evaluated(); }
+
+[[maybe_unused]] int CPP_31942() {
+  if constexpr (foo()) {
+    return 0; // warn here
+  } else {
+    return 1; // shouldn't warn here.
+  }
+}
 } // namespace null_dereferences
 
 // Global DFA
@@ -294,6 +304,16 @@ void test11() {
   }
 }
 
+constexpr bool foo() { return !std::is_constant_evaluated(); }
+
+[[maybe_unused]] int CPP_31942() {
+  if constexpr (foo()) {
+    return 0; // warn here
+  } else {
+    return 1; // shouldn't warn here.
+  }
+}
+
 } // namespace
 
 void checkGlobalDFA() {
@@ -311,6 +331,7 @@ void checkGlobalDFA() {
   test9();
   test10();
   test11();
+  CPP_31942();
   test1();
 }
 #pragma clang diagnostic pop
