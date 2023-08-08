@@ -1,4 +1,4 @@
-// summary: should be 24 warnings
+// summary: should be 25 warnings
 // Constant parameter is working only with int-convertible types
 // It's not working with other types even int() operator is defined
 // https://youtrack.jetbrains.com/issue/CPP-23268
@@ -97,6 +97,17 @@ struct [[maybe_unused]] point {
   int y;
 };
 
+static void CPP_23268(int a) {} // warn here
+
+class one {
+  int number;
+public:
+  explicit one(int n) : number(n) {}
+  explicit operator int() const {
+    return number;
+  }
+};
+
 void checkGlobalDFA() {
   test0(1);
   test1(1);
@@ -123,5 +134,9 @@ void checkGlobalDFA() {
   test17(1, 2);
 
   CPP_23668(0.0);
+  CPP_23268(static_cast<int>(0.5));
+  one a(1);
+  CPP_23268(static_cast<int>(1));
+  CPP_23268(static_cast<int>(a));
 }
 #pragma clang diagnostic pop
