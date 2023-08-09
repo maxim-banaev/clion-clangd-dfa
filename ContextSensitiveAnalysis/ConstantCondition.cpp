@@ -1,4 +1,4 @@
-// summary: should be 52 warnings
+// summary: should be 53 warnings
 #include <iostream>
 
 #include <type_traits>
@@ -154,6 +154,16 @@ public:
     if (this->x == 1) /*warn here*/ {
     }
   }
+};
+
+// https://youtrack.jetbrains.com/issue/CPP-23431/Treat-this-expression-as-a-variable-never-equal-to-nullptr
+class [[maybe_unused]] test12_1 {
+  void foo() {}
+public:
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wtautological-undefined-compare"
+  [[maybe_unused]] void bar() { if (this != nullptr) foo(); } // warn here
+#pragma clang diagnostic pop
 };
 
 void test13() {
