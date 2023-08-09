@@ -9,7 +9,9 @@
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+
 // Local DFA
+#include <iostream>
 namespace endless_loop {
 void test1() {
   for (;;) { // warn here
@@ -103,6 +105,18 @@ void test7() {
 void test8() {
   int a = 1;
   while (a > 0) { // warn here
+  }
+}
+
+void code() {
+  std::cout << "reached\n";
+}
+
+// https://youtrack.jetbrains.com/issue/CPP-32820
+void CPP_32820() {
+  for (int i = 0; i < 3; i++) { // shouldn't warn here
+    switch (i) {} // NOLINT(*-multiway-paths-covered)
+    code();
   }
 }
 } // namespace endless_loop
@@ -214,6 +228,19 @@ void test10() {
   while (a > 0) { // warn here
   }
 }
+
+void code() {
+  std::cout << "reached\n";
+}
+
+// https://youtrack.jetbrains.com/issue/CPP-32820
+void CPP_32820() {
+  for (int i = 0; i < 3; i++) { // shouldn't warn here
+    switch (i) {} // NOLINT(*-multiway-paths-covered)
+    code();
+  }
+}
+
 } // namespace
 
 void checkGlobalDFA() {
@@ -233,6 +260,7 @@ void checkGlobalDFA() {
   test7();
   test8();
   test10();
+  CPP_32820();
 }
 
 [[maybe_unused]] void checkGlobalDFA1() { test2(); }

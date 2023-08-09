@@ -3,11 +3,9 @@
 // It's not working with other types even int() operator is defined
 // https://youtrack.jetbrains.com/issue/CPP-23268
 #include <climits>
-
 #include <string>
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCode"
-
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "UnusedParameter"
 #pragma ide diagnostic ignored "UnusedValue"
@@ -108,6 +106,10 @@ public:
   }
 };
 
+// negative case
+static void CPP_29313(auto n) { // shouldn't warn here
+}
+
 void checkGlobalDFA() {
   test0(1);
   test1(1);
@@ -138,5 +140,8 @@ void checkGlobalDFA() {
   one a(1);
   CPP_23268(static_cast<int>(1));
   CPP_23268(static_cast<int>(a));
+
+  CPP_29313(1);
+  CPP_29313(true);
 }
 #pragma clang diagnostic pop
