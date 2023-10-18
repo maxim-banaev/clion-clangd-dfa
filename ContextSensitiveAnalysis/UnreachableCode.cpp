@@ -5,6 +5,7 @@
 
 // Local DFA
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
 #pragma ide diagnostic ignored "Simplify"
 #pragma ide diagnostic ignored "ConstantParameter"

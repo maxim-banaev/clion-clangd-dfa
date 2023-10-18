@@ -5,6 +5,7 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "MemoryLeak"
 #pragma clang diagnostic ignored "-Wunused-value"
 #pragma ide diagnostic ignored "NullDereference"
 #pragma ide diagnostic ignored "UnusedValue"

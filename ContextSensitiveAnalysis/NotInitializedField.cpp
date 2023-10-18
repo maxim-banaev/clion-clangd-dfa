@@ -41,10 +41,10 @@ public:
 };
 
 template <typename T> struct test3 {
-  T t;
+  T index;
 
 public:
-  void check() { t++; } // warn here
+  void check() { index++; } // warn here
 };
 
 struct test4 {

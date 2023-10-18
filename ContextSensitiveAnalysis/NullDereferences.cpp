@@ -3,10 +3,12 @@
 #include <string>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "MemoryLeak"
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma clang diagnostic ignored "-Wunused-value"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
+#pragma ide diagnostic ignored "readability-container-size-empty"
 // local DFA
 namespace null_dereference {
 struct foo {

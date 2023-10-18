@@ -22,6 +22,19 @@ void static test0(int a) {}
 // ReSharper restore CppParameterNeverUsed
 #pragma clang diagnostic pop
 
+void static test000(bool cond) {
+  int *x = nullptr;
+  if (cond) {
+    x = new int(20);
+  }
+  for (int i = 0; i < 10; i++) {
+    if (cond) {
+      *x; // Pointer may be null
+    }
+  }
+}
+
+
 void static test1(int a) {} // warn here
 
 void static test2(const int &a) {} // look like is not working also
