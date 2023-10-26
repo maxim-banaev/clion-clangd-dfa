@@ -1,7 +1,10 @@
-//  summary: should be 3 warnings
+// summary: should be 3 warnings
+// Test for clangd -Wuninitialized nwarning
+// Check ContextSensitiveAnalysis/NotInitializedField.cpp for DFA inspection
 #include <string>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "NotInitializedField"
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
