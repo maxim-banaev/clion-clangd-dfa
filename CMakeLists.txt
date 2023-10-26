@@ -22,6 +22,7 @@ add_executable(main main.cpp
         ContextSensitiveAnalysis/UnusedLocal.cpp
         ContextSensitiveAnalysis/UnusedParameter.cpp
         ContextSensitiveAnalysis/UnusedValue.cpp
+        ContextSensitiveAnalysis/MemoryLeak.cpp
         LocalVariableEscapesScope.cpp
         NotInitializedVariable.cpp
         MissingReturn.cpp
