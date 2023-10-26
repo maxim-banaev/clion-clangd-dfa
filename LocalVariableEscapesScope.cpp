@@ -1,4 +1,4 @@
-// summary: should be 5 warnings
+// summary: should be 6 warnings
 #include <string>
 #include <vector>
 
@@ -45,7 +45,12 @@ namespace local_variable_escapes_scope {
         void test4_2() {
             char val[10];
             something_string_field = val; // shouldn't warn here
-            char_pointer_char_filed = val; // shouldn't warn here
+            char_pointer_char_filed = val; // warn here
+        }
+
+        void test4_3(char val[10]) {
+          something_string_field = val; // shouldn't warn here
+          char_pointer_char_filed = val; // shouldn't warn here
         }
     };
 
