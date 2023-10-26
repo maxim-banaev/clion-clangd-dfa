@@ -1,9 +1,10 @@
-// summary: should be 8 warnings
+// summary: should be 15 warnings
 #include <cstdlib>
 #include <string>
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "DanglingPointer"
 #pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 // Local DFA
@@ -11,7 +12,7 @@ namespace escape_analysis {
 int *gPtr;
 int g;
 
-int *foo(int p) {
+int *test(int p) {
   int ar[3];
   int x = 0;
   int *ptr = &x;
@@ -47,6 +48,66 @@ void CPP_29840(std::string &out) {
   // false positive
   std::vector<std::string> v;
   out = v[0]; // shouldn't warn here
+}
+
+// negative case
+const char *CPP_35738() {
+  return ""; // shouldn't warn here
+}
+
+struct Wrapper {
+  const char *Ptr;
+};
+
+Wrapper create() {
+  char Arr[2];
+  Arr[0] = 'A';
+  Arr[1] = '\0';
+  return Wrapper{Arr}; // warn here
+}
+
+void test2() {
+  Wrapper w{};
+  w.Ptr = "";
+}
+
+class MyClass {};
+
+const MyClass &foo(const MyClass &c) { return c; }
+
+const MyClass &test3(const MyClass &param, bool flag) {
+  MyClass local;
+
+  if (flag)
+    return foo(param);
+  else
+    return foo(local); // warn here
+}
+
+struct Holder {
+  int *ref;
+};
+
+struct Wrapper1 {
+  Holder holder;
+
+  void saveString(int *block) { holder.ref = block; }
+};
+
+Wrapper1 globalWrapper;
+
+Wrapper1 test(Wrapper1 &paramWrapper) {
+  int p;
+  Wrapper1 localWrapper1{};
+  Wrapper1 localWrapper2{};
+
+  localWrapper1.saveString(&p);
+
+  localWrapper2.saveString(&p);
+
+  paramWrapper.saveString(&p);  // warn here
+  globalWrapper.saveString(&p); // warn here
+  return localWrapper2;         // warn here
 }
 
 } // namespace escape_analysis
@@ -96,6 +157,11 @@ void CPP_29840(std::string &out) {
   out = v[0]; // shouldn't warn here
 }
 
+// negative case
+const char *CPP_35738() {
+  return ""; // shouldn't warn here
+}
+
 } // namespace
 
 void checkGlobalDFA() {
@@ -106,5 +172,6 @@ void checkGlobalDFA() {
   CPP_29550();
   std::string out;
   CPP_29840(out);
+  CPP_35738();
 }
 #pragma clang diagnostic pop
