@@ -1,5 +1,11 @@
-// summary: should be 6 warning
-//bugs: to be done.
+// summary: should be 4 warning
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-35830/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-if-structure-is-trivial-type
+// https://youtrack.jetbrains.com/issue/CPP-35831/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-with-templated-type
+//
+// topics:
+// https://timsong-cpp.github.io/cppwp/n4861/dcl.init#6
+// https://en.cppreference.com/w/cpp/language/zero_initialization
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "UnusedValue"
@@ -21,8 +27,8 @@ struct test1_1 {
 
 public:
   test1_1() = default;
-
-  void check() { index++; } // warn here
+  // https://youtrack.jetbrains.com/issue/CPP-35830/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-if-structure-is-trivial-type
+  void check() { index++; } // should warn here
 };
 
 struct test1_2 {
@@ -44,6 +50,7 @@ template <typename T> struct test3 {
   T index;
 
 public:
+  // https://youtrack.jetbrains.com/issue/CPP-35831/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-with-templated-type
   void check() { index++; } // warn here
 };
 
@@ -53,8 +60,8 @@ struct test4 {
 public:
   void setIndex(int ind) { test4::index = ind; }
   int getIndex() const {
-    return index;
-  } // shouldn't warn here. We use setter before.
+    return index; // shouldn't warn here. We use setter before.
+  }
 };
 
 struct test5 {
@@ -67,8 +74,8 @@ public:
 struct test6 {
   int index;
   int getIndex() const {
-    return index;
-  } // shouldn't warn here. We initialize index before.
+    return index; // shouldn't warn here. We initialize index before.
+  }
 };
 
 } // namespace
