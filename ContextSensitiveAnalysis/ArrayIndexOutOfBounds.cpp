@@ -1,4 +1,9 @@
 // summary: should be 48 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-29036/The-inspection-Array-index-is-out-of-bounds-is-not-working-in-case-when-reach-out-of-bounds-in-descending-order
+// https://youtrack.jetbrains.com/issue/CPP-28853/Support-arithmetics-in-DFA
+// https://youtrack.jetbrains.com/issue/CPP-29044/Add-Support-Array-index-is-out-of-bounds-for-arrays-when-size-is-initialised-with-sizeof-function
+
 #include <array>
 #include <iostream>
 #include <string>
@@ -38,7 +43,7 @@ void test3() {
     a[i] = i; // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-29036
+// https://youtrack.jetbrains.com/issue/CPP-29036/The-inspection-Array-index-is-out-of-bounds-is-not-working-in-case-when-reach-out-of-bounds-in-descending-order
 void test4() {
   int *a = new int[10];
   for (int i = 11; i >= 0; --i)
@@ -144,7 +149,7 @@ void test10() {
   ip[1] = 2; // warn here?
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-29038/
+// https://youtrack.jetbrains.com/issue/CPP-28853/Support-arithmetics-in-DFA
 void test13() {
   int x[12], i = 13;
   x[i++] = 1; // should warn here
@@ -217,7 +222,7 @@ template <int SIZE> [[maybe_unused]] void test21() {
   x[SIZE] = 1; // shouldn't warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-29044
+// https://youtrack.jetbrains.com/issue/CPP-29044/Add-Support-Array-index-is-out-of-bounds-for-arrays-when-size-is-initialised-with-sizeof-function
 [[maybe_unused]] void test22(int a = 5) {
   if (a == 5) {
     [[maybe_unused]] char x[a];
@@ -293,7 +298,7 @@ void test3() {
     a[i] = i; // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-29036
+// https://youtrack.jetbrains.com/issue/CPP-29036/The-inspection-Array-index-is-out-of-bounds-is-not-working-in-case-when-reach-out-of-bounds-in-descending-order
 void test4() {
   int *a = new int[10];
   for (int i = 11; i >= 0; --i)
@@ -374,7 +379,7 @@ void test12(int x) {
   arr[x] = 1; // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-29038/
+// https://youtrack.jetbrains.com/issue/CPP-28853/Support-arithmetics-in-DFA
 void test13() {
   int x[12], i = 13;
   x[i++] = 1; // should warn here

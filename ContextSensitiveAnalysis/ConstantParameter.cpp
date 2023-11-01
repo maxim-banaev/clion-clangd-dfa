@@ -1,10 +1,11 @@
 // summary: should be 25 warnings
 // Constant parameter is working only with int-convertible types
 // It's not working with other types even int() operator is defined
-// https://youtrack.jetbrains.com/issue/CPP-23268
+// https://youtrack.jetbrains.com/issue/CPP-23268/Constant-function-arguments-inspection-support-for-arguments-which-are-converted-in-inside-function-call
 #include <climits>
 #include <string>
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-value"
 #pragma ide diagnostic ignored "UnreachableCode"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 #pragma ide diagnostic ignored "UnusedParameter"

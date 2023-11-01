@@ -1,5 +1,7 @@
-// summary: should be 11 warnings
-
+// summary: should be 10 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-25978/C-C-Data-flow-analysis-Loop-condition-isnt-updated-inside-the-loop-inspection-is-not-working-for-iterators
+// https://youtrack.jetbrains.com/issue/CPP-34486/The-Loop-condition-inspection-stops-tracking-case-with-if-inside-the-loop
 #include <vector>
 
 #pragma clang diagnostic push
@@ -38,7 +40,7 @@ void test5(int i = 0) {
   }
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-25978
+// https://youtrack.jetbrains.com/issue/CPP-25978/C-C-Data-flow-analysis-Loop-condition-isnt-updated-inside-the-loop-inspection-is-not-working-for-iterators
 void test6(const std::vector<int> &v) {
   for (auto wrapIter = v.begin(); wrapIter != v.end();) {
   }
@@ -75,13 +77,13 @@ void test5(int i = 0) {
   }
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-25978
+// https://youtrack.jetbrains.com/issue/CPP-25978/C-C-Data-flow-analysis-Loop-condition-isnt-updated-inside-the-loop-inspection-is-not-working-for-iterators
 void test6(const std::vector<int> &v) {
   for (auto wrapIter = v.begin(); wrapIter != v.end();) {
   }
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-34486
+// https://youtrack.jetbrains.com/issue/CPP-34486/The-Loop-condition-inspection-stops-tracking-case-with-if-inside-the-loop
 void test7(int c) {
   int a = 10;
   while (a > 0) { // should warn here

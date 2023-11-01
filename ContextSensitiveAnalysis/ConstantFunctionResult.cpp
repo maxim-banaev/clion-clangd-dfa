@@ -1,4 +1,10 @@
 // summary: should be 18 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-23365/Constant-function-result-inspection-No-warning-for-simple-function
+// https://youtrack.jetbrains.com/issue/CPP-23230/DFA-should-evaluate-conditional-binary-expressions-assigned-to-variable
+// https://youtrack.jetbrains.com/issue/CPP-23449/Constant-function-result-inspection-No-warning-for-template-function
+// https://youtrack.jetbrains.com/issue/CPP-23378/Constant-function-result-inspection-No-warning-for-function-with-recursion
+// https://youtrack.jetbrains.com/issue/CPP-23379/Support-dynamic-call-resolution
 #include <functional>
 #include <string>
 
@@ -37,10 +43,10 @@ bool test0() {
 }
 #pragma clang diagnostic pop
 
-// https://youtrack.jetbrains.com/issue/CPP-23365
+// https://youtrack.jetbrains.com/issue/CPP-23365/Constant-function-result-inspection-No-warning-for-simple-function
 bool test1() { return true; }
 
-// https://youtrack.jetbrains.com/issue/CPP-23365
+// https://youtrack.jetbrains.com/issue/CPP-23365/Constant-function-result-inspection-No-warning-for-simple-function
 bool test1_2() { return true; }
 
 int test2() { // warn here
@@ -75,7 +81,7 @@ Letter test5() { // warn here
   return l;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-23490
+// https://youtrack.jetbrains.com/issue/CPP-23230/DFA-should-evaluate-conditional-binary-expressions-assigned-to-variable
 bool test11() {
   auto a = true;
   auto b = false;
@@ -85,7 +91,7 @@ bool test11() {
 
 // Global DFA
 namespace {
-// https://youtrack.jetbrains.com/issue/CPP-23365
+// https://youtrack.jetbrains.com/issue/CPP-23365/Constant-function-result-inspection-No-warning-for-simple-function
 bool test1() { return true; }
 
 bool test1_1(int x, bool b = true) { // warn here
@@ -127,7 +133,7 @@ template <int N> int test5(int x, int b = N) { // warn here
   return N;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-23449
+// https://youtrack.jetbrains.com/issue/CPP-23449/Constant-function-result-inspection-No-warning-for-template-function
 template <typename T> T test6(T x, T b = 0) {
   if (x > 0)
     return b;
@@ -142,7 +148,7 @@ Letter test7(int x, Letter l = Letter::A) { // warn here
   return Letter::A;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-23378
+// https://youtrack.jetbrains.com/issue/CPP-23378/Constant-function-result-inspection-No-warning-for-function-with-recursion
 int test8(int x) {
   if (random() % 2 == 0)
     return test8(x);
@@ -155,14 +161,14 @@ void *test9(int x, void *p = nullptr) { // warn here
   return nullptr;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-23379
+// https://youtrack.jetbrains.com/issue/CPP-23379/Support-dynamic-call-resolution
 int test10(int x, int b = 0) {
   if (x > 0)
     return b;
   return 0;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-23490
+// https://youtrack.jetbrains.com/issue/CPP-23230/DFA-should-evaluate-conditional-binary-expressions-assigned-to-variable
 bool test11() {
   auto a = true;
   auto b = false;
@@ -170,7 +176,7 @@ bool test11() {
 }
 } // namespace
 
-// https://youtrack.jetbrains.com/issue/CPP-23365
+// https://youtrack.jetbrains.com/issue/CPP-23365/Constant-function-result-inspection-No-warning-for-simple-function
 static bool test15() { return true; }
 
 class X {

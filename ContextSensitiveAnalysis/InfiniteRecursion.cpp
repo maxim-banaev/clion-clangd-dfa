@@ -1,4 +1,7 @@
 // summary: should be 8 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+// https://youtrack.jetbrains.com/issue/CPP-17716/clangd-DFA-doesnt-work-when-template-is-used
 #include <iostream>
 
 #pragma clang diagnostic push
@@ -15,10 +18,10 @@ void test2();
 #define CALL_TEST() test2()
 
 void test2() {
-  CALL_TEST(); // https://youtrack.jetbrains.com/issue/CPP-17805
+  CALL_TEST(); // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-17716
+// https://youtrack.jetbrains.com/issue/CPP-17716/clangd-DFA-doesnt-work-when-template-is-used
 template <typename T> void test3(T t) { test3(t); }
 
 void test4() {
@@ -73,7 +76,7 @@ void test2();
 #define CALL_TEST() test2()
 
 void test2() {
-  CALL_TEST(); // https://youtrack.jetbrains.com/issue/CPP-17805
+  CALL_TEST(); // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
 }
 
 // https://youtrack.jetbrains.com/issue/CPP-17716

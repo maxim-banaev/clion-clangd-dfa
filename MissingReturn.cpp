@@ -1,5 +1,6 @@
 // summary: should be 15 warnings
-
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-17716/clangd-DFA-doesnt-work-when-template-is-used
 #include <map>
 #include <memory>
 #include <string>
@@ -13,7 +14,7 @@ namespace {
 
 auto test2() -> bool {} // warn here
 
-// https://youtrack.jetbrains.com/issue/CPP-17716
+// https://youtrack.jetbrains.com/issue/CPP-17716/clangd-DFA-doesnt-work-when-template-is-used
 template <typename T> int test3([[maybe_unused]] T t) {}
 template <> int test3([[maybe_unused]] int t) {} // warn here
 

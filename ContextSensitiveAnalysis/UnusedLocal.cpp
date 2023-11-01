@@ -1,4 +1,6 @@
 // summary: should be 24 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
 #include <iostream>
 #include <unordered_map>
 #include <vector>
@@ -104,7 +106,6 @@ void test13(int c) {
 }
 
 // negative case
-// https://youtrack.jetbrains.com/issue/CPP-30354/False-Positive-The-value-is-only-assigned-but-never-accessed
 void *CPP_30354() {
   char *mem;             // shouldn't warn here
   size_t byteOffset = 8; // shouldn't warn here
@@ -202,7 +203,6 @@ void test13(int c) {
 }
 
 // negative case
-// https://youtrack.jetbrains.com/issue/CPP-30354/False-Positive-The-value-is-only-assigned-but-never-accessed
 void *CPP_30354() {
   char *mem;             // shouldn't warn here
   size_t byteOffset = 8; // shouldn't warn here

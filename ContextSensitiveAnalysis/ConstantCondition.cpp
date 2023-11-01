@@ -1,4 +1,7 @@
 // summary: should be 53 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+// https://youtrack.jetbrains.com/issue/CPP-23431/Treat-this-expression-as-a-variable-never-equal-to-nullptr
 #include <iostream>
 
 #include <type_traits>
@@ -34,7 +37,7 @@ void test() {
 
 void test1() {
   int a = 1;
-  if (A(a)) { // https://youtrack.jetbrains.com/issue/CPP-17805
+  if (A(a)) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
 }
 
@@ -98,19 +101,19 @@ void test7() {
   if (x == X) { // warn here
   }
   if (X == x) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
-  if (Y == 1) {
-  }             // https://youtrack.jetbrains.com/issue/CPP-17805
+  } // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (Y == 1) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
   if (1 == Y) { // warn here
   }
   if (x == Y) { // warn here
   }
-  if (Y == x) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
-  if (Y == X) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
-  if (X == Y) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
+  if (Y == x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
+  if (Y == X) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
+  if (X == Y) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
 }
 
 void test8() {
@@ -305,7 +308,7 @@ void test() {
 
 void test1() {
   int a = 1;
-  if (A(a)) { // https://youtrack.jetbrains.com/issue/CPP-17805
+  if (A(a)) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
 }
 
@@ -368,20 +371,20 @@ void test7() {
 
   if (x == X) { // warn here
   }
-  if (X == x) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
-  if (Y == 1) {
-  }             // https://youtrack.jetbrains.com/issue/CPP-17805
+  if (X == x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
+  if (Y == 1) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
   if (1 == Y) { // warn here
   }
   if (x == Y) { // warn here
   }
-  if (Y == x) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
-  if (Y == X) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
-  if (X == Y) {
-  } // https://youtrack.jetbrains.com/issue/CPP-17805
+  if (Y == x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
+  if (Y == X) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
+  if (X == Y) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  }
 }
 
 int getZero() {

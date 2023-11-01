@@ -1,4 +1,5 @@
 // summary: should be 2 warnings
+// bugs: not yet found
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "NotInitializedField"
 

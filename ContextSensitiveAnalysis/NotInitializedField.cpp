@@ -1,5 +1,5 @@
 // summary: should be 6 warning
-
+//bugs: to be done.
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 #pragma ide diagnostic ignored "UnusedValue"

@@ -1,5 +1,5 @@
 // summary: should be 31 warnings
-
+// bugs: not yet found
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCallsOfFunction"
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
@@ -112,7 +112,6 @@ void code() {
   std::cout << "reached\n";
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-32820
 void CPP_32820() {
   for (int i = 0; i < 3; i++) { // shouldn't warn here
     switch (i) {} // NOLINT(*-multiway-paths-covered)
@@ -233,7 +232,6 @@ void code() {
   std::cout << "reached\n";
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-32820
 void CPP_32820() {
   for (int i = 0; i < 3; i++) { // shouldn't warn here
     switch (i) {} // NOLINT(*-multiway-paths-covered)

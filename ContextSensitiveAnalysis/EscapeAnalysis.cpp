@@ -1,4 +1,6 @@
 // summary: should be 15 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-23550/Dangling-pointers-Address-of-local-variable-may-escape-the-function-is-not-detected
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -121,7 +123,7 @@ int *foo(int p) {
   int ar[3];
   int x = 0;
   int *ptr = &x;
-  // https://youtrack.jetbrains.com/issue/CPP-23550
+
   gPtr = ptr; // warn here
   gPtr = &x;  // warn here
 
@@ -135,7 +137,7 @@ int *foo(int p) {
     return ptr;
 
   ptr = ar;
-  // https://youtrack.jetbrains.com/issue/CPP-23550
+
   gPtr = ptr; // warn here
   return ptr; // warn here
 }

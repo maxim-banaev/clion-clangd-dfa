@@ -1,5 +1,5 @@
 // summary: should be 8 warnings
-
+// bugs: not yet found
 #include <cstdlib>
 
 #pragma clang diagnostic push

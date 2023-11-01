@@ -1,4 +1,8 @@
-// summary: should be 19 warnings
+// summary: should be 18 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-35826/Unreachable-Call-doesnt-work-if-return-type-is-STL-container
+// https://youtrack.jetbrains.com/issue/CPP-23438/Unreachable-call-of-function-The-inspection-is-not-working-for-templated-function
+
 #include <string>
 
 #pragma clang diagnostic push
@@ -47,7 +51,7 @@ void static test3(Switcher s = OFF) {
 void call_test3() { test3(); }
 
 class Test4 {
-  void test4_function() {}
+  void test4_function() {} // warn here
 
 public:
   void test4() {
@@ -80,17 +84,18 @@ void test6() {
     test6_function();
 }
 
-std::string test7_function() { return ""; } // warn here
+// https://youtrack.jetbrains.com/issue/CPP-35826/Unreachable-Call-doesnt-work-if-return-type-is-STL-container
+std::string test7_function() { return ""; } // should warn here
 
 void test7() {
   if (flag)
     test7_function();
 }
 
-template <typename T> void test8_function() {}
-
-// https://youtrack.jetbrains.com/issue/CPP-23438
+// https://youtrack.jetbrains.com/issue/CPP-23438/Unreachable-call-of-function-The-inspection-is-not-working-for-templated-function
 // clangd limitation :(
+template <typename T> void test8_function() {} // should warn here
+
 template <typename T> void test8() {
   if (flag)
     test8_function<T>();
@@ -131,7 +136,7 @@ void do_nothing() {}
 
 void test12() { flag ? test12_function() : do_nothing(); }
 
-static void test13_function() {}
+static void test13_function() {} // shouldn't warn here
 
 void test13() {
   try {

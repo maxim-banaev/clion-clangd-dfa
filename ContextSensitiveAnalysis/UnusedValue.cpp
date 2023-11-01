@@ -1,5 +1,6 @@
 // summary: should be 27 warnings
-
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
 #include <string>
 #include <vector>
 
@@ -33,7 +34,6 @@ bool test3() {
   return a && b;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-23491
 std::string test4() {
   std::string a = "a"; // warn here
   std::string b{"b"};  // shouldn't warn here
@@ -64,7 +64,6 @@ void test8() {
 }
 
 void test9() {
-  // https://youtrack.jetbrains.com/issue/CPP-28842
   int a[] = {1, 233}; // warn here
 }
 
@@ -107,7 +106,6 @@ bool test3() {
   return a && b;
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-23491
 std::string test4() {
   std::string a = "a"; // warn here
   std::string b{"b"};  // shouldn't warn here
@@ -138,7 +136,6 @@ void test8() {
 }
 
 void test9() {
-  // https://youtrack.jetbrains.com/issue/CPP-28842
   int a[] = {1, 233}; // warn here
 }
 

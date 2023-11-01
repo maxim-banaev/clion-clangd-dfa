@@ -1,4 +1,6 @@
 // summary: should be 16 warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-23537/Unused-parameter-inspection-doesnt-work-in-lambdas
 #include <functional>
 #include <string>
 
@@ -28,9 +30,9 @@ void test8(const int numbers...) {} // warn here
 enum class Letter { A };
 void test9(Letter l) {} // warn here
 
-// https://youtrack.jetbrains.com/issue/CPP-23537
+// https://youtrack.jetbrains.com/issue/CPP-23537/Unused-parameter-inspection-doesnt-work-in-lambdas
 void test10() {
-  auto l = [](int p) {};
+  auto l = [](int p) {}; // should warn here
 
   l(1);
 }
@@ -55,9 +57,9 @@ void test3(const std::string p) {} // warn here
 
 void test4(int &p) {} // warn here
 
-// https://youtrack.jetbrains.com/issue/CPP-23537
+// https://youtrack.jetbrains.com/issue/CPP-23537/Unused-parameter-inspection-doesnt-work-in-lambdas
 void test10() {
-  auto l = [](int p) {};
+  auto l = [](int p) {}; // should warn here
 
   l(1);
 }
