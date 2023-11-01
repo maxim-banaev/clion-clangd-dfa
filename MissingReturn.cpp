@@ -7,6 +7,7 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 namespace {
