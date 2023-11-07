@@ -6,11 +6,15 @@
 
 #include <type_traits>
 #pragma clang diagnostic push
-
+// ReSharper disable CppDFAUnreadVariable
+// ReSharper disable CppDFAUnusedValue
 #pragma clang diagnostic ignored "-Wconstant-evaluated"
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "UnreachableCode"
+// ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "ConstantFunctionResult"
+// ReSharper disable CppDFAConstantFunctionResult
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 // Local DFA
 
@@ -28,6 +32,7 @@ void test() {
   // check the suppressing
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+  // ReSharper disable once CppDFAConstantConditions
   if (a != 0) {
   }
 #pragma clang diagnostic pop

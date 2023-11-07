@@ -8,8 +8,12 @@
 // https://en.cppreference.com/w/cpp/language/zero_initialization
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantFunctionResult"
+// ReSharper disable CppDFAConstantFunctionResult
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
+// ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "modernize-use-nodiscard"
 #pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
 

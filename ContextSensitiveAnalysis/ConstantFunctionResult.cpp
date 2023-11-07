@@ -15,13 +15,18 @@
 // Local DFA
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCode"
+// ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+// ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "misc-no-recursion"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 
 #ifdef _MSC_VER

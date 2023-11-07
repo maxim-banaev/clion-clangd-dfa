@@ -1,7 +1,8 @@
 // summary: should be 11 warnings
-
+// bugs: not yet found
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "Simplify"
 
 #include <iostream>

@@ -8,6 +8,7 @@
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "performance-unnecessary-value-param"
 // Local DFA
 namespace unused_parameter {

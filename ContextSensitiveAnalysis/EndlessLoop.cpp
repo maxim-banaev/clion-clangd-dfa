@@ -2,12 +2,18 @@
 // bugs: not yet found
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCallsOfFunction"
+// ReSharper disable CppDFAUnreachableCallsOfFunction
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
+// ReSharper disable CppDFALoopConditionNotUpdated
 #pragma ide diagnostic ignored "Simplify"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "ConstantFunctionResult"
+// ReSharper disable CppDFAConstantFunctionResult
 #pragma ide diagnostic ignored "UnreachableCode"
+// ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 
 // Local DFA

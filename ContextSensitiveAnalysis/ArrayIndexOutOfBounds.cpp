@@ -11,11 +11,17 @@
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "MemoryLeak"
+// ReSharper disable CppDFAMemoryLeak
 #pragma clang diagnostic ignored "-Wunused-value"
+// ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "NullDereference"
+// ReSharper disable CppDFANullDereference
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 
 // local DFA
 namespace array_index_out_of_bounds {

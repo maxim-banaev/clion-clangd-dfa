@@ -6,7 +6,9 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "NotInitializedField"
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+// ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
 namespace not_initialized_variable {

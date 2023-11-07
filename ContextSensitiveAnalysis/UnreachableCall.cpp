@@ -7,6 +7,7 @@
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
+// ReSharper disable CppDFAEndlessLoop
 #pragma ide diagnostic ignored "bugprone-reserved-identifier"
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #pragma clang diagnostic ignored "-Wtautological-undefined-compare"
@@ -14,8 +15,11 @@
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "UnreachableCode"
+// ReSharper disable CppDFAUnreachableCode
 
 static void test1_function() {} // warn here
 

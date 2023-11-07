@@ -4,8 +4,11 @@
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "MemoryLeak"
+// ReSharper disable CppDFAMemoryLeak
 #pragma ide diagnostic ignored "UnreachableCode"
+// ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma clang diagnostic ignored "-Wunused-value"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
 #pragma ide diagnostic ignored "readability-container-size-empty"

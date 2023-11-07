@@ -5,6 +5,7 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 // Local DFA
 namespace local_variable_escapes_scope {

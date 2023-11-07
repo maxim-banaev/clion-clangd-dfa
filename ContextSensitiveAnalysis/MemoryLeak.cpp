@@ -4,9 +4,13 @@
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+// ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
 namespace memory_leak {
 class MyClass {
   [[maybe_unused]] int *leakedField = new int; // warn here
@@ -59,7 +63,7 @@ void test9(bool flag) {
 
 void test10() {
   auto l = []() {
-    auto c = new int; // warn here // warn here
+    auto c = new int; // warn here
   };
   l();
 }

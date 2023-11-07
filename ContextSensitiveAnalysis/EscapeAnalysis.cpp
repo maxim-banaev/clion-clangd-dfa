@@ -7,7 +7,9 @@
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "DanglingPointer"
+// ReSharper disable CppDFADeletedPointer
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 // Local DFA
 namespace escape_analysis {

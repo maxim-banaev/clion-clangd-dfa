@@ -6,8 +6,11 @@
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantFunctionResult"
+// ReSharper disable CppDFAConstantFunctionResult
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+// ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 // Local DFA
 namespace unused_value {
 int test1() {

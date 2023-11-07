@@ -7,20 +7,25 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-value"
 #pragma ide diagnostic ignored "UnreachableCode"
+// ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "UnusedParameter"
+// ReSharper disable CppDFAUnusedParameter
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "ConstantFunctionResult"
+// ReSharper disable CppDFAConstantFunctionResult
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+// ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 
 // check the suppressing
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantParameter"
-// ReSharper disable CppParameterNeverUsed
+// ReSharper disable once CppDFAConstantParameter
 void static test0(int a) {}
-// ReSharper restore CppParameterNeverUsed
 #pragma clang diagnostic pop
 
 void static test000(bool cond) {

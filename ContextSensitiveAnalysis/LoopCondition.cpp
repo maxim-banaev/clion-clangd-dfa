@@ -6,10 +6,14 @@
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnreachableCode"
+// ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "EndlessLoop"
+// ReSharper disable CppDFAEndlessLoop
 #pragma ide diagnostic ignored "bugprone-suspicious-semicolon"
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 // Local DFA
 namespace loop_condition {
 void test1() {

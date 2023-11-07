@@ -6,14 +6,20 @@
 // Local DFA
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantFunctionResult"
+// ReSharper disable CppDFAConstantFunctionResult
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
 #pragma ide diagnostic ignored "Simplify"
 #pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 #pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable CppDFAUnusedValue
+// ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "ConstantConditionsOC"
+// ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "EndlessLoop"
+// ReSharper disable CppDFAEndlessLoop
 #pragma ide diagnostic ignored "hicpp-multiway-paths-covered"
 namespace null_dereferences {
 void test() {
