@@ -1,5 +1,9 @@
 // summary: should be 2 warnings
-// bugs: not yet found
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-35884/stdlist-iterator-is-marked-as-invalid-after-the-list-modification
+
+#include <list>
+#include <iostream>
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "NotInitializedField"
 
@@ -13,6 +17,15 @@ void test1(node *head) {
   for (node *pt = head; pt != nullptr; pt = pt->next) { // warn here
     delete pt;
   }
+}
+
+// negative case
+// https://youtrack.jetbrains.com/issue/CPP-35884/stdlist-iterator-is-marked-as-invalid-after-the-list-modification
+void test2() {
+  std::list<int> list{1, 2, 3};
+  auto it = list.begin();
+  list.push_back(4);
+  std::cout << *it; // shouldn't warn here
 }
 } // namespace dangling_pointer
 
