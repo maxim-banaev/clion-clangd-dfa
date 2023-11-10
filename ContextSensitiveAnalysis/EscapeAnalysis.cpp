@@ -6,6 +6,8 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "ConstantParameter"
+// ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "DanglingPointer"
 // ReSharper disable CppDFADeletedPointer
 #pragma ide diagnostic ignored "UnusedValue"
@@ -114,6 +116,12 @@ Wrapper1 test(Wrapper1 &paramWrapper) {
   return localWrapper2;         // warn here
 }
 
+// negative case
+std::string CPP_35947(size_t size) {
+  char value[size];
+  return {value}; // shouldn't warn here
+}
+
 } // namespace escape_analysis
 
 // Global DFA
@@ -166,6 +174,11 @@ const char *CPP_35738() {
   return ""; // shouldn't warn here
 }
 
+// negative case
+std::string CPP_35947(size_t size) {
+  char value[size];
+  return {value}; // shouldn't warn here
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -177,5 +190,6 @@ void checkGlobalDFA() {
   std::string out;
   CPP_29840(out);
   CPP_35738();
+  CPP_35947(10);
 }
 #pragma clang diagnostic pop

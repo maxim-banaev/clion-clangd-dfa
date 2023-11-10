@@ -321,6 +321,23 @@ constexpr bool foo() { return !std::is_constant_evaluated(); }
   }
 }
 
+static int CPP_35957_test(int buffer, int dirname, bool b) {
+  if (b) {
+    return -1;
+  }
+  if (dirname != buffer) {
+  }
+  return 0;
+}
+
+// negative case
+int CPP_35957(int y, bool b) {
+  if (CPP_35957_test(0, y, b) < 0) { // shouldn't warn here
+    return 0;
+  }
+  return 1;
+}
+
 } // namespace
 
 void checkGlobalDFA() {
@@ -339,6 +356,8 @@ void checkGlobalDFA() {
   test10();
   test11();
   CPP_31942();
+  CPP_35957(10, true);
+  CPP_35957(10, false);
   test1();
 }
 #pragma clang diagnostic pop

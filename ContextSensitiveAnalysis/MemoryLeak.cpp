@@ -35,11 +35,13 @@ void test3() {
   delete c;
 }
 
+// negative case
 void test4() {
   auto c = new int; // shouldn't warn here.
   free(c);
 }
 
+// negative case
 void test5() {
   auto c = malloc(10); // shouldn't warn here.
   free(c);
@@ -75,8 +77,16 @@ void test11() {
 
 #define NEW new
 
-void test12() {
-  auto c = NEW int;
+void test12() { auto c = NEW int; }
+
+// negative case
+int *alloc() {
+  return new int(10); // shouldn't warn here.
+}
+
+[[maybe_unused]] void CPP_35968() {
+  int *x = alloc(); // shouldn't warn here
+  delete x;
 }
 
 } // namespace memory_leak
@@ -87,7 +97,20 @@ void test(bool flag) {
   if (flag)
     delete c;
 }
+
+// negative case
+int *alloc() {
+  return new int(10); // shouldn't warn here
+}
+
+void CPP_35968() {
+  int *x = alloc(); // shouldn't warn here
+  delete x;
+}
 } // namespace
 
-void checkGlobalDFA() { test(true); }
+void checkGlobalDFA() {
+  test(true);
+  CPP_35968();
+}
 #pragma clang diagnostic pop
