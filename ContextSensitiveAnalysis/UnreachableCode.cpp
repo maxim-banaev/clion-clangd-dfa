@@ -344,7 +344,7 @@ constexpr bool foo() { return !std::is_constant_evaluated(); }
   }
 }
 
-static int CPP_35957_test(int buffer, int dirname, bool b) {
+int CPP_35957_test(int buffer, int dirname, bool b) {
   if (b) {
     return -1;
   }
