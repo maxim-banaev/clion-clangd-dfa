@@ -181,6 +181,29 @@ constexpr bool foo() { return !std::is_constant_evaluated(); }
     return 1; // shouldn't warn here.
   }
 }
+
+struct C {
+  int *p;
+};
+
+int CPP_36091_test(C *c) {
+  if (c->p) {
+  }
+
+  return 0;
+}
+
+// negative case
+int CPP_36091() {
+  C c{};
+  int i = CPP_36091_test(&c);
+
+  if (i < 0) {
+  }
+
+  return 0; // shouldn't warn here.
+}
+
 } // namespace null_dereferences
 
 // Global DFA
@@ -338,6 +361,27 @@ int CPP_35957(int y, bool b) {
   return 1;
 }
 
+struct C {
+  int *p;
+};
+
+int CPP_36091_test(C *c) {
+  if (c->p) {
+  }
+
+  return 0;
+}
+
+// negative case
+int CPP_36091() {
+  C c{};
+  int i = CPP_36091_test(&c);
+
+  if (i < 0) {
+  }
+
+  return 0; // shouldn't warn here.
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -356,6 +400,7 @@ void checkGlobalDFA() {
   test10();
   test11();
   CPP_31942();
+  CPP_36091();
   CPP_35957(10, true);
   CPP_35957(10, false);
   test1();
