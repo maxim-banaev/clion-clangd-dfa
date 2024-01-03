@@ -82,6 +82,25 @@ struct test6 {
   }
 };
 
+// negative case
+void CPP_36825() {
+  struct S {
+    struct {
+      int x;
+      int y;
+    };
+  };
+
+  struct U {
+    union {
+      int x;
+    };
+  };
+  S s = {1};
+  U u = {.x = 2};
+  s.y = 3;
+  s.x + s.y + u.x; // shouldn't warn here.
+}
 } // namespace
 
 [[maybe_unused]] void check() {
