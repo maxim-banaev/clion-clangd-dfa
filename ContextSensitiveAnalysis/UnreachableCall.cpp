@@ -1,6 +1,5 @@
-// summary: should be 18 warnings
+// summary: should be 19 warnings
 // bugs:
-// https://youtrack.jetbrains.com/issue/CPP-35826/Unreachable-Call-doesnt-work-if-return-type-is-STL-container
 // https://youtrack.jetbrains.com/issue/CPP-23438/Unreachable-call-of-function-The-inspection-is-not-working-for-templated-function
 
 #include <string>
@@ -88,8 +87,7 @@ void test6() {
     test6_function();
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-35826/Unreachable-Call-doesnt-work-if-return-type-is-STL-container
-std::string test7_function() { return ""; } // should warn here
+std::string test7_function() { return ""; } // warn here
 
 void test7() {
   if (flag)
