@@ -179,6 +179,12 @@ bool test11() {
   auto b = false;
   return a && b;
 }
+
+// negative case
+#include "library.h" // check header file for false warning
+[[maybe_unused]] void test12_class::do_something() {
+  _nports = 10;
+}
 } // namespace
 
 // https://youtrack.jetbrains.com/issue/CPP-23365/Constant-function-result-inspection-No-warning-for-simple-function

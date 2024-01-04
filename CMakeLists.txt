@@ -4,6 +4,9 @@ project(clangd-dfa-inspection-checker)
 set(CMAKE_CXX_STANDARD 20)
 
 #set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+
+include_directories(include)
+
 add_executable(main main.cpp
         ContextSensitiveAnalysis/ArrayIndexOutOfBounds.cpp
         ContextSensitiveAnalysis/ConstantCondition.cpp
