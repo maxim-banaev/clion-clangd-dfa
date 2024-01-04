@@ -204,6 +204,22 @@ int CPP_36091() {
   return 0; // shouldn't warn here.
 }
 
+// negative case
+bool has_same_col(const std::pair<int, int> & pos1, const std::pair<int, int> & pos2)
+{
+  return pos1.second == pos2.second;
+}
+
+void CPP_36698() {
+  std::pair<int, int> pos1 = {1, 2};
+  std::pair<int, int> pos2 = {3, 2};
+
+  if (has_same_col(pos1, pos2))
+  {
+    std::cout << "same col" << std::endl; // shouldn't warn here.
+  }
+}
+
 } // namespace null_dereferences
 
 // Global DFA
@@ -382,6 +398,18 @@ int CPP_36091() {
 
   return 0; // shouldn't warn here.
 }
+
+// negative case
+bool has_same_col(const std::pair<int, int> & pos1, const std::pair<int, int> & pos2)
+{
+  return pos1.second == pos2.second;
+}
+void CPP_36698(const std::pair<int, int> & pos1, const std::pair<int, int> & pos2) {
+  if (has_same_col(pos1, pos2))
+  {
+    std::cout << "same col" << std::endl; // shouldn't warn here.
+  }
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -403,6 +431,7 @@ void checkGlobalDFA() {
   CPP_36091();
   CPP_35957(10, true);
   CPP_35957(10, false);
+  CPP_36698({1,2}, {3,2});
   test1();
 }
 #pragma clang diagnostic pop
