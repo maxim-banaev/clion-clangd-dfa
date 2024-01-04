@@ -5,6 +5,7 @@
 
 // Local DFA
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCallsOfFunction"
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 // ReSharper disable CppDFAConstantFunctionResult
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
