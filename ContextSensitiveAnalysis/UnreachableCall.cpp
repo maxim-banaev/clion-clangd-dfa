@@ -9,6 +9,7 @@
 // ReSharper disable CppDFAEndlessLoop
 #pragma ide diagnostic ignored "bugprone-reserved-identifier"
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
+#pragma ide diagnostic ignored "modernize-use-equals-default"
 #pragma clang diagnostic ignored "-Wtautological-undefined-compare"
 #pragma ide diagnostic ignored "Simplify"
 #pragma ide diagnostic ignored "OCUnusedStructInspection"
@@ -219,6 +220,21 @@ static bool test20_function() { return true; } // warn here
 void test20([[maybe_unused]] int a) {
   for (int i = 0; true || test20_function(); i++) {
   }
+}
+
+//negative case
+struct S {
+  constexpr S() {} // shouldn't warn here
+
+  [[nodiscard]] constexpr int getNum() const { return 21; }
+};
+
+[[maybe_unused]] consteval S getS() {
+  return {};
+}
+
+int test21() {
+  static_assert(S().getNum() == 21);
 }
 
 void checkGlobalDFA() {
