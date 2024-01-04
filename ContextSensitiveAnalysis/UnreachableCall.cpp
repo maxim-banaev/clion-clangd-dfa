@@ -3,6 +3,9 @@
 // https://youtrack.jetbrains.com/issue/CPP-23438/Unreachable-call-of-function-The-inspection-is-not-working-for-templated-function
 
 #include <string>
+#ifdef _MSC_VER
+#include <algorithm>
+#endif
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "EndlessLoop"
@@ -65,7 +68,7 @@ public:
 };
 
 class Base {
-  virtual void test5_function(){};
+  virtual void test5_function() {};
 };
 
 class Test5 : public Base {
@@ -222,24 +225,37 @@ void test20([[maybe_unused]] int a) {
   }
 }
 
-//negative case
+// negative case
 struct S {
   constexpr S() {} // shouldn't warn here
 
   [[nodiscard]] constexpr int getNum() const { return 21; }
 };
 
-[[maybe_unused]] consteval S getS() {
-  return {};
-}
+[[maybe_unused]] consteval S getS() { return {}; }
 
-int test21() {
-  static_assert(S().getNum() == 21);
+void test21() { static_assert(S().getNum() == 21); }
+
+// negative case
+namespace {
+int test22_function(unsigned char c) { // shouldn't warn here
+  if (c == 'a') {
+    return 1;
+  }
+  return 0;
+}
+} // namespace
+
+void test22() {
+  std::string s{"hello"};
+  std::transform(s.cbegin(), s.cend(), s.begin(),
+                 [](unsigned char c) { return test22_function(c); });
 }
 
 void checkGlobalDFA() {
   test6();
   test7();
   ::test8<int>();
+  test22();
 }
 #pragma clang diagnostic pop
