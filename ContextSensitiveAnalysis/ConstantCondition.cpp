@@ -107,17 +107,21 @@ void test7() {
   }
   if (X == x) {
   } // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
-  if (Y == 1) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (Y ==
+      1) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
   if (1 == Y) { // warn here
   }
   if (x == Y) { // warn here
   }
-  if (Y == x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (Y ==
+      x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
-  if (Y == X) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (Y ==
+      X) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
-  if (X == Y) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (X ==
+      Y) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
 }
 
@@ -167,10 +171,14 @@ public:
 // https://youtrack.jetbrains.com/issue/CPP-23431/Treat-this-expression-as-a-variable-never-equal-to-nullptr
 class [[maybe_unused]] test12_1 {
   void foo() {}
+
 public:
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wtautological-undefined-compare"
-  [[maybe_unused]] void bar() { if (this != nullptr) foo(); } // warn here
+  [[maybe_unused]] void bar() {
+    if (this != nullptr)
+      foo();
+  } // warn here
 #pragma clang diagnostic pop
 };
 
@@ -292,6 +300,22 @@ int CPP_26296() {
   return 0;
 }
 
+// negative case
+void CPP_36723(const char *str) {
+  for (const char *str_p = str;; str_p++) {
+    char ch = *str_p;
+    switch (ch) { // NOLINT(*-multiway-paths-covered)
+    case ' ':
+    case '\t':
+    case '\n':
+    case '\0':
+      if (ch == '\n' || ch == '\0') { // shouldn't warn here
+        return;
+      }
+      std::cout << "reached\n";
+    }
+  }
+}
 } // namespace constant_condition
 
 // Global DFA
@@ -376,19 +400,24 @@ void test7() {
 
   if (x == X) { // warn here
   }
-  if (X == x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (X ==
+      x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
-  if (Y == 1) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (Y ==
+      1) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
   if (1 == Y) { // warn here
   }
   if (x == Y) { // warn here
   }
-  if (Y == x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (Y ==
+      x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
-  if (Y == X) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (Y ==
+      X) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
-  if (X == Y) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
+  if (X ==
+      Y) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
 }
 
@@ -549,6 +578,22 @@ int CPP_26296() {
   return 0;
 }
 
+// negative case
+void CPP_36723(const char *str) {
+  for (const char *str_p = str;; str_p++) {
+    char ch = *str_p;
+    switch (ch) { // NOLINT(*-multiway-paths-covered)
+    case ' ':
+    case '\t':
+    case '\n':
+    case '\0':
+      if (ch == '\n' || ch == '\0') { // shouldn't warn here
+        return;
+      }
+      std::cout << "reached\n";
+    }
+  }
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -581,5 +626,6 @@ void checkGlobalDFA() {
   CPP_30291(5);
   CPP_30291(6);
   CPP_26296();
+  CPP_36723("\t");
 }
 #pragma clang diagnostic pop
