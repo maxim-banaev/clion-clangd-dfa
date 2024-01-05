@@ -316,6 +316,20 @@ void CPP_36723(const char *str) {
     }
   }
 }
+
+// negative case
+void change_int(int *pInt) {
+  *pInt = 1;
+}
+[[maybe_unused]] void CPP_36562() {
+  int int1 = 0;
+  int int2 = int1;
+  change_int(&int2);
+  if(int1 != int2) { // shouldn't warn here
+    std::cout << "Integer was changed to: " << int2 << "\n";
+  }
+}
+
 } // namespace constant_condition
 
 // Global DFA
