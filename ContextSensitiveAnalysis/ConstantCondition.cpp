@@ -330,6 +330,13 @@ void change_int(int *pInt) {
   }
 }
 
+// negative case
+[[maybe_unused]] const char* CPP_36559() {
+  auto reply = "WTF?";
+  if (((size_t)reply) < 0xFFFFFFFF) // shouldn't warn here
+    return nullptr;
+  return reply;
+}
 } // namespace constant_condition
 
 // Global DFA
@@ -608,6 +615,13 @@ void CPP_36723(const char *str) {
     }
   }
 }
+
+// negative case
+const char* CPP_36559(const char *reply) {
+  if (((size_t)reply) < 0xFFFFFFFF)  // shouldn't warn here
+    return nullptr;
+  return reply;
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -641,5 +655,6 @@ void checkGlobalDFA() {
   CPP_30291(6);
   CPP_26296();
   CPP_36723("\t");
+  CPP_36559("WTF");
 }
 #pragma clang diagnostic pop
