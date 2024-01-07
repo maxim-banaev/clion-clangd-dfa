@@ -1,8 +1,11 @@
 // summary: should be 8 warnings
 // bugs: not yet found
 #include <cstdlib>
+#include <new>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnreachableCode"
+// ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 // ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "ConstantConditionsOC"
@@ -103,14 +106,23 @@ int *alloc() {
   return new int(10); // shouldn't warn here
 }
 
+// negative case
 void CPP_35968() {
   int *x = alloc(); // shouldn't warn here
   delete x;
 }
+
+// negative case
+struct Point { int x, y; };
+
+[[maybe_unused]] void CPP_36129() {
+  char buf[sizeof(Point)];
+  auto *p = ::new (buf) Point; // shouldn't warn here
+}
 } // namespace
 
 void checkGlobalDFA() {
-  test(true);
+  test(false);
   CPP_35968();
 }
 #pragma clang diagnostic pop
