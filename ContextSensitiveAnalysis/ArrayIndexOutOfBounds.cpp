@@ -10,6 +10,7 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wvla-cxx-extension"
 #pragma ide diagnostic ignored "MemoryLeak"
 // ReSharper disable CppDFAMemoryLeak
 #pragma clang diagnostic ignored "-Wunused-value"
@@ -22,6 +23,7 @@
 // ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 // ReSharper disable CppDFAConstantConditions
+// ReSharper disable CppEntityAssignedButNoRead
 
 // local DFA
 namespace array_index_out_of_bounds {

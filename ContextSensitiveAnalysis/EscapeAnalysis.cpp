@@ -6,6 +6,7 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wvla-cxx-extension"
 #pragma ide diagnostic ignored "ConstantParameter"
 // ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "DanglingPointer"
