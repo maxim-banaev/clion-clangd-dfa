@@ -1,6 +1,7 @@
 // summary: should be 3 warnings
 // Test for clangd -Wuninitialized nwarning
 // Check ContextSensitiveAnalysis/NotInitializedField.cpp for DFA inspection
+
 #include <string>
 
 #pragma clang diagnostic push
@@ -11,6 +12,11 @@
 // ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
+
+// ReSharper disable CppObjectMemberMightNotBeInitialized
+// ReSharper disable CppJoinDeclarationAndAssignment
+// ReSharper disable CppEntityAssignedButNoRead
+
 namespace not_initialized_variable {
     void test() {
         int a;

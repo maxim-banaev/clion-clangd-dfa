@@ -1,6 +1,7 @@
 // summary: should be 15 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-17716/clangd-DFA-doesnt-work-when-template-is-used
+
 #include <map>
 #include <memory>
 #include <string>
@@ -11,6 +12,12 @@
 // ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma ide diagnostic ignored "UnusedLocalVariable"
+
+// ReSharper disable CppDeclaratorNeverUsed
+// ReSharper disable CppPolymorphicClassWithNonVirtualPublicDestructor
+// ReSharper disable CppDFAUnreadVariable
+// ReSharper disable CppNotAllPathsReturnValue
+
 namespace {
 [[noreturn]] int test1() {} // warn here
 

@@ -1,4 +1,5 @@
 // summary: should be 6 warnings
+
 #include <string>
 #include <vector>
 
@@ -6,6 +7,11 @@
 #pragma ide diagnostic ignored "readability-convert-member-functions-to-static"
 #pragma ide diagnostic ignored "UnusedValue"
 // ReSharper disable CppDFAUnusedValue
+
+// ReSharper disable CppClassNeedsConstructorBecauseOfUninitializedMember
+// ReSharper disable CppMemberFunctionMayBeStatic
+// ReSharper disable CppUninitializedNonStaticDataMember
+
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 // Local DFA
 namespace local_variable_escapes_scope {
