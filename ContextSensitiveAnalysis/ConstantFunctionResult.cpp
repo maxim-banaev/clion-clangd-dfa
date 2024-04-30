@@ -29,6 +29,9 @@
 // ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 
+// ReSharper disable CppMemberFunctionMayBeStatic
+// ReSharper disable CppExpressionWithoutSideEffects
+
 #ifdef _MSC_VER
 #pragma ide diagnostic ignored "cert-msc50-cpp"
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -154,7 +157,7 @@ Letter test7(int x, Letter l = Letter::A) { // warn here
 }
 
 // https://youtrack.jetbrains.com/issue/CPP-23378/Constant-function-result-inspection-No-warning-for-function-with-recursion
-int test8(int x) {
+int test8(int x) { // NOLINT(*-no-recursion)
   if (random() % 2 == 0)
     return test8(x);
   return x;
@@ -208,12 +211,12 @@ class X {
 public:
   void
   check_test16() { // NOLINT(readability-convert-member-functions-to-static)
-    int tmp = test16(0);
+    [[maybe_unused]] int tmp = test16(0);
   }
 
   void
   check_test17() { // NOLINT(readability-convert-member-functions-to-static)
-    int tmp = test17(0);
+    [[maybe_unused]] int tmp = test17(0);
   }
 };
 
@@ -238,7 +241,7 @@ static double test18_2(int x, double b = 0.17) { // warn here.
 }
 
 static bool CPP_23668(double t) { // should warn here?
-  return t;
+  return t; // NOLINT(*-narrowing-conversions)
 }
 
 void checkGlobalDFA() {

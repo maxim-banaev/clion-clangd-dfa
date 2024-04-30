@@ -23,6 +23,8 @@
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 // ReSharper disable CppDFAConstantConditions
 
+// ReSharper disable CppEntityAssignedButNoRead
+
 // local DFA
 namespace array_index_out_of_bounds {
 void test1() {

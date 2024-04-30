@@ -11,6 +11,9 @@
 // ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 // ReSharper disable CppDFAConstantConditions
+
+// ReSharper disable CppDeclaratorNeverUsed
+
 // Local DFA
 namespace unused_value {
 int test1() {

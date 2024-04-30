@@ -1,6 +1,9 @@
 // summary: should be 16 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-23537/Unused-parameter-inspection-doesnt-work-in-lambdas
+// No Unused parameter inspection in Nova. The inspection were turned off intentionally
+// https://youtrack.jetbrains.com/issue/CPP-33966/DFA-No-Unused-parameter-inspection
+
 #include <functional>
 #include <string>
 
@@ -10,6 +13,10 @@
 #pragma ide diagnostic ignored "ConstantParameter"
 // ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "performance-unnecessary-value-param"
+
+// ReSharper disable CppMemberFunctionMayBeStatic
+// ReSharper disable CppPassValueParameterByConstReference
+
 // Local DFA
 namespace unused_parameter {
 void test1(int p) {} // warn here

@@ -2,6 +2,7 @@
 // Constant parameter is working only with int-convertible types
 // It's not working with other types even int() operator is defined
 // https://youtrack.jetbrains.com/issue/CPP-23268/Constant-function-arguments-inspection-support-for-arguments-which-are-converted-in-inside-function-call
+
 #include <climits>
 #include <string>
 #pragma clang diagnostic push
@@ -21,6 +22,11 @@
 // ReSharper disable CppDFAUnreadVariable
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
 
+// ReSharper disable CppMemberFunctionMayBeStatic
+// ReSharper disable CppUninitializedNonStaticDataMember
+// ReSharper disable CppClassNeedsConstructorBecauseOfUninitializedMember
+// ReSharper disable CppExpressionWithoutSideEffects
+
 // check the suppressing
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantParameter"
@@ -28,7 +34,7 @@
 void static test0(int a) {}
 #pragma clang diagnostic pop
 
-void static test000(bool cond) {
+[[maybe_unused]] void static test000(bool cond) {
   int *x = nullptr;
   if (cond) {
     x = new int(20);
@@ -75,7 +81,7 @@ void test11_1(int a = 0) {}     // warn here
 void test11_2(int a, int b) {}  // warn here
 void test11_3(char c, int a) {} // warn here
 
-void test12() {}
+[[maybe_unused]] void test12() {}
 
 template <typename T> void test15(T t) {} // warn here
 
@@ -105,7 +111,7 @@ class X {
 public:
   void checkDFA() {
     XTest1(1);
-    auto ret = flag ? XTest2(1) : 0;
+    [[maybe_unused]] auto ret = flag ? XTest2(1) : 0;
   }
 };
 
@@ -154,7 +160,7 @@ void checkGlobalDFA() {
   test16<int, char>(1);
   test17(1, 2);
 
-  CPP_23668(0.0);
+  CPP_23668(0.0); // NOLINT(*-narrowing-conversions)
   CPP_23268(static_cast<int>(0.5));
   one a(1);
   CPP_23268(static_cast<int>(1));

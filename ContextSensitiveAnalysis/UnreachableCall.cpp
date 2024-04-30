@@ -24,6 +24,11 @@
 #pragma ide diagnostic ignored "UnreachableCode"
 // ReSharper disable CppDFAUnreachableCode
 
+// ReSharper disable CppPolymorphicClassWithNonVirtualPublicDestructor
+// ReSharper disable CppIfCanBeReplacedByConstexprIf
+// ReSharper disable CppMemberFunctionMayBeStatic
+// ReSharper disable CppTooWideScope
+
 static void test1_function() {} // warn here
 
 void test1() {

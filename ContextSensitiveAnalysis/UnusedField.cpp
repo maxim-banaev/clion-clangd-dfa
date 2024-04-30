@@ -1,9 +1,15 @@
 // summary: should be 11 warnings
 // bugs: not yet found
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 // ReSharper disable CppDFAConstantConditions
 #pragma ide diagnostic ignored "Simplify"
+
+// ReSharper disable CppMemberFunctionMayBeConst
+// ReSharper disable CppParameterMayBeConstPtrOrRef
+// ReSharper disable CppClassNeedsConstructorBecauseOfUninitializedMember
+// ReSharper disable CppUninitializedNonStaticDataMember
 
 #include <iostream>
 #include <mutex>

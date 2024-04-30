@@ -1,5 +1,6 @@
 // summary: should be 10 warnings
 // bugs: not yet found
+
 #include <string>
 
 #pragma clang diagnostic push
@@ -12,6 +13,11 @@
 #pragma clang diagnostic ignored "-Wunused-value"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
 #pragma ide diagnostic ignored "readability-container-size-empty"
+
+// ReSharper disable CppFunctionDoesntReturnValue
+// ReSharper disable CppExpressionWithoutSideEffects
+// ReSharper disable CppParameterMayBeConstPtrOrRef
+
 // local DFA
 namespace null_dereference {
 struct foo {

@@ -1,18 +1,9 @@
-#include <string>
-
-struct S {
-  S(const S &) {}
-
-  S() {}
-
-  virtual ~S() {}
-};
+[[maybe_unused]] static void test2() {
+    int *a = new int[2];
+    for (int i = 0; i < 3; ++i)
+        a[i] = i; // warn here
+}
 
 int main() {
-  S s;
-  S &s1 = s;
-  S &&s2 = S();
-  const std::string &rs = "abc";
-  const double &rcd2 = 2;
-  double &&rrd3 = 2;
+
 }

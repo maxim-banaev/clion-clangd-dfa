@@ -2,6 +2,7 @@
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
 // https://youtrack.jetbrains.com/issue/CPP-23431/Treat-this-expression-as-a-variable-never-equal-to-nullptr
+
 #include <iostream>
 
 #include <type_traits>
@@ -16,6 +17,19 @@
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 // ReSharper disable CppDFAConstantFunctionResult
 #pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
+
+// ReSharper disable CppClassNeedsConstructorBecauseOfUninitializedMember
+// ReSharper disable CppUninitializedNonStaticDataMember
+// ReSharper disable StdIsConstantEvaluatedWillAlwaysEvaluateToConstant
+// ReSharper disable CppDefaultCaseNotHandledInSwitchStatement
+// ReSharper disable CppVariableCanBeMadeConstexpr
+// ReSharper disable CppMemberFunctionMayBeStatic
+// ReSharper disable CppCompileTimeConstantCanBeReplacedWithBooleanConstant
+// ReSharper disable CppTooWideScope
+// ReSharper disable CppLocalVariableMayBeConst
+// ReSharper disable CppCStyleCast
+// ReSharper disable CppIfCanBeReplacedByConstexprIf
+
 // Local DFA
 
 #ifdef _MSC_VER
@@ -650,7 +664,7 @@ void checkGlobalDFA() {
   test21();
 
   CPP_28958();
-  CPP_23668(0.0);
+  CPP_23668(0.0); // NOLINT(*-narrowing-conversions)
   CPP_30291(5);
   CPP_30291(6);
   CPP_26296();

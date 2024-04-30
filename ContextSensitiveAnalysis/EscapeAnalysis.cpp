@@ -1,6 +1,7 @@
 // summary: should be 15 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-23550/Dangling-pointers-Address-of-local-variable-may-escape-the-function-is-not-detected
+
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -13,6 +14,9 @@
 #pragma ide diagnostic ignored "UnusedValue"
 // ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
+// ReSharper disable CppCStyleCast
+
 // Local DFA
 namespace escape_analysis {
 int *gPtr;

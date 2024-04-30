@@ -11,6 +11,8 @@
 // ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "misc-no-recursion"
 
+// ReSharper disable CppMemberFunctionMayBeStatic
+
 // Local DFA
 namespace infinite_recursion {
 [[noreturn]] void test1() { test1(); } // warn here

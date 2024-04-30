@@ -16,6 +16,9 @@
 // ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "UnusedLocalVariable"
 
+// ReSharper disable CppDeclaratorNeverUsed
+// ReSharper disable CppDefaultCaseNotHandledInSwitchStatement
+
 // Local DFA
 #include <iostream>
 namespace endless_loop {

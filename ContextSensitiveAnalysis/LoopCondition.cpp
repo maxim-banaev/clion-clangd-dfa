@@ -14,6 +14,9 @@
 #pragma ide diagnostic ignored "bugprone-suspicious-semicolon"
 #pragma ide diagnostic ignored "ConstantParameter"
 // ReSharper disable CppDFAConstantParameter
+
+// ReSharper disable CppForLoopCanBeReplacedWithWhile
+
 // Local DFA
 namespace loop_condition {
 void test1() {

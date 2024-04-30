@@ -22,6 +22,12 @@
 #pragma ide diagnostic ignored "EndlessLoop"
 // ReSharper disable CppDFAEndlessLoop
 #pragma ide diagnostic ignored "hicpp-multiway-paths-covered"
+
+// ReSharper disable CppDeclaratorNeverUsed
+// ReSharper disable CppDefaultCaseNotHandledInSwitchStatement
+// ReSharper disable CppIfCanBeReplacedByConstexprIf
+// ReSharper disable CppParameterMayBeConstPtrOrRef
+
 namespace null_dereferences {
 void test() {
   return;

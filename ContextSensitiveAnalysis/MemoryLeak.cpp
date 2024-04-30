@@ -1,5 +1,6 @@
 // summary: should be 8 warnings
 // bugs: not yet found
+
 #include <cstdlib>
 #include <new>
 
@@ -14,6 +15,9 @@
 // ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "UnusedValue"
 // ReSharper disable CppDFAUnusedValue
+
+// ReSharper disable CppDeclaratorNeverUsed
+
 namespace memory_leak {
 class MyClass {
   [[maybe_unused]] int *leakedField = new int; // warn here
@@ -68,7 +72,7 @@ void test9(bool flag) {
 
 void test10() {
   auto l = []() {
-    auto c = new int; // warn here
+    [[maybe_unused]] auto c = new int; // warn here
   };
   l();
 }
@@ -80,7 +84,7 @@ void test11() {
 
 #define NEW new
 
-void test12() { auto c = NEW int; }
+void test12() { [[maybe_unused]] auto c = NEW int; }
 
 // negative case
 int *alloc() {

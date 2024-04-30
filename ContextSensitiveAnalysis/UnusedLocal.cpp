@@ -1,6 +1,8 @@
 // summary: should be 24 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
+
+
 #include <iostream>
 #include <unordered_map>
 #include <vector>
@@ -13,6 +15,7 @@
 // ReSharper disable CppDFAUnreachableCode
 #pragma ide diagnostic ignored "UnusedParameter"
 // ReSharper disable CppDFAUnusedParameter
+// ReSharper disable CppParameterNeverUsed
 #pragma ide diagnostic ignored "UnusedValue"
 // ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "ConstantParameter"
@@ -21,6 +24,15 @@
 #pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
 #pragma clang diagnostic ignored "-Winvalid-noreturn"
 #pragma ide diagnostic ignored "performance-for-range-copy"
+
+// ReSharper disable CppClassNeedsConstructorBecauseOfUninitializedMember
+// ReSharper disable CppUninitializedNonStaticDataMember
+// ReSharper disable CppDeclaratorNeverUsed
+// ReSharper disable CppRedundantParentheses
+// ReSharper disable CppRedundantCastExpression
+// ReSharper disable CppLocalVariableMayBeConst
+// ReSharper disable CppTooWideScope
+// ReSharper disable CppLocalVariableMightNotBeInitialized
 
 // Local DFA
 namespace unused_local {

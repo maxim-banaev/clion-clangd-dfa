@@ -6,6 +6,7 @@
 // topics:
 // https://timsong-cpp.github.io/cppwp/n4861/dcl.init#6
 // https://en.cppreference.com/w/cpp/language/zero_initialization
+
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantFunctionResult"
 // ReSharper disable CppDFAConstantFunctionResult
@@ -16,6 +17,9 @@
 // ReSharper disable CppDFAConstantParameter
 #pragma ide diagnostic ignored "modernize-use-nodiscard"
 #pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
+
+// ReSharper disable CppExpressionWithoutSideEffects
+// ReSharper disable CppDiscardedPostfixOperatorResult
 
 namespace {
 struct test1 {
