@@ -23,8 +23,7 @@ namespace {
 
 auto test2() -> bool {} // warn here
 
-// https://youtrack.jetbrains.com/issue/CPP-17716/clangd-DFA-doesnt-work-when-template-is-used
-template <typename T> int test3([[maybe_unused]] T t) {}
+template <typename T> int test3([[maybe_unused]] T t) {} // warn here
 template <> int test3([[maybe_unused]] int t) {} // warn here
 
 #define func                                                                   \

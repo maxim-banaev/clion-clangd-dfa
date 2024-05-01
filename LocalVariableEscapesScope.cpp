@@ -29,7 +29,7 @@ namespace local_variable_escapes_scope {
 
     std::vector<int> int_vector;
     void test3() {
-        std::vector<int> val = {1, 2};
+        std::vector val = {1, 2};
         int_vector = val; // shouldn't warn here
     }
 
@@ -91,7 +91,7 @@ namespace {
     }
     std::vector<int> int_vector;
     void test3() {
-        std::vector<int> val = {1, 2};
+        std::vector val = {1, 2};
         int_vector = val; // shouldn't warn here
     }
 } // namespace

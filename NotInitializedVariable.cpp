@@ -16,6 +16,8 @@
 // ReSharper disable CppObjectMemberMightNotBeInitialized
 // ReSharper disable CppJoinDeclarationAndAssignment
 // ReSharper disable CppEntityAssignedButNoRead
+// ReSharper disable CppLocalVariableMightNotBeInitialized
+// ReSharper disable CppDFANotInitializedField
 
 namespace not_initialized_variable {
     void test() {
