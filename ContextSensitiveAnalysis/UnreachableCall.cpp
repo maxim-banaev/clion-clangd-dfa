@@ -28,6 +28,7 @@
 // ReSharper disable CppIfCanBeReplacedByConstexprIf
 // ReSharper disable CppMemberFunctionMayBeStatic
 // ReSharper disable CppTooWideScope
+// ReSharper disable CppUseRangeAlgorithm
 
 static void test1_function() {} // warn here
 

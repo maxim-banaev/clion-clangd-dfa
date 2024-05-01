@@ -1,7 +1,6 @@
-// summary: should be 53 warnings
+// summary: should be 49 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
-// https://youtrack.jetbrains.com/issue/CPP-23431/Treat-this-expression-as-a-variable-never-equal-to-nullptr
 
 #include <iostream>
 
@@ -40,7 +39,7 @@
 namespace constant_condition {
 void test() {
   int a = 1;
-  if (a == 1) { // warn here
+  if (a == 1) { //Condition is always true
   }
 
   // check the suppressing
@@ -88,17 +87,17 @@ template <typename T> void test4();
 template <> void test4<int>() {
   int t1 = 0;
   int t2 = 0;
-  if (t1 == t2) { // warn here
+  if (t1 == t2) { //Condition is always true
   }
 }
 
 void test5() {
   int *i = nullptr;
-  if (i == nullptr) { // warn here
+  if (i == nullptr) { //Condition is always true
   }
 
   std::string *s = nullptr;
-  if (s == nullptr) { // warn here
+  if (s == nullptr) { //Condition is always true
   }
 }
 
@@ -106,7 +105,7 @@ typedef int X;
 
 void test6() {
   X i = 1;
-  if (i == 1) { // warn here
+  if (i == 1) { //Condition is always true
   }
 }
 
@@ -117,16 +116,16 @@ void test7() {
   int x = 1;
   int y = 1;
 
-  if (x == X) { // warn here
+  if (x == X) { //Condition is always true
   }
   if (X == x) {
   } // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   if (Y ==
       1) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
-  if (1 == Y) { // warn here
+  if (1 == Y) { //Condition is always true
   }
-  if (x == Y) { // warn here
+  if (x == Y) { //Condition is always true
   }
   if (Y ==
       x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
@@ -141,33 +140,33 @@ void test7() {
 
 void test8() {
   float f = 0.5;
-  if (f == 0.5) { // warn here
+  if (f == 0.5) { //Condition is always true
   }
 }
 
 [[maybe_unused]] void test8_1() {
   float f = 0.5f;
-  if (f == 0.5f) { // warn here
+  if (f == 0.5f) { //Condition is always true
   }
 }
 
 bool test9(int p1, [[maybe_unused]] int p2) {
   if (p1 == 1 || p1 == 2)
-    return p1 == 1 || p1 == 2; // warn here
+    return p1 == 1 || p1 == 2; //Condition is always true
   return false;
 }
 
 void fn(bool cond);
 void test10() {
   int x = 1;
-  fn(x == 1); // warn here
+  fn(x == 1); //Condition is always true
 }
 
 void test11() {
   int x = 1;
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnusedValue"
-  [[maybe_unused]] bool a = x == 1; // warn here
+  [[maybe_unused]] bool a = x == 1; //Condition is always true
 #pragma clang diagnostic pop
 }
 
@@ -177,12 +176,11 @@ class [[maybe_unused]] test12 {
 public:
   [[maybe_unused]] void func() {
     this->x = 1;
-    if (this->x == 1) /*warn here*/ {
+    if (this->x == 1) { //Condition is always true
     }
   }
 };
 
-// https://youtrack.jetbrains.com/issue/CPP-23431/Treat-this-expression-as-a-variable-never-equal-to-nullptr
 class [[maybe_unused]] test12_1 {
   void foo() {}
 
@@ -190,28 +188,28 @@ public:
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wtautological-undefined-compare"
   [[maybe_unused]] void bar() {
-    if (this != nullptr)
+    if (this != nullptr) //Condition is always true
       foo();
-  } // warn here
+  }
 #pragma clang diagnostic pop
 };
 
 void test13() {
   int a = 1;
-  [[maybe_unused]] auto cond = a == 1; // warn here
+  [[maybe_unused]] auto cond = a == 1; //Condition is always true
 }
 
 void fn14([[maybe_unused]] bool flag = false) {}
 void test14() {
   int a = 1;
-  fn14(a == 1); // warn here
+  fn14(a == 1); //Condition is always true
 }
 
 int fn15() { return 0; }
 
 void test15() {
   int a = 1;
-  if (a == fn15()) { // warn here
+  if (a == fn15()) { //Condition is always false
   }
 }
 
@@ -220,19 +218,21 @@ void test15() {
   [[maybe_unused]] bool a = flag ? x == 1 : x == 2; // warn here twice
 }
 
+// std::is_constant_evaluated is not covered by DFA.
+// In Clion Classic it was covered by Simplify inspection
 void test17() {
-  if (std::is_constant_evaluated()) { // warn here
+  if (std::is_constant_evaluated()) {
   }
 }
 
 [[maybe_unused]] void test17_1() {
-  if constexpr (std::is_constant_evaluated()) { // warn here
+  if constexpr (std::is_constant_evaluated()) {
   }
 }
 
 [[maybe_unused]] void test18() {
   [[maybe_unused]] const int n =
-      std::is_constant_evaluated() ? 13 : 17; // warn here
+      std::is_constant_evaluated() ? 13 : 17;
 }
 
 template <int x> struct C {};
@@ -247,13 +247,13 @@ template <> struct C<false> {
 
 [[maybe_unused]] constexpr void test19([[maybe_unused]] const int x) {
   // Type checker correctly evaluates std::is_constant_evaluated() == true here
-  if (C<std::is_constant_evaluated()>::x) { // warn here
+  if (C<std::is_constant_evaluated()>::x) {
   }
 }
 
 [[maybe_unused]] void test20() {
   int a = 1;
-  if (a < 2) { // warn here
+  if (a < 2) { //Condition is always true
   }
 }
 
@@ -357,13 +357,13 @@ void change_int(int *pInt) {
 namespace {
 void test() {
   int a = 1;
-  if (a == 1) { // warn here
+  if (a == 1) { //Condition is always true
   }
 
   // check the suppressing
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
-  if (a != 0) {
+  if (a != 0) { //Condition is always true
   }
 #pragma clang diagnostic pop
 }
@@ -404,17 +404,17 @@ template <typename T> void test4();
 template <> void test4<int>() {
   int t1 = 0;
   int t2 = 0;
-  if (t1 == t2) { // warn here
+  if (t1 == t2) { //Condition is always true
   }
 }
 
 void test5() {
   int *i = nullptr;
-  if (i == nullptr) { // warn here
+  if (i == nullptr) { //Condition is always true
   }
 
   std::string *s = nullptr;
-  if (s == nullptr) { // warn here
+  if (s == nullptr) { //Condition is always true
   }
 }
 
@@ -422,7 +422,7 @@ typedef int X1;
 
 void test6() {
   X1 i = 1;
-  if (i == 1) { // warn here
+  if (i == 1) { //Condition is always true
   }
 }
 
@@ -433,7 +433,7 @@ void test7() {
   int x = 1;
   int y = 1;
 
-  if (x == X) { // warn here
+  if (x == X) { //Condition is always true
   }
   if (X ==
       x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
@@ -441,9 +441,9 @@ void test7() {
   if (Y ==
       1) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
   }
-  if (1 == Y) { // warn here
+  if (1 == Y) { //Condition is always true
   }
-  if (x == Y) { // warn here
+  if (x == Y) { //Condition is always true
   }
   if (Y ==
       x) { // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
@@ -467,25 +467,25 @@ int getOne() {
 }
 
 void test8() {
-  if (getZero() == 0) { // warn here
+  if (getZero() == 0) { //Condition is always true
   }
-  if (getZero()) { // warn here
+  if (getZero()) { //Condition is always false
   }
-  if (!getZero()) { // warn here
+  if (!getZero()) { //Condition is always true
   }
-  if (getZero( // warn here
+  if (getZero( //Condition is always false
                // foo
           )) {
   }
 
   if (false) { // warn here
     asm("nop");
-  } else if (getZero()) { // warn here
+  } else if (getZero()) { //Condition is always false
   }
 }
 
 void test9() {
-  while (getZero()) { // warn here
+  while (getZero()) { //Condition is always false
   }
 }
 
@@ -497,17 +497,17 @@ int test10() {
 }
 
 void test11() {
-  if (getZero() == 0) { // warn here
+  if (getZero() == 0) { //Condition is always true
   }
-  if (1 == getOne()) { // warn here
+  if (1 == getOne()) { //Condition is always true
   }
-  if (getZero() == getOne()) { // warn here
+  if (getZero() == getOne()) { //Condition is always false
   }
 }
 
 bool test12(int p1, [[maybe_unused]] int p2) {
-  if (p1 == 1 || p1 == 2)      // warn here
-    return p1 == 1 || p1 == 2; // warn here
+  if (p1 == 1 || p1 == 2)      //Condition is always true when reached
+    return p1 == 1 || p1 == 2; //Condition is always true
   return false;
 }
 
@@ -515,46 +515,46 @@ void fn([[maybe_unused]] bool cond) {}
 void test13() {
   int x = 1;
   fn(false);
-  fn(x == 1); // warn here
+  fn(x == 1); //Condition is always true
 }
 
 void test14() {
   int x = 1;
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "UnusedValue"
-  [[maybe_unused]] auto b = x == 1; // warn here
+  [[maybe_unused]] auto b = x == 1; //Condition is always true
 #pragma clang diagnostic pop
 }
 
 void test15() {
   int a = 1;
-  [[maybe_unused]] auto cond = a == 1; // warn here
+  [[maybe_unused]] auto cond = a == 1; //Condition is always true
 }
 
 void fn16([[maybe_unused]] bool flag = false) {}
 void test16() {
   int a = 1;
   fn16();
-  fn16(a == 1); // warn here
+  fn16(a == 1); //Condition is always true
 }
 
 int fn17() { return 0; }
 
 void test17() {
   int a = 1;
-  if (a == fn17()) { // warn here
+  if (a == fn17()) { //Condition is always false
   }
 }
 
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantParameter"
 void test18(float f = 0.f) {
-  [[maybe_unused]] auto cond = f == 0.f; // warn here
+  [[maybe_unused]] auto cond = f == 0.f; //Condition is always true
 }
 #pragma clang diagnostic pop
 
 void test19() {
-  if (std::is_constant_evaluated()) { // warn here
+  if (std::is_constant_evaluated()) {
   }
 }
 
@@ -569,7 +569,7 @@ constexpr int test20([[maybe_unused]] bool flag) {
 
 [[maybe_unused]] void test21() {
   int a = 1;
-  if (a < 2) { // warn here
+  if (a < 2) { //Condition is always true
   }
 }
 

@@ -1,6 +1,8 @@
-// summary: should be 31 warnings
-// bugs: not yet found
+// summary: should be 31(33 on Nova) warnings
+// bugs:
+// https://youtrack.jetbrains.com/issue/CPP-38639/The-same-endless-do-while-loop-is-warned-twice-in-CLion-Nova
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedTemplateParameterInspection"
 #pragma ide diagnostic ignored "UnreachableCallsOfFunction"
 // ReSharper disable CppDFAUnreachableCallsOfFunction
 #pragma ide diagnostic ignored "LoopDoesntUseConditionVariableInspection"
@@ -226,7 +228,7 @@ void test8() {
   }
 }
 
-void test9() {
+[[maybe_unused]] void test9() {
   while (true) { // shouldn't warn here. No call of function
   }
 }
@@ -250,7 +252,7 @@ void CPP_32820() {
 
 } // namespace
 
-void checkGlobalDFA() {
+[[maybe_unused]] void checkGlobalDFA() {
   test1();
   test1_1();
   test1_2();

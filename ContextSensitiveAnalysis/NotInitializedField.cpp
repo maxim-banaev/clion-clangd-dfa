@@ -1,7 +1,8 @@
-// summary: should be 4 warning
+// summary: should be 3 warning
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-35830/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-if-structure-is-trivial-type
 // https://youtrack.jetbrains.com/issue/CPP-35831/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-with-templated-type
+// https://youtrack.jetbrains.com/issue/CPP-38638/No-Usage-of-non-initialized-field-inspection-when-operator-is-used
 //
 // topics:
 // https://timsong-cpp.github.io/cppwp/n4861/dcl.init#6
@@ -20,63 +21,59 @@
 
 // ReSharper disable CppExpressionWithoutSideEffects
 // ReSharper disable CppDiscardedPostfixOperatorResult
+// ReSharper disable CppClassNeedsConstructorBecauseOfUninitializedMember
+// ReSharper disable CppUninitializedNonStaticDataMember
 
 namespace {
 struct test1 {
-  int index;
-
-public:
   void read_index() const { [[maybe_unused]] int value = index; } // warn here
   void increment_index() { index++; }                             // warn here
+private:
+  int index;
 };
 
 struct test1_1 {
-  int index;
-
-public:
   test1_1() = default;
   // https://youtrack.jetbrains.com/issue/CPP-35830/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-if-structure-is-trivial-type
   void check() { index++; } // should warn here
+private:
+  int index;
 };
 
 struct test1_2 {
-  int index{};
-
-public:
   void check() { index++; } // shouldn't warn here. We use {}
+private:
+  int index{};
 };
 
+// https://youtrack.jetbrains.com/issue/CPP-38638/No-Usage-of-non-initialized-field-inspection-when-operator-is-used
 struct test2 {
+  void add(int value) { buffer[index++] = value; } // should warn here
+private:
   [[maybe_unused]] int *buffer = new int[10];
   int index;
-
-public:
-  void add(int value) { buffer[index++] = value; } // warn here
 };
 
 template <typename T> struct test3 {
-  T index;
-
-public:
   // https://youtrack.jetbrains.com/issue/CPP-35831/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-with-templated-type
   void check() { index++; } // warn here
+private:
+  T index;
 };
 
 struct test4 {
-  int index;
-
-public:
   void setIndex(int ind) { test4::index = ind; }
   int getIndex() const {
     return index; // shouldn't warn here. We use setter before.
   }
+private:
+  int index;
 };
 
 struct test5 {
-  int index : 5;
-
-public:
   int getIndex() const { return index; } // warn here
+private:
+  int index : 5;
 };
 
 struct test6 {

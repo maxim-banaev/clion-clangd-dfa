@@ -19,6 +19,12 @@
 
 // Local DFA
 namespace unused_parameter {
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedParameter"
+// ReSharper disable once CppParameterNeverUsed
+void test0(int p) {}
+#pragma clang diagnostic pop
+
 void test1(int p) {} // warn here
 
 void test2(float p) {} // warn here

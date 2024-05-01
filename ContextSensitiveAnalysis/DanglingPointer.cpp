@@ -1,4 +1,4 @@
-// summary: should be 2 warnings
+// summary: should be 3 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-35884/stdlist-iterator-is-marked-as-invalid-after-the-list-modification
 
@@ -22,7 +22,7 @@ void test1(node *head) {
 // negative case
 // https://youtrack.jetbrains.com/issue/CPP-35884/stdlist-iterator-is-marked-as-invalid-after-the-list-modification
 void test2() {
-  std::list<int> list{1, 2, 3};
+  std::list list{1, 2, 3};
   auto it = list.begin();
   list.push_back(4);
   std::cout << *it; // shouldn't warn here

@@ -27,7 +27,6 @@
 
 // ReSharper disable CppClassNeedsConstructorBecauseOfUninitializedMember
 // ReSharper disable CppUninitializedNonStaticDataMember
-// ReSharper disable CppDeclaratorNeverUsed
 // ReSharper disable CppRedundantParentheses
 // ReSharper disable CppRedundantCastExpression
 // ReSharper disable CppLocalVariableMayBeConst
@@ -72,21 +71,21 @@ void test7_1(std::string s = "123") {}
 template <typename T> void test8(T t) {}
 
 void test9() {
-  auto l = []() { // warn here
-    int a;        // warn here
+  auto l = [] { // warn here
+    int a;      // warn here
   };
 }
 
 void test9_1() {
-  auto l = []() {}; // warn here
+  auto l = [] {}; // warn here
 }
 
 void test9_2() {
-  auto l = [=]() {}; // warn here
+  auto l = [=] {}; // warn here
 }
 
 void test9_3() {
-  auto l = [&]() {}; // warn here
+  auto l = [&] {}; // warn here
 }
 
 void test10() {
@@ -100,7 +99,7 @@ void test11() {
   int a = 1; // shouldn't warn here
   int b = 2;
   if (b < 0) {
-    int d = a;
+    [[maybe_unused]] int d = a;
   }
 }
 template <typename T>
@@ -114,8 +113,8 @@ void CPP_30074(const std::unordered_map<std::string, T> &v) {
 }
 
 void test12(const std::unordered_map<int, int> &v) {
-  for (const auto item : v) {
-  } // warn here
+  for (const auto item : v) { // warn here
+  }
 }
 
 void test13(int c) {
@@ -148,7 +147,7 @@ void test3() {
 }
 
 class foo {
-  int x;
+  [[maybe_unused]] int x;
 
 public:
   static void test4(int x) { int y; } // warn here
@@ -169,21 +168,21 @@ void test7_1(std::string s = "123") {}
 template <typename T> void test8(T t) {}
 
 void test9() {
-  auto l = []() { // warn here
-    int a;        // warn here
+  auto l = [] { // warn here
+    int a;      // warn here
   };
 }
 
 void test9_1() {
-  auto l = []() {}; // warn here
+  auto l = [] {}; // warn here
 }
 
 void test9_2() {
-  auto l = [=]() {}; // warn here
+  auto l = [=] {}; // warn here
 }
 
 void test9_3() {
-  auto l = [&]() {}; // warn here
+  auto l = [&] {}; // warn here
 }
 
 void test10() {
@@ -196,7 +195,7 @@ void test11() {
   int a = 1; // shouldn't warn here
   int b = 2;
   if (b < 0) {
-    int d = a;
+    [[maybe_unused]] int d = a;
   }
 }
 
@@ -211,8 +210,8 @@ void CPP_30074(const std::unordered_map<std::string, T> &v) {
 }
 
 void test12(const std::unordered_map<int, int> &v) {
-  for (const auto item : v) {
-  } // warn here
+  for (const auto item : v) { // warn here
+  }
 }
 
 void test13(int c) {

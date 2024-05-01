@@ -1,6 +1,9 @@
-// summary: should be 27 warnings
+// summary: should be 23 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
+// https://youtrack.jetbrains.com/issue/CPP-38634/No-unused-value-inspection-fro-stdstring
+// https://youtrack.jetbrains.com/issue/CPP-38636/No-unused-value-inspection-for-templated-variable
+
 #include <string>
 #include <vector>
 
@@ -16,6 +19,15 @@
 
 // Local DFA
 namespace unused_value {
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedValue"
+// ReSharper disable once CppDFAUnusedValue
+int test0() {
+  int a = 0;
+  a = 1;
+  return a;
+}
+#pragma clang diagnostic pop
 int test1() {
   int a = 0; // warn here
   int a1{0}; // warn here
@@ -40,6 +52,7 @@ bool test3() {
   return a && b;
 }
 
+// https://youtrack.jetbrains.com/issue/CPP-38634/No-unused-value-inspection-for-stdstring-variable
 std::string test4() {
   std::string a = "a"; // warn here
   std::string b{"b"};  // shouldn't warn here
@@ -49,10 +62,11 @@ std::string test4() {
 }
 
 std::vector<int> test5() {
-  std::vector<int> v = {1, 2, 3}; // shouldn't warn here
-  return {1, 2, 3};               // shouldn't warn here
+  std::vector v = {1, 2, 3}; // shouldn't warn here
+  return {1, 2, 3};          // shouldn't warn here
 }
 
+// https://youtrack.jetbrains.com/issue/CPP-38636/No-unused-value-inspection-for-templated-variable
 template <typename T> T test6() {
   T t = 0; // warn here
   t = 1;
@@ -112,6 +126,7 @@ bool test3() {
   return a && b;
 }
 
+// https://youtrack.jetbrains.com/issue/CPP-38634/No-unused-value-inspection-for-stdstring-variable
 std::string test4() {
   std::string a = "a"; // warn here
   std::string b{"b"};  // shouldn't warn here
@@ -121,10 +136,11 @@ std::string test4() {
 }
 
 std::vector<int> test5() {
-  std::vector<int> v = {1, 2, 3}; // shouldn't warn here
-  return {1, 2, 3};               // shouldn't warn here
+  std::vector v = {1, 2, 3}; // shouldn't warn here
+  return {1, 2, 3};          // shouldn't warn here
 }
 
+// https://youtrack.jetbrains.com/issue/CPP-38636/No-unused-value-inspection-for-templated-variable
 template <typename T> T test6() {
   T t = 0; // warn here
   t = 1;

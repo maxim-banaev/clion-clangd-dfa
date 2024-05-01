@@ -1,6 +1,7 @@
 // summary: should be 11 warnings
 // bugs: not yet found
-
+// The inspection is not working in Nova. This is not DFA. It's Unused global
+// declaration inspection
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
 // ReSharper disable CppDFAConstantConditions
