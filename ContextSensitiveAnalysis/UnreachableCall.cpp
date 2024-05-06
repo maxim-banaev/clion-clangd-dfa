@@ -2,6 +2,7 @@
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-23438/Unreachable-call-of-function-The-inspection-is-not-working-for-templated-function
 
+#include <algorithm>
 #include <string>
 #ifdef _MSC_VER
 #include <algorithm>

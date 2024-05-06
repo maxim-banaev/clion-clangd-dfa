@@ -1,9 +1,7 @@
-// summary: should be 42 warnings
+// summary: should be 48 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-29036/The-inspection-Array-index-is-out-of-bounds-is-not-working-in-case-when-reach-out-of-bounds-in-descending-order
 // https://youtrack.jetbrains.com/issue/CPP-28853/Support-arithmetics-in-DFA
-// https://youtrack.jetbrains.com/issue/CPP-29044/Add-Support-Array-index-is-out-of-bounds-for-arrays-when-size-is-initialised-with-sizeof-function
-// https://youtrack.jetbrains.com/issue/CPP-38633/No-Index-Array-out-of-Bound-warning-for-stdarray-in-for-loop
 
 #include <array>
 #include <iostream>
@@ -11,6 +9,7 @@
 #include <vector>
 
 #pragma clang diagnostic push
+#pragma ide diagnostic ignored "UnusedLocalVariable"
 #pragma ide diagnostic ignored "MemoryLeak"
 // ReSharper disable CppDFAMemoryLeak
 #pragma clang diagnostic ignored "-Wunused-value"
@@ -41,18 +40,16 @@ void test1_1() {
   a[N] = 11; // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-38622/No-index-Array-out-of-Bound-warning-in-for-loop
 void test2() {
   int *a = new int[2];
   for (int i = 0; i < 3; ++i)
-    a[i] = i; // should warn here
+    a[i] = i; // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-38622/No-index-Array-out-of-Bound-warning-in-for-loop
 void test3() {
   auto *a = new int[3];
   for (int i = 0; i < 4; ++i)
-    a[i] = i; // should warn here
+    a[i] = i; // warn here
 }
 
 // https://youtrack.jetbrains.com/issue/CPP-29036/The-inspection-Array-index-is-out-of-bounds-is-not-working-in-case-when-reach-out-of-bounds-in-descending-order
@@ -114,11 +111,10 @@ void test8(int x) {
     buf[x] = 1; // shouldn't warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-38633/No-Index-Array-out-of-Bound-warning-for-stdarray-in-for-loop
 void test9() {
   std::array<int, 9> array = {1, 2, 3, 4, 5};
   for (int i = 10; i < 11; ++i)
-    array[i] = i; // should warn here
+    array[i] = i; // warn here
 }
 
 void test9_1() {
@@ -205,7 +201,7 @@ void test16() {
 
 void test17() {
   std::string s[16];
-  s[17] = "test17"; // warn here?
+  s[17] = "test17"; // warn here
 }
 
 [[maybe_unused]] void test18() {
@@ -299,18 +295,16 @@ void test1_1() {
   a[N] = 11; // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-38622/No-index-Array-out-of-Bound-warning-in-for-loop
 void test2() {
   int *a = new int[2];
   for (int i = 0; i < 3; ++i)
-    a[i] = i; // should warn here
+    a[i] = i; // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-38622/No-index-Array-out-of-Bound-warning-in-for-loop
 void test3() {
   auto *a = new int[3];
   for (int i = 0; i < 4; ++i)
-    a[i] = i; // should warn here
+    a[i] = i; // warn here
 }
 
 // https://youtrack.jetbrains.com/issue/CPP-29036/The-inspection-Array-index-is-out-of-bounds-is-not-working-in-case-when-reach-out-of-bounds-in-descending-order
@@ -362,11 +356,10 @@ void test8(int x = 8) {
     buf[x] = 1; // warn here
 }
 
-// https://youtrack.jetbrains.com/issue/CPP-38633/No-Index-Array-out-of-Bound-warning-for-stdarray-in-for-loop
 void test9() {
   std::array<int, 9> array = {1, 2, 3, 4, 5};
   for (int i = 0; i < 10; ++i)
-    array[i] = i; // should warn here
+    array[i] = i; // warn here
 }
 
 void test9_1() {

@@ -1,8 +1,7 @@
-// summary: should be 3 warning
+// summary: should be 4 warning
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-35830/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-if-structure-is-trivial-type
 // https://youtrack.jetbrains.com/issue/CPP-35831/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-with-templated-type
-// https://youtrack.jetbrains.com/issue/CPP-38638/No-Usage-of-non-initialized-field-inspection-when-operator-is-used
 //
 // topics:
 // https://timsong-cpp.github.io/cppwp/n4861/dcl.init#6
@@ -46,9 +45,8 @@ private:
   int index{};
 };
 
-// https://youtrack.jetbrains.com/issue/CPP-38638/No-Usage-of-non-initialized-field-inspection-when-operator-is-used
 struct test2 {
-  void add(int value) { buffer[index++] = value; } // should warn here
+  void add(int value) { buffer[index++] = value; } // warn here
 private:
   [[maybe_unused]] int *buffer = new int[10];
   int index;
@@ -56,7 +54,7 @@ private:
 
 template <typename T> struct test3 {
   // https://youtrack.jetbrains.com/issue/CPP-35831/C-C-Data-Flow-Analysis-Not-Initialized-Field-doesnt-work-with-templated-type
-  void check() { index++; } // warn here
+  void check() { index++; } // shouldn't warn here. Works as expected.
 private:
   T index;
 };

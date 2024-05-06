@@ -1,4 +1,8 @@
 // summary: should be 16 warnings
+// The inspection is covered by
+// C/C++ | Potential Code Quality Issues | Parameter is never used in Nova.
+// There is no count of warning is the right top corner. Only grey highlighting
+// in the function arguments. This is not DFA in Nova.
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-23537/Unused-parameter-inspection-doesnt-work-in-lambdas
 // No Unused parameter inspection in Nova. The inspection were turned off intentionally

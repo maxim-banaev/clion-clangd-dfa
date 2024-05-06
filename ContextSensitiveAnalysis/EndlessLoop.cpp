@@ -1,4 +1,4 @@
-// summary: should be 31(33 on Nova) warnings
+// summary: should be 31 warnings in Classic | 33 warnings in Nova
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-38639/The-same-endless-do-while-loop-is-warned-twice-in-CLion-Nova
 #pragma clang diagnostic push
