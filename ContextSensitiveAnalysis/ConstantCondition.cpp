@@ -1,9 +1,10 @@
-// summary: should be 49 warnings
+// summary: should be 47 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
 
 #include <iostream>
 
+// ReSharper disable CppUnusedIncludeDirective
 #include <type_traits>
 #pragma clang diagnostic push
 // ReSharper disable CppDFAUnreadVariable
@@ -371,7 +372,8 @@ void test() {
   // check the suppressing
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "ConstantConditionsOC"
-  if (a != 0) { //Condition is always true
+  // ReSharper disable once CppDFAConstantConditions
+  if (a != 0) { // shouldn't warn here
   }
 #pragma clang diagnostic pop
 }

@@ -1,8 +1,8 @@
-// summary: should be 27 warnings in CLion Classic
+// summary: should be 27 warnings in CLion Classic | 23 warnings in CLion Nova
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
-// https://youtrack.jetbrains.com/issue/CPP-38634/No-unused-value-inspection-fro-stdstring
-// https://youtrack.jetbrains.com/issue/CPP-38636/No-unused-value-inspection-for-templated-variable
+// https://youtrack.jetbrains.com/issue/CPP-38634/No-unused-value-inspection-fro-stdstring [Nova]
+// https://youtrack.jetbrains.com/issue/CPP-38636/No-unused-value-inspection-for-templated-variable [Nova]
 
 #include <string>
 #include <vector>
@@ -23,7 +23,7 @@ namespace unused_value {
 #pragma ide diagnostic ignored "UnusedValue"
 // ReSharper disable once CppDFAUnusedValue
 int test0() {
-  int a = 0;
+  int a = 0; // shouldn't warn here
   a = 1;
   return a;
 }
