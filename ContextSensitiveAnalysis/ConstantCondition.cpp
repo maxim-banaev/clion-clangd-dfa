@@ -351,6 +351,14 @@ void change_int(int *pInt) {
     return nullptr;
   return reply;
 }
+
+// negative case
+[[maybe_unused]] void CPP_37944() {
+  std::string_view sw{nullptr, 0};
+  if (sw.data()) { // shouldn't warn here
+
+  }
+}
 } // namespace constant_condition
 
 // Global DFA
