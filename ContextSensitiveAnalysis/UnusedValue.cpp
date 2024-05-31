@@ -1,4 +1,4 @@
-// summary: should be 23 warnings
+// summary: should be 27 warnings in CLion Classic
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
 // https://youtrack.jetbrains.com/issue/CPP-38634/No-unused-value-inspection-fro-stdstring

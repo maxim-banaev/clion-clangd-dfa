@@ -17,6 +17,7 @@
 #pragma ide diagnostic ignored "NullDereference"
 // ReSharper disable CppDFANullDereference
 #pragma ide diagnostic ignored "UnusedValue"
+#pragma ide diagnostic ignored "UnusedLocalVariable"
 // ReSharper disable CppDFAUnusedValue
 #pragma ide diagnostic ignored "ConstantParameter"
 // ReSharper disable CppDFAConstantParameter
@@ -279,6 +280,11 @@ template <int SIZE> [[maybe_unused]] void test21() {
 const std::string myConstFoo = "foo";
 [[maybe_unused]] void CPP_29592() {
   myConstFoo[4]; // warn here
+}
+
+// negative case
+void CPP_38447(int *ptr) {
+  ptr[-3] = 13; // shouldn't warn here
 }
 
 } // namespace array_index_out_of_bounds
