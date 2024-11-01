@@ -1,4 +1,4 @@
-// summary: should be 24 warnings
+// summary: should be 24 warnings | 16 warnings in Nova (when CppDeclaratorNeverUsed is disabled)
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-21720/guard-variable-detector-suppresses-DFA-too-aggressively
 

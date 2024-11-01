@@ -360,6 +360,12 @@ void change_int(int *pInt) {
 
   }
 }
+
+[[maybe_unused]] void CPP_41781() {
+  constexpr auto value = __builtin_is_constant_evaluated() ? 0 : 1;
+  if (value == 0) {}; // TBD
+}
+
 } // namespace constant_condition
 
 // Global DFA
@@ -646,6 +652,11 @@ const char* CPP_36559(const char *reply) {
     return nullptr;
   return reply;
 }
+
+[[maybe_unused]] void CPP_41781() {
+  constexpr auto value = __builtin_is_constant_evaluated() ? 0 : 1;
+  if (value == 0) {}; // TBD
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -680,5 +691,6 @@ void checkGlobalDFA() {
   CPP_26296();
   CPP_36723("\t");
   CPP_36559("WTF");
+  CPP_41781();
 }
 #pragma clang diagnostic pop
