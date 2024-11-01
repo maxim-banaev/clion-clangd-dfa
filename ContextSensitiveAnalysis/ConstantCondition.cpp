@@ -363,7 +363,7 @@ void change_int(int *pInt) {
 
 [[maybe_unused]] void CPP_41781() {
   constexpr auto value = __builtin_is_constant_evaluated() ? 0 : 1;
-  if (value == 0) {}; // TBD
+  if (value == 0) {}; // it's StdIsConstantEvaluatedWillAlwaysEvaluateToConstant in Nova
 }
 
 } // namespace constant_condition
@@ -655,7 +655,7 @@ const char* CPP_36559(const char *reply) {
 
 [[maybe_unused]] void CPP_41781() {
   constexpr auto value = __builtin_is_constant_evaluated() ? 0 : 1;
-  if (value == 0) {}; // TBD
+  if (value == 0) {}; // it's StdIsConstantEvaluatedWillAlwaysEvaluateToConstant in Nova
 }
 } // namespace
 
