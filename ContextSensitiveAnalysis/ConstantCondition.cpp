@@ -1,4 +1,4 @@
-// summary: should be 47 warnings
+// summary: should be 49 warnings
 // bugs:
 // https://youtrack.jetbrains.com/issue/CPP-17805/clangd-DFA-doesnt-work-when-Macro-is-used
 
@@ -366,6 +366,16 @@ void change_int(int *pInt) {
   if (value == 0) {}; // it's StdIsConstantEvaluatedWillAlwaysEvaluateToConstant in Nova
 }
 
+[[maybe_unused]] void CPP_13519() {
+  constexpr bool a_const = true;
+  if constexpr (a_const) // shouldn't warn here
+    asm("nop");
+
+  bool a = true;
+  if (a) // should warn here
+    asm("nop");
+}
+
 } // namespace constant_condition
 
 // Global DFA
@@ -657,6 +667,17 @@ const char* CPP_36559(const char *reply) {
   constexpr auto value = __builtin_is_constant_evaluated() ? 0 : 1;
   if (value == 0) {}; // it's StdIsConstantEvaluatedWillAlwaysEvaluateToConstant in Nova
 }
+
+
+[[maybe_unused]] void CPP_13519() {
+  constexpr bool a_const = true;
+  if constexpr (a_const) // shouldn't warn here
+    asm("nop");
+
+  bool a = true;
+  if (a) // should warn here
+    asm("nop");
+}
 } // namespace
 
 void checkGlobalDFA() {
@@ -692,5 +713,6 @@ void checkGlobalDFA() {
   CPP_36723("\t");
   CPP_36559("WTF");
   CPP_41781();
+  CPP_13519();
 }
 #pragma clang diagnostic pop
